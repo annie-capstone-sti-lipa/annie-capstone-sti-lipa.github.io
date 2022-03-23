@@ -3,15 +3,19 @@
 @import "./hover-cursors";
 
 .rounded-border {
-  border-radius: $borderRadius/2;
-}
-
-.circular-border {
   border-radius: $borderRadius;
 }
 
+.circular-border {
+  border-radius: $borderRadius * 3;
+}
+
 .box-shadow {
-  box-shadow: 0em 0em 1em #2c2c2c;
+  box-shadow: 0em 0em 1em $bgDark;
+}
+
+.box-shadow-light {
+  box-shadow: 0em 0em 1em lighten($bgDark, 20%);
 }
 
 .default-padding {

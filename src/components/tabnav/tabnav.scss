@@ -1,0 +1,9 @@
+@import "../../styles/presets";
+@import "../../styles/variables";
+
+#tabnav {
+  background-color: white;
+  border-radius: 0 0 $borderRadius * 3 $borderRadius * 3;
+
+  @extend .default-padding;
+}

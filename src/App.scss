@@ -1,3 +1,6 @@
+@import "./styles/variables";
+
 #app {
   text-align: center;
+  background-color: $bgLight;
 }
