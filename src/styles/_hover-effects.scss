@@ -1,0 +1,55 @@
+@import "mixins";
+
+// compound
+.clickable:hover {
+  @extend .no-select;
+  @extend .hover-pointer;
+  @extend .active-shrink;
+  @extend .hover-grow;
+}
+
+.disabled-button {
+  background-color: $bgDark !important;
+
+  @extend .hover-disabled;
+  @extend .no-select;
+}
+
+// individual
+
+.shadow-inset {
+  box-shadow: 0 0 20px #fff inset;
+}
+
+.hover-shadow-inset:hover {
+  @extend .shadow-inset;
+}
+
+.hover-highlight:hover {
+  @include desktop {
+    background-color: $secondaryLight;
+  }
+}
+
+.subtle-hover-grow:hover {
+  @include desktop {
+    transition: 100ms;
+    transform: scale(1.02);
+  }
+}
+
+.hover-grow:hover {
+  @include desktop {
+    transition: 200ms;
+    transform: scale(1.05);
+  }
+}
+
+.hover-highlight:active {
+  background-color: $secondary;
+}
+
+.active-shrink:active {
+  transform: scale(0.9);
+  box-shadow: 0 0 0 0 #fff;
+}

@@ -1,0 +1,24 @@
+// COLORS
+$primary: #106e94;
+$secondary: #11496c;
+
+$primaryLight: lighten($primary, 10%);
+$primaryLight1: lighten($primary, 20%);
+$primaryLight2: lighten($primary, 30%);
+
+$secondaryLight: lighten($secondary, 10%);
+$secondaryLight1: lighten($secondary, 20%);
+$secondaryLight2: lighten($secondary, 30%);
+
+$bgLight: #f0f0f0;
+$bgDark: #888888;
+
+$positive: #52ce9c;
+$negative: #d20000;
+
+// SIZES
+
+$defaultPadding: 20px;
+$defaultMargin: 16px;
+$borderRadius: 8px;
+$desktop: 900px;
