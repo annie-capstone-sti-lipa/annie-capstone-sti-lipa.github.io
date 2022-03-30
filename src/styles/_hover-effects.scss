@@ -2,7 +2,7 @@
 
 // compound
 .clickable:hover {
-  @extend .no-select;
+  @extend .unselectable;
   @extend .hover-pointer;
   @extend .active-shrink;
   @extend .hover-grow;
@@ -12,17 +12,13 @@
   background-color: $bgDark !important;
 
   @extend .hover-disabled;
-  @extend .no-select;
+  @extend .unselectable;
 }
 
 // individual
 
-.shadow-inset {
-  box-shadow: 0 0 20px #fff inset;
-}
-
 .hover-shadow-inset:hover {
-  @extend .shadow-inset;
+  box-shadow: 0 0 20px #fff inset;
 }
 
 .hover-highlight:hover {
@@ -50,6 +46,6 @@
 }
 
 .active-shrink:active {
-  transform: scale(0.9);
-  box-shadow: 0 0 0 0 #fff;
+  transform: scale(0.93);
+  box-shadow: 0 0 20px 0 #fff;
 }

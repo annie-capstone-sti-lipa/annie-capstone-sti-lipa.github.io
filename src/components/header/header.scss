@@ -1,15 +1,19 @@
 @import "../../styles/variables";
 @import "../../styles/presets";
-
+@import "../../styles/hover-effects";
 @import "../../styles/globals";
 
 #header {
   background-color: $primary;
-  height: 250px;
+  align-items: center;
+
+  @extend .default-padding;
 
   .header-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
 
     @extend .default-padding;
   }

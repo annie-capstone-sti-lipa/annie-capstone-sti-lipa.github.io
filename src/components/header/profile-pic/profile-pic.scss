@@ -1,0 +1,49 @@
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
+
+.profile-pic-container .icon-container {
+  visibility: hidden;
+}
+
+.profile-pic-container:hover .icon-container {
+  visibility: visible;
+}
+
+.profile-pic-container {
+  position: relative;
+
+  @extend .clickable;
+  @extend .circular-border;
+
+  .icon-container {
+    background-color: $secondary;
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    padding: 2px;
+
+    @extend .circular-border;
+
+    .edit-icon {
+      display: block;
+      width: 16px;
+      height: 16px;
+
+      @extend .icon;
+    }
+  }
+
+  .profile-pic {
+    max-width: 140px;
+    background-color: white;
+    padding: 4px;
+
+    @include mobile {
+      max-width: 100px;
+    }
+
+    @extend .box-shadow-light;
+    @extend .circular-border;
+    @extend .hover-highlight;
+  }
+}
