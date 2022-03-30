@@ -1,7 +1,16 @@
 @import "../../styles/variables";
 @import "../../styles/presets";
 
+@import "../../styles/globals";
+
 #header {
   background-color: $primary;
   height: 250px;
+
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+
+    @extend .default-padding;
+  }
 }
