@@ -1,4 +1,5 @@
 @import "../../../styles/presets";
+@import "../../../styles/keyframes";
 @import "../../../styles/hover-effects";
 
 .profile-pic-container .icon-container {
@@ -46,4 +47,85 @@
     @extend .circular-border;
     @extend .hover-highlight;
   }
+}
+
+.image-modal {
+  position: relative;
+
+  @extend .unselectable;
+
+  .close-icon-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 40px;
+    max-height: 40px;
+    background-color: $negative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @extend .rounded-border;
+    @extend .clickable;
+
+    .close-icon {
+      max-width: inherit;
+      max-height: inherit;
+
+      @extend .icon;
+    }
+  }
+
+  .modal-pfp {
+    width: 90%;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .buttons {
+    display: flex;
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+
+    .upload-button {
+      margin: 12px;
+      background-color: $secondary;
+      min-width: 100px;
+      padding: 8px;
+
+      @extend .rounded-border;
+      @extend .clickable;
+    }
+
+    .save-button {
+      background-color: $positive;
+
+      @extend .upload-button;
+    }
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(black, 0.5);
+  padding: 90px 20px;
+}
+
+.modal {
+  margin: auto;
+  background-color: white;
+  text-align: center;
+  max-width: 900px;
+  width: 85%;
+  background-color: white;
+
+  animation: bounce-pop 200ms;
+
+  @extend .rounded-border;
+  @extend .default-padding;
 }
