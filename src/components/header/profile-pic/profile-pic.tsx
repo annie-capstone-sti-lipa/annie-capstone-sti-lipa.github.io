@@ -5,6 +5,7 @@ import editIcon from "../../../assets/icons/edit.svg";
 
 import { useState } from "react";
 import Modal from "../../modal/modal";
+import EditIcon from "../../edit-icon/edit-icon";
 
 export default function ProfilePic() {
   const [showModal, setShowModal] = useState(false);
@@ -21,9 +22,7 @@ export default function ProfilePic() {
         closeModal={() => setShowModal(() => false)}
         body={<ModalBody closeModal={() => setShowModal(() => false)} />}
       />
-      <div className="icon-container">
-        <img className="edit-icon" src={editIcon} alt="edit" />
-      </div>
+      <EditIcon />
       <img className="profile-pic" src={tempPfp} alt="profile pic" />
     </div>
   );

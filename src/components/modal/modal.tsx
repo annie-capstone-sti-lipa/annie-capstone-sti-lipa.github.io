@@ -24,7 +24,6 @@ export default function Dialog({
       shouldCloseOnEsc={true}
       onRequestClose={(event) => {
         event.stopPropagation();
-        console.log("req");
         closeModal();
       }}
     >

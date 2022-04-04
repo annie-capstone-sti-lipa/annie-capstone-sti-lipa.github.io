@@ -3,11 +3,15 @@
 @import "../../../styles/hover-effects";
 
 .profile-pic-container .icon-container {
-  visibility: hidden;
+  @include desktop {
+    visibility: hidden;
+  }
 }
 
 .profile-pic-container:hover .icon-container {
-  visibility: visible;
+  @include desktop {
+    visibility: visible;
+  }
 }
 
 .profile-pic-container {
@@ -18,24 +22,6 @@
 
   @include mobile {
     margin: auto;
-  }
-
-  .icon-container {
-    background-color: $secondary;
-    position: absolute;
-    right: 8px;
-    bottom: 8px;
-    padding: 2px;
-
-    @extend .circular-border;
-
-    .edit-icon {
-      display: block;
-      width: 16px;
-      height: 16px;
-
-      @extend .icon;
-    }
   }
 
   .profile-pic {
