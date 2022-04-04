@@ -4,10 +4,12 @@
 @import "../../styles/globals";
 
 #header {
-  background-color: $primary;
+  background-color: white;
   align-items: center;
+  border-radius: 0 0 $borderRadius * 3 $borderRadius * 3;
 
   @extend .default-padding;
+  @extend .box-shadow;
 
   .header-container {
     display: flex;

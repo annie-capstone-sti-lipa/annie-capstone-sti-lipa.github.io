@@ -1,6 +1,8 @@
+import Bio from "./bio/bio";
 import "./header.scss";
 
 import ProfilePic from "./profile-pic/profile-pic";
+import Tabnav from "./tabnav/tabnav";
 
 export default function Header() {
   return (
@@ -8,11 +10,12 @@ export default function Header() {
       <div className="container">
         <div className="header-container">
           <ProfilePic />
-          <div>name and bio</div>
+          <Bio />
           <div>kanji quiz score</div>
           <div>mal discord</div>
         </div>
       </div>
+      <Tabnav />
     </div>
   );
 }

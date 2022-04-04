@@ -1,0 +1,23 @@
+@import "../../../styles/variables";
+@import "../../../styles/mixins";
+@import "../../../styles/presets";
+
+.name-and-bio {
+  text-align: center;
+  max-width: 200px;
+
+  @include mobile {
+    margin: auto;
+  }
+
+  .name {
+    font-size: x-large;
+    font-weight: bold;
+    margin: 8px;
+  }
+
+  .bio {
+    font-size: small;
+    margin: 8px;
+  }
+}
