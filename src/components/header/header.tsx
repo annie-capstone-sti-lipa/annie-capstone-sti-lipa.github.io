@@ -1,5 +1,6 @@
 import Bio from "./bio/bio";
 import "./header.scss";
+import KanjiKana from "./kanji-kana/kanji-kana";
 
 import ProfilePic from "./profile-pic/profile-pic";
 import Tabnav from "./tabnav/tabnav";
@@ -11,7 +12,7 @@ export default function Header() {
         <div className="header-container">
           <ProfilePic />
           <Bio />
-          <div>kanji quiz score</div>
+          <KanjiKana />
           <div>mal discord</div>
         </div>
       </div>
