@@ -1,3 +1,4 @@
+import AccountLinks from "./account-links/account-links";
 import Bio from "./bio/bio";
 import "./header.scss";
 import KanjiKana from "./kanji-kana/kanji-kana";
@@ -13,7 +14,7 @@ export default function Header() {
           <ProfilePic />
           <Bio />
           <KanjiKana />
-          <div>mal discord</div>
+          <AccountLinks />
         </div>
       </div>
       <Tabnav />
