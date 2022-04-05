@@ -1,2 +1,16 @@
 @import "../../../styles/presets";
 @import "../../../styles/variables";
+
+.tabnav {
+  display: flex;
+  border-top: 1px solid rgba(black, 0.1);
+  border-radius: 0 0 $borderRadius * 3 $borderRadius * 3;
+  justify-content: space-around;
+
+  @extend .default-padding;
+
+  .tabnav-item {
+    font-weight: bold;
+    margin: 0 8px;
+  }
+}

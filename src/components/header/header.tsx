@@ -9,6 +9,7 @@ import Tabnav from "./tabnav/tabnav";
 export default function Header() {
   return (
     <div id="header">
+      <div className="top-line"></div>
       <div className="container">
         <div className="header-container">
           <ProfilePic />

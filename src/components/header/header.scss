@@ -8,8 +8,12 @@
   align-items: center;
   border-radius: 0 0 $borderRadius * 3 $borderRadius * 3;
 
-  @extend .default-padding;
   @extend .box-shadow;
+
+  .top-line {
+    background-color: $primary;
+    padding: 8px;
+  }
 
   .header-container {
     display: flex;
