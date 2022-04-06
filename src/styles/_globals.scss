@@ -3,3 +3,19 @@
   max-width: 1000px;
   margin: auto;
 }
+
+.edit-icon-container {
+  position: relative !important;
+}
+
+.edit-icon-container .icon-container {
+  @include desktop {
+    visibility: hidden;
+  }
+}
+
+.edit-icon-container:hover .icon-container {
+  @include desktop {
+    visibility: visible;
+  }
+}

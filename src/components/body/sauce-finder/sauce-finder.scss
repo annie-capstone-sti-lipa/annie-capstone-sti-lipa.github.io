@@ -1,0 +1,60 @@
+@import "../../../styles/presets";
+@import "../../../styles/globals";
+@import "../../../styles/hover-effects";
+
+.sauce-finder {
+  .hint-text {
+    font-size: large;
+    font-weight: bold;
+    margin: 24px;
+  }
+
+  .or {
+    margin: 20px;
+  }
+
+  .image-input {
+    #image-input {
+      display: none;
+    }
+
+    .preview-image-container {
+      margin: auto;
+      padding: 12px;
+      max-width: 200px;
+      max-height: 200px;
+
+      @extend .clickable;
+
+      .preview-image {
+        margin: auto;
+        width: 90%;
+
+        .icon-container {
+          border: 2px solid white;
+        }
+
+        @extend .rounded-border;
+      }
+
+      .icon-container {
+        border: 2px solid white;
+      }
+
+      @extend .edit-icon-container;
+    }
+  }
+
+  .search-button {
+    width: 90%;
+    max-width: 300px;
+    background-color: $positive;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    margin: 24px auto;
+
+    @extend .rounded-border;
+    @extend .clickable;
+  }
+}
