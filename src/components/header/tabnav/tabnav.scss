@@ -39,6 +39,11 @@
         justify-content: space-around;
       }
 
+      .selected {
+        background-color: $primaryLight;
+        font-weight: normal !important;
+      }
+
       .tabnav-item {
         font-weight: bold;
         display: flex;
@@ -46,6 +51,7 @@
         white-space: nowrap;
 
         @extend .clickable;
+        @extend .rounded-border;
         @extend .default-padding;
       }
     }

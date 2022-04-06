@@ -3,6 +3,8 @@
 $primary: #fee867;
 $secondary: #40b8ea;
 
+$primaryDark1: darken($primary, 30%);
+
 $primaryLight: lighten($primary, 10%);
 $primaryLight1: lighten($primary, 20%);
 $primaryLight2: lighten($primary, 30%);

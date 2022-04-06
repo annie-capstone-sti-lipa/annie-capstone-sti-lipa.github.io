@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { select } from "../../../redux/reducers/tabnav-item-reducer";
 import tabnavItem from "../../../types/enums/tabnavItem";
 import "./tabnav.scss";
@@ -26,9 +26,16 @@ export default function Tabnav() {
 }
 
 function TabnavItem({ name }: { name: string }) {
+  const isSelected =
+    useSelector((state: any) => state.tabnav.selected) === name;
+
   const dispatch = useDispatch();
+
   return (
-    <div className="tabnav-item" onClick={() => dispatch(select(name))}>
+    <div
+      className={`tabnav-item ${isSelected ? "selected" : ""}`}
+      onClick={() => dispatch(select(name))}
+    >
       {name}
     </div>
   );
