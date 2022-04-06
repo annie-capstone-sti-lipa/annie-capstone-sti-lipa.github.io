@@ -45,6 +45,11 @@
   }
 }
 
+.gray-icon {
+  filter: invert(96%) sepia(0%) saturate(234%) hue-rotate(197deg)
+    brightness(91%) contrast(95%) !important;
+}
+
 .unselectable {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;

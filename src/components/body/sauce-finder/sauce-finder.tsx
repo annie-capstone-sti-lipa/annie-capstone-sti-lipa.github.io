@@ -10,6 +10,7 @@ import EditIcon from "../../edit-icon/edit-icon";
 export default function SauceFinder() {
   const [image, setImage] = useState<any>(addImageIcon);
   const [sauce, setSauce] = useState<sauce | null>();
+  const [isInitial, setIsInitial] = useState(true);
 
   useEffect(() => {
     setSauce({
@@ -32,8 +33,14 @@ export default function SauceFinder() {
               document.getElementById("image-input")?.click();
             }}
           >
+            <img
+              className={`preview-image ${
+                isInitial ? "preview-image-placeholder" : ""
+              }`}
+              src={image}
+              alt="upload"
+            />
             <EditIcon />
-            <img className="preview-image" src={image} alt="upload" />
           </div>
           <input
             id="image-input"
@@ -44,6 +51,7 @@ export default function SauceFinder() {
                 let reader = new FileReader();
                 reader.onload = (e) => {
                   setImage(() => e.target?.result);
+                  setIsInitial(false);
                 };
                 reader.readAsDataURL(event.target.files[0]);
               }
@@ -51,10 +59,12 @@ export default function SauceFinder() {
           />
         </div>
         <div className="or">or</div>
-        <div>
-          <span className="hint-text">Paste image URL:</span>
-          <input type="text" />
-        </div>
+        <span className="hint-text">Paste image URL:</span>
+        <input
+          className="url-input"
+          type="text"
+          placeholder="https://site/image.png"
+        />
         <div className="search-button">Search</div>
       </div>
 

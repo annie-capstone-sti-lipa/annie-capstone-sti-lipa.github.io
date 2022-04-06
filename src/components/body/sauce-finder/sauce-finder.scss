@@ -9,10 +9,14 @@
 
   .sauce-card {
     border-left: 8px solid $secondary;
-    margin: 20px 0;
+    margin: 12px;
     width: 90%;
-    max-width: 250px;
+    max-width: 300px;
     font-size: small;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     @extend .subtle-hover-grow;
     @extend .hover-pointer;
@@ -30,6 +34,7 @@
     }
 
     .thumbnail {
+      width: 90%;
       margin: 20px auto;
 
       @extend .rounded-border;
@@ -63,6 +68,10 @@
   }
 
   .sauce-finder {
+    width: 90%;
+    max-width: 300px;
+    margin: 12px;
+
     .hint-text {
       font-size: large;
       font-weight: bold;
@@ -86,6 +95,10 @@
 
         @extend .clickable;
 
+        .preview-image-placeholder {
+          @extend .gray-icon;
+        }
+
         .preview-image {
           margin: auto;
           width: 90%;
@@ -95,6 +108,16 @@
 
         @extend .edit-icon-container;
       }
+    }
+
+    .url-input {
+      display: block;
+      text-align: center;
+      border-radius: 32px;
+      padding: 12px;
+      width: 90%;
+      border: 1px solid #888;
+      margin: 12px auto;
     }
 
     .search-button {
