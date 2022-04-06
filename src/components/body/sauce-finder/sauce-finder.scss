@@ -30,15 +30,7 @@
         margin: auto;
         width: 90%;
 
-        .icon-container {
-          border: 2px solid white;
-        }
-
         @extend .rounded-border;
-      }
-
-      .icon-container {
-        border: 2px solid white;
       }
 
       @extend .edit-icon-container;

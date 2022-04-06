@@ -1,11 +1,12 @@
 @import "../../styles/variables";
 @import "../../styles/presets";
 
-.icon-container {
+.edit-container {
   background-color: $secondary;
   position: absolute;
   right: 0;
   top: 0;
+  border: 2px solid white;
 
   @include mobile {
     top: 4px;

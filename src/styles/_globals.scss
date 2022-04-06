@@ -8,13 +8,13 @@
   position: relative !important;
 }
 
-.edit-icon-container .icon-container {
+.edit-icon-container .edit-container {
   @include desktop {
     visibility: hidden;
   }
 }
 
-.edit-icon-container:hover .icon-container {
+.edit-icon-container:hover .edit-container {
   @include desktop {
     visibility: visible;
   }
