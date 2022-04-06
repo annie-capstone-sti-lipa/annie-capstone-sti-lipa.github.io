@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux";
 import "./body.scss";
 
 export default function Body() {
-  return <div id="body">body</div>;
+  const selected = useSelector((state: any) => state.tabnav.selected);
+
+  return <div id="body">{selected}</div>;
 }
