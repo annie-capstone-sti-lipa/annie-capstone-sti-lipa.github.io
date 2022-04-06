@@ -7,15 +7,15 @@
 }
 
 .circular-border {
-  border-radius: $borderRadius * 3;
+  border-radius: 100%;
 }
 
 .box-shadow {
-  box-shadow: 0em 0em 1em $bgDark;
+  box-shadow: 0em 0em 2px $bgDark;
 }
 
 .box-shadow-light {
-  box-shadow: 0em 0em 1em lighten($bgDark, 20%);
+  box-shadow: 0em 0em 2px lighten($bgDark, 20%);
 }
 
 .default-padding {

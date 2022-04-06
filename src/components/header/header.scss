@@ -1,7 +1,26 @@
 @import "../../styles/variables";
 @import "../../styles/presets";
+@import "../../styles/hover-effects";
+@import "../../styles/globals";
 
 #header {
-  background-color: $primary;
-  height: 250px;
+  background-color: white;
+  align-items: center;
+  border-radius: 0 0 $borderRadius * 3 $borderRadius * 3;
+
+  @extend .box-shadow;
+
+  .top-line {
+    background-color: $primary;
+    padding: 8px;
+  }
+
+  .header-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    @extend .default-padding;
+  }
 }

@@ -3,6 +3,8 @@
 $primary: #fee867;
 $secondary: #40b8ea;
 
+$primaryDark1: darken($primary, 30%);
+
 $primaryLight: lighten($primary, 10%);
 $primaryLight1: lighten($primary, 20%);
 $primaryLight2: lighten($primary, 30%);
@@ -11,7 +13,7 @@ $secondaryLight: lighten($secondary, 10%);
 $secondaryLight1: lighten($secondary, 20%);
 $secondaryLight2: lighten($secondary, 30%);
 
-$bgLight: #f0f0f0;
+$bgLight: #f0f2f5;
 $bgDark: #888888;
 
 $positive: #52ce9c;
@@ -22,4 +24,4 @@ $negative: #d20000;
 $defaultPadding: 20px;
 $defaultMargin: 16px;
 $borderRadius: 8px;
-$desktop: 900px;
+$desktop: 840px;

@@ -1,0 +1,59 @@
+@import "../../../styles/presets";
+@import "../../../styles/variables";
+@import "../../../styles/hover-effects";
+
+.arrow-container {
+  position: relative;
+
+  .arrow {
+    position: absolute;
+    max-width: 12px;
+    top: 45%;
+    bottom: 45%;
+  }
+
+  .right {
+    right: 4px;
+  }
+
+  .left {
+    left: 4px;
+  }
+
+  @include desktop {
+    .arrow {
+      visibility: hidden;
+    }
+  }
+
+  .container {
+    .tabnav {
+      position: relative;
+      display: flex;
+      border-top: 1px solid rgba(black, 0.1);
+      border-radius: 0 0 $borderRadius * 3 $borderRadius * 3;
+      overflow-y: hidden;
+      overflow-x: auto;
+
+      @include desktop {
+        justify-content: space-around;
+      }
+
+      .selected {
+        background-color: $primaryLight;
+        font-weight: normal !important;
+      }
+
+      .tabnav-item {
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+
+        @extend .clickable;
+        @extend .rounded-border;
+        @extend .default-padding;
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+@import "../../../styles/presets";
+@import "../../../styles/keyframes";
+@import "../../../styles/hover-effects";
+
+.profile-pic-container .icon-container {
+  @include desktop {
+    visibility: hidden;
+  }
+}
+
+.profile-pic-container:hover .icon-container {
+  @include desktop {
+    visibility: visible;
+  }
+}
+
+.profile-pic-container {
+  position: relative;
+
+  @extend .clickable;
+  @extend .circular-border;
+
+  @include mobile {
+    margin: auto;
+  }
+
+  .profile-pic {
+    max-width: 140px;
+    background-color: white;
+    padding: 4px;
+
+    @extend .circular-border;
+    @extend .hover-highlight;
+  }
+}
+
+.image-modal {
+  position: relative;
+
+  @extend .unselectable;
+
+  .modal-pfp {
+    width: 90%;
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .buttons {
+    display: flex;
+    color: white;
+    font-weight: bold;
+    justify-content: center;
+
+    .upload-button {
+      margin: 12px;
+      background-color: $secondary;
+      min-width: 100px;
+      padding: 8px;
+
+      @extend .rounded-border;
+      @extend .clickable;
+    }
+
+    .save-button {
+      background-color: $positive;
+
+      @extend .upload-button;
+    }
+  }
+}

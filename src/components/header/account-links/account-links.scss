@@ -1,0 +1,34 @@
+@import "../../../styles/hover-effects";
+
+.account-links {
+  @include mobile {
+    margin: auto;
+  }
+
+  .account-button {
+    width: 90vw;
+    max-width: 180px;
+    display: flex;
+    justify-content: center;
+    margin: 12px;
+    padding: 4px;
+
+    @extend .clickable;
+    @extend .rounded-border;
+
+    .account-link-container {
+      min-width: 70%;
+      color: white;
+      font-weight: bold;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .account-icon {
+        width: 28px;
+        height: 28px;
+        margin-right: 12px;
+      }
+    }
+  }
+}
