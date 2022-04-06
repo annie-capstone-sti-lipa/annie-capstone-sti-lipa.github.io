@@ -11,16 +11,14 @@ export default function SauceFinder() {
     <div className="sauce-finder">
       <div className="hint-text">Select Image:</div>
       <div className="image-input">
-        <div className="preview-image-container">
+        <div
+          className="preview-image-container"
+          onClick={() => {
+            document.getElementById("image-input")?.click();
+          }}
+        >
           <EditIcon />
-          <img
-            className="preview-image"
-            src={image}
-            alt="upload"
-            onClick={() => {
-              document.getElementById("image-input")?.click();
-            }}
-          />
+          <img className="preview-image" src={image} alt="upload" />
         </div>
         <input
           id="image-input"
