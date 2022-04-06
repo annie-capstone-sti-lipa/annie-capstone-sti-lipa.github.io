@@ -29,10 +29,6 @@
     background-color: white;
     padding: 4px;
 
-    @include mobile {
-      max-width: 100px;
-    }
-
     @extend .circular-border;
     @extend .hover-highlight;
   }
