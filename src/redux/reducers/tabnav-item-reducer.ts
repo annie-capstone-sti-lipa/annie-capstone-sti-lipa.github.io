@@ -4,7 +4,7 @@ import tabnavItem from "../../types/enums/tabnavItem";
 export const tabnavSlice = createSlice({
   name: "tabnav",
   initialState: {
-    selected: tabnavItem.sauceFinder,
+    selected: tabnavItem.calendar,
   },
   reducers: {
     select: (state, action) => {

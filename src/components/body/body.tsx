@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import tabnavItem from "../../types/enums/tabnavItem";
 import "./body.scss";
+import Calendar from "./calendar/calendar";
 import SauceFinder from "./sauce-finder/sauce-finder";
 
 export default function Body() {
@@ -10,6 +11,8 @@ export default function Body() {
     switch (selected) {
       case tabnavItem.sauceFinder:
         return <SauceFinder />;
+      case tabnavItem.calendar:
+        return <Calendar />;
       default:
         return <div>{selected}</div>;
     }

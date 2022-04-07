@@ -1,0 +1,40 @@
+@import "../../../styles/presets";
+
+.calendar {
+  .title {
+    font-size: x-large;
+    font-weight: bold;
+    background-color: #333;
+    color: white;
+    margin: 4px;
+    padding: 32px;
+
+    @extend .rounded-border;
+  }
+
+  .month-view {
+    width: 100%;
+    padding: 4px;
+
+    .week-day {
+      padding: 16px;
+      margin: 8px;
+      color: white;
+      font-weight: bold;
+      background-color: #333;
+
+      @extend .box-shadow;
+      @extend .rounded-border;
+    }
+
+    .day-card {
+      max-width: 32px;
+      max-height: 32px;
+      margin: 12px;
+      padding: 8px;
+
+      @extend .box-shadow;
+      @extend .rounded-border;
+    }
+  }
+}
