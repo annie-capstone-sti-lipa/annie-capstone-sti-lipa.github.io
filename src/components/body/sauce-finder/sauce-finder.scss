@@ -8,7 +8,7 @@
   justify-content: space-around;
 
   .sauce-card {
-    border-left: 8px solid $secondary;
+    border-left: 8px solid $positive;
     margin: 12px;
     width: 90%;
     max-width: 300px;
@@ -43,7 +43,7 @@
     .view-button {
       display: flex;
       align-items: center;
-      background-color: $secondary;
+      background-color: $positive;
       padding: 4px 16px;
       color: white;
       font-weight: bold;

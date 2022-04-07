@@ -40,8 +40,7 @@
       }
 
       .selected {
-        background-color: $primaryLight;
-        font-weight: normal !important;
+        @extend .box-shadow;
       }
 
       .tabnav-item {
