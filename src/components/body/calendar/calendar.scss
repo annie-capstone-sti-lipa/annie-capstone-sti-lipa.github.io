@@ -1,6 +1,18 @@
 @import "../../../styles/presets";
+@import "../../../styles/hover-effects";
 
 .calendar {
+  .week-day {
+    padding: 16px;
+    margin: 8px;
+    color: white;
+    font-weight: bold;
+    background-color: #333;
+
+    @extend .box-shadow;
+    @extend .rounded-border;
+  }
+
   .title {
     font-size: x-large;
     font-weight: bold;
@@ -12,22 +24,14 @@
     @extend .rounded-border;
   }
 
-  .month-view {
+  .week-view {
     width: 100%;
     padding: 4px;
+    border-spacing: 4px 12px;
 
-    .week-day {
-      padding: 16px;
-      margin: 8px;
-      color: white;
-      font-weight: bold;
-      background-color: #333;
+    @extend .hover-pointer;
 
-      @extend .box-shadow;
-      @extend .rounded-border;
-    }
-
-    .day-card {
+    .day-card-week {
       max-width: 32px;
       max-height: 32px;
       margin: 12px;
@@ -35,6 +39,28 @@
 
       @extend .box-shadow;
       @extend .rounded-border;
+    }
+  }
+
+  .month-view {
+    width: 100%;
+    padding: 4px;
+    border-spacing: 4px 12px;
+
+    @extend .hover-pointer;
+
+    .week-row {
+      @extend .clickable;
+
+      .day-card-month {
+        max-width: 32px;
+        max-height: 32px;
+        margin: 12px;
+        padding: 8px;
+
+        @extend .box-shadow;
+        @extend .rounded-border;
+      }
     }
   }
 }

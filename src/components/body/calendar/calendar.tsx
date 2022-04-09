@@ -8,6 +8,7 @@ enum view {
 
 export default function Calendar() {
   const [selectedView, setSelectedView] = useState(view.monthView);
+  const [selectedWeek, setSelectedWeek] = useState<Array<string>>();
 
   let today = new Date();
   let firstDay = new Date(today.getFullYear(), today.getMonth()).getDay();
@@ -24,16 +25,21 @@ export default function Calendar() {
     "Saturday",
   ];
 
+  const _setSelectedView = (view: view) => setSelectedView(() => view);
+  const _setSelectedWeek = (week: Array<string>) => setSelectedWeek(() => week);
+
   function viewSwitch() {
     switch (selectedView) {
       case view.weekView:
-        return <WeekView />;
+        return <WeekView daysInWeek={daysInWeek} selectedWeek={selectedWeek} />;
       default:
         return (
           <MonthView
             firstDay={firstDay}
             daysThisMonth={daysThisMonth}
             daysInWeek={daysInWeek}
+            setSelectedView={_setSelectedView}
+            setSelectedWeek={_setSelectedWeek}
           />
         );
     }
@@ -47,32 +53,62 @@ export default function Calendar() {
   );
 }
 
-function WeekView() {
-  return <div className="week-view">sunday</div>;
+function WeekView({
+  daysInWeek,
+  selectedWeek,
+}: {
+  daysInWeek: Array<string>;
+  selectedWeek?: Array<string>;
+}) {
+  return (
+    <table className="week-view">
+      <thead>
+        <tr>
+          {daysInWeek.map((day, index) => (
+            <WeekDay day={day} key={day + index} />
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {selectedWeek!.map((day, index) => (
+            <DayCardWeek day={day} key={`day ${index}`} />
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  );
 }
 
 function MonthView({
   firstDay,
   daysThisMonth,
   daysInWeek,
+  setSelectedView,
+  setSelectedWeek,
 }: {
   firstDay: number;
   daysThisMonth: number;
   daysInWeek: Array<string>;
+  setSelectedView: (view: view) => void;
+  setSelectedWeek: (week: Array<string>) => void;
 }) {
   function days() {
-    let daysArr: Array<string | number> = [];
+    let daysArr: Array<string> = [];
     let dayElements = [];
 
     for (let i = 0; i < firstDay; i++) daysArr.push("");
-    for (let i = 0; i < daysThisMonth; i++) daysArr.push(i + 1);
+    for (let i = 0; i < daysThisMonth; i++) daysArr.push((i + 1).toString());
 
     function getRow() {
       let row = [];
 
       for (let i = 0; i < daysInWeek.length; i++) {
         row.push(
-          <DayCard day={daysArr.shift()!.toString()} key={daysArr.length} />
+          <DayCardMonth
+            day={daysArr.shift()!.toString()}
+            key={daysArr.length}
+          />
         );
       }
 
@@ -80,8 +116,20 @@ function MonthView({
     }
 
     while (daysArr.length !== 0) {
-      console.log(daysArr.length);
-      dayElements.push(<tr>{getRow()}</tr>);
+      let current = daysArr.slice(0, daysInWeek.length);
+
+      dayElements.push(
+        <tr
+          className="week-row"
+          onClick={() => {
+            setSelectedWeek(current);
+            setSelectedView(view.weekView);
+          }}
+          key={`week-row ${daysArr.length}`}
+        >
+          {getRow()}
+        </tr>
+      );
     }
 
     return dayElements;
@@ -89,12 +137,14 @@ function MonthView({
 
   return (
     <table className="month-view">
-      <tr>
-        {daysInWeek.map((day, index) => (
-          <WeekDay day={day} key={day + index} />
-        ))}
-      </tr>
-      {days()}
+      <thead>
+        <tr>
+          {daysInWeek.map((day, index) => (
+            <WeekDay day={day} key={day + index} />
+          ))}
+        </tr>
+      </thead>
+      <tbody>{days()}</tbody>
     </table>
   );
 }
@@ -103,6 +153,10 @@ function WeekDay({ day }: { day: string }) {
   return <th className="week-day">{day}</th>;
 }
 
-function DayCard({ day }: { day: string }) {
-  return <td className="day-card">{day}</td>;
+function DayCardMonth({ day }: { day: string }) {
+  return <td className="day-card-month">{day}</td>;
+}
+
+function DayCardWeek({ day }: { day: string }) {
+  return <td className="day-card-week">{day}</td>;
 }
