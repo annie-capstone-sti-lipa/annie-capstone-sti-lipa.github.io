@@ -2,6 +2,8 @@
 @import "../../../styles/hover-effects";
 
 .calendar {
+  color: $secondary;
+
   .title-container {
     margin-bottom: 16px;
     text-align: end;
@@ -12,7 +14,7 @@
       color: white;
       font-size: small;
       font-weight: bold;
-      background-color: #333;
+      background-color: $secondary;
       border-radius: 0 $borderRadius;
       padding: 16px;
     }
@@ -21,53 +23,62 @@
   .view-container {
     @extend .default-padding;
 
-    .week-day {
-      padding: 16px;
-      margin: 8px;
-      color: white;
-      font-weight: bold;
-      background-color: #333;
-
-      @extend .box-shadow;
-      @extend .rounded-border;
-    }
-
     .week-view {
       width: 100%;
       padding: 4px;
       border-spacing: 4px 12px;
+      border: 1px solid $bgLight;
 
       @extend .hover-pointer;
+      @extend .rounded-border;
 
-      .day-card-week {
-        max-width: 32px;
-        max-height: 32px;
-        margin: 12px;
-        padding: 8px;
+      .week-header {
+        .week-day {
+          .day-name {
+            color: $secondary;
+            font-size: small;
+            font-weight: lighter;
+            margin-bottom: 8px;
+          }
 
-        @extend .box-shadow;
-        @extend .rounded-border;
+          .day-date-container {
+            .day-date {
+              margin: auto;
+              padding: 8px;
+              width: 20px;
+              height: 20px;
+              color: white;
+              background-color: $secondary;
+
+              @extend .circular-border;
+            }
+          }
+        }
       }
     }
 
     .month-view {
       width: 100%;
       padding: 4px;
-      border-spacing: 4px 12px;
+      border-spacing: 0;
 
       @extend .hover-pointer;
 
+      .week-day {
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        background-color: $secondary;
+      }
+
       .week-row {
-        @extend .clickable;
+        @extend .hover-highlight;
 
         .day-card-month {
           max-width: 32px;
           max-height: 32px;
-          margin: 12px;
           padding: 8px;
-
-          @extend .box-shadow;
-          @extend .rounded-border;
+          border: 1px solid $bgLight;
         }
       }
     }

@@ -65,18 +65,23 @@ function WeekView({
   return (
     <table className="week-view">
       <thead>
-        <tr>
+        <tr className="week-header">
           {daysInWeek.map((day, index) => (
-            <WeekDay day={day} key={day + index} />
+            <th className="week-day" key={`${day} ${index}`}>
+              <div className="day-name">{day}</div>
+              <div className="day-date-container">
+                <div className="day-date">
+                  {selectedWeek![index].length === 0
+                    ? "_"
+                    : selectedWeek![index]}
+                </div>
+              </div>
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
-        <tr>
-          {selectedWeek!.map((day, index) => (
-            <DayCardWeek day={day} key={`day ${index}`} />
-          ))}
-        </tr>
+        <tr></tr>
       </tbody>
     </table>
   );
@@ -99,7 +104,7 @@ function MonthView({
     let daysArr: Array<string> = [];
     let dayElements = [];
 
-    for (let i = 0; i < firstDay; i++) daysArr.push("");
+    for (let i = 0; i < firstDay; i++) daysArr.push("_");
     for (let i = 0; i < daysThisMonth; i++) daysArr.push((i + 1).toString());
 
     function getRow() {
