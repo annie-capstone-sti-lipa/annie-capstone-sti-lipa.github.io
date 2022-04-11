@@ -6,8 +6,27 @@
 
   .title-container {
     margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
     text-align: end;
     box-sizing: border-box;
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $secondary;
+      border-radius: $borderRadius 0;
+      width: 30%;
+      max-width: 80px;
+
+      @extend .clickable;
+
+      .back-icon {
+        display: block;
+        @extend .icon;
+      }
+    }
 
     .title {
       display: inline-block;
@@ -27,8 +46,8 @@
       width: 100%;
       padding: 4px;
       border-spacing: 4px 12px;
-      border: 1px solid $bgLight;
 
+      @extend .box-shadow;
       @extend .hover-pointer;
       @extend .rounded-border;
 
@@ -59,16 +78,16 @@
 
     .month-view {
       width: 100%;
-      padding: 4px;
       border-spacing: 0;
 
+      @extend .box-shadow;
+      @extend .rounded-border;
       @extend .hover-pointer;
 
       .week-day {
         padding: 16px;
-        color: white;
         font-weight: bold;
-        background-color: $secondary;
+        color: $secondary;
       }
 
       .week-row {
@@ -77,8 +96,9 @@
         .day-card-month {
           max-width: 32px;
           max-height: 32px;
-          padding: 8px;
-          border: 1px solid $bgLight;
+          padding: 20px;
+
+          @extend .rounded-border;
         }
       }
     }

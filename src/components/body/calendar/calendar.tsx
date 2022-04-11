@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./calendar.scss";
 
+import backIcon from "../../../assets/icons/back.svg";
+
 enum view {
   monthView,
   weekView,
@@ -48,6 +50,16 @@ export default function Calendar() {
   return (
     <div className="calendar">
       <div className="title-container">
+        {selectedView === view.weekView ? (
+          <div
+            className="back-button"
+            onClick={() => _setSelectedView(view.monthView)}
+          >
+            <img className="back-icon" src={backIcon} alt="back" />
+          </div>
+        ) : (
+          <span></span>
+        )}
         <span className="title">April, Spring 2022</span>
       </div>
       <div className="view-container">{viewSwitch()}</div>
