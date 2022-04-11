@@ -76,13 +76,19 @@ function WeekView({
 }) {
   return (
     <table className="week-view">
-      <thead>
-        <tr className="week-header">
+      <thead className="week-header">
+        <tr>
           {daysInWeek.map((day, index) => (
             <th className="week-day" key={`${day} ${index}`}>
               <div className="day-name">{day}</div>
               <div className="day-date-container">
-                <div className="day-date">
+                <div
+                  className={`day-date ${
+                    selectedWeek![index] === new Date().getDate().toString()
+                      ? "today"
+                      : ""
+                  }`}
+                >
                   {selectedWeek![index].length === 0
                     ? "_"
                     : selectedWeek![index]}
@@ -93,7 +99,17 @@ function WeekView({
         </tr>
       </thead>
       <tbody>
-        <tr></tr>
+        <tr className="anime-scheds">
+          {selectedWeek!.map((day, index) => (
+            <td key={`${day} ${index}`}>
+              {Array(Math.floor(Math.random() * (3 - 0) + 0))
+                .fill("")
+                .map((item, index) => {
+                  return <AnimeSchedCard key={index} />;
+                })}
+            </td>
+          ))}
+        </tr>
       </tbody>
     </table>
   );
@@ -123,10 +139,12 @@ function MonthView({
       let row = [];
 
       for (let i = 0; i < daysInWeek.length; i++) {
+        let day = daysArr.shift()!.toString();
         row.push(
           <DayCardMonth
-            day={daysArr.shift()!.toString()}
+            day={day}
             key={daysArr.length}
+            isToday={new Date().getDate().toString() === day}
           />
         );
       }
@@ -172,10 +190,24 @@ function WeekDay({ day }: { day: string }) {
   return <th className="week-day">{day}</th>;
 }
 
-function DayCardMonth({ day }: { day: string }) {
-  return <td className="day-card-month">{day}</td>;
+function DayCardMonth({ day, isToday }: { day: string; isToday: boolean }) {
+  return (
+    <td className={`day-card-month-container `}>
+      <div className={`day-card-month ${isToday ? "today" : ""}`}>{day}</div>
+    </td>
+  );
 }
 
-function DayCardWeek({ day }: { day: string }) {
-  return <td className="day-card-week">{day}</td>;
+function AnimeSchedCard() {
+  return (
+    <div className="anime-sched-card">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Ancient_Magus%27_Bride%2C_volume_1.jpg/220px-The_Ancient_Magus%27_Bride%2C_volume_1.jpg"
+        alt=""
+        className="thumbnail"
+        draggable={false}
+      />
+      <div className="anime-name">Mahoutsukai no yome</div>
+    </div>
+  );
 }
