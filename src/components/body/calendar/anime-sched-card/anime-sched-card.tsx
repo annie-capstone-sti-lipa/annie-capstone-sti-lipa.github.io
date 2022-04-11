@@ -2,6 +2,8 @@ import { useState } from "react";
 import Modal from "../../../modal/modal";
 import "./anime-sched-card.scss";
 
+import playIcon from "../../../../assets/icons/right.svg";
+
 export default function AnimeSchedCard() {
   const [showModal, setShowModal] = useState(false);
 
@@ -14,11 +16,22 @@ export default function AnimeSchedCard() {
       />
       <img
         src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Ancient_Magus%27_Bride%2C_volume_1.jpg/220px-The_Ancient_Magus%27_Bride%2C_volume_1.jpg"
-        alt=""
+        alt="thumbnail"
         className="thumbnail"
         draggable={false}
       />
       <div className="anime-name">Mahoutsukai no yome</div>
+      <div
+        className="play-button"
+        onClick={(event) => {
+          event.stopPropagation();
+          //todo : add auto track of episodes
+          window.open("https://www.netflix.com/watch/81511413");
+        }}
+      >
+        <span>Ep 1</span>
+        <img className="play-icon" src={playIcon} alt="play" />
+      </div>
     </div>
   );
 }

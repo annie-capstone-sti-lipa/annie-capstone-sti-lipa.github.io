@@ -33,6 +33,20 @@
 
     @extend .rounded-border;
   }
+
+  .play-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: small;
+    background-color: $secondary;
+
+    @extend .clickable-button;
+
+    .play-icon {
+      @extend .white-icon;
+    }
+  }
 }
 
 .anime-sched-modal {
