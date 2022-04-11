@@ -1,0 +1,146 @@
+@import "../../../../styles/presets";
+@import "../../../../styles/globals";
+@import "../../../../styles/hover-effects";
+
+.anime-sched-card {
+  padding: 8px 4px;
+  margin: 12px;
+  border-top: 4px solid $secondary;
+
+  @extend .box-shadow;
+  @extend .rounded-border;
+  @extend .clickable;
+  @extend .unselectable;
+
+  .anime-name {
+    font-size: small;
+    margin: 8px;
+  }
+
+  .thumbnail {
+    max-width: 80px;
+
+    @extend .rounded-border;
+  }
+}
+
+.anime-sched-modal {
+  max-height: 70vh;
+  overflow: auto;
+
+  @extend .default-padding;
+
+  .anime-details-container {
+    display: flex;
+
+    @include mobile {
+      flex-wrap: wrap;
+    }
+
+    .thumbnail {
+      margin: 20px;
+      max-height: 300px;
+
+      @include mobile {
+        margin: auto;
+      }
+
+      @extend .rounded-border;
+    }
+
+    .anime-details {
+      max-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: start;
+      padding: 0 16px;
+
+      .title {
+        margin: 16px 0;
+        text-align: center;
+
+        .name {
+          font-size: large;
+          font-weight: bold;
+        }
+
+        .ratings {
+          font-size: small;
+        }
+      }
+
+      .synopsis {
+        margin: 16px 0;
+        text-align: center;
+      }
+
+      .link-input {
+        display: flex;
+        align-items: center;
+        margin: 16px 0;
+
+        @include mobile {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .input {
+          margin-left: 16px;
+          text-align: center;
+          width: 80%;
+          padding: 8px;
+
+          @extend .rounded-border;
+        }
+
+        .update {
+          background-color: $secondary;
+          margin: 8px;
+
+          @extend .clickable-button;
+        }
+      }
+
+      .hint {
+        font-size: small;
+        margin-bottom: 12px;
+        color: $bgDark;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        justify-content: flex-end;
+
+        @include mobile {
+          * {
+            margin: 4px auto !important;
+          }
+        }
+
+        .mark-complete {
+          background-color: $positive;
+          margin: 8px;
+
+          @extend .clickable-button;
+        }
+
+        .hold {
+          background-color: $primary;
+          margin: 8px;
+
+          @extend .clickable-button;
+        }
+
+        .drop {
+          background-color: $negative;
+          margin: 8px;
+
+          @extend .clickable-button;
+        }
+      }
+    }
+  }
+}

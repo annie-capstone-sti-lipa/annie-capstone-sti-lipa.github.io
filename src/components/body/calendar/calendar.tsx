@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./calendar.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
+import AnimeSchedCard from "./anime-sched-card/anime-sched-card";
 
 enum view {
   monthView,
@@ -104,7 +105,7 @@ function WeekView({
             <td key={`${day} ${index}`}>
               {Array(Math.floor(Math.random() * (3 - 0) + 0))
                 .fill("")
-                .map((item, index) => {
+                .map((_, index) => {
                   return <AnimeSchedCard key={index} />;
                 })}
             </td>
@@ -195,19 +196,5 @@ function DayCardMonth({ day, isToday }: { day: string; isToday: boolean }) {
     <td className={`day-card-month-container `}>
       <div className={`day-card-month ${isToday ? "today" : ""}`}>{day}</div>
     </td>
-  );
-}
-
-function AnimeSchedCard() {
-  return (
-    <div className="anime-sched-card">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Ancient_Magus%27_Bride%2C_volume_1.jpg/220px-The_Ancient_Magus%27_Bride%2C_volume_1.jpg"
-        alt=""
-        className="thumbnail"
-        draggable={false}
-      />
-      <div className="anime-name">Mahoutsukai no yome</div>
-    </div>
   );
 }

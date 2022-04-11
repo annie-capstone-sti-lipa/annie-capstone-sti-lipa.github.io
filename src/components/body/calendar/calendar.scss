@@ -97,28 +97,6 @@
         :last-child {
           border-right: none;
         }
-
-        .anime-sched-card {
-          padding: 8px 4px;
-          margin: 12px;
-          border-top: 4px solid $secondary;
-
-          @extend .box-shadow;
-          @extend .rounded-border;
-          @extend .clickable;
-          @extend .unselectable;
-
-          .anime-name {
-            font-size: small;
-            margin: 8px;
-          }
-
-          .thumbnail {
-            max-width: 80px;
-
-            @extend .rounded-border;
-          }
-        }
       }
     }
 
