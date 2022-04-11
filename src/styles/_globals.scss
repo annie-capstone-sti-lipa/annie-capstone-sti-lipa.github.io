@@ -19,14 +19,3 @@
     visibility: visible;
   }
 }
-
-.clickable-button {
-  text-align: center;
-  font-weight: bold;
-  min-width: 100px;
-  padding: 8px;
-  color: white;
-
-  @extend .rounded-border;
-  @extend .clickable;
-}

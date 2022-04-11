@@ -1,6 +1,17 @@
 @import "../../../../styles/presets";
-@import "../../../../styles/globals";
 @import "../../../../styles/hover-effects";
+
+.clickable-button {
+  text-align: center;
+  font-weight: bold;
+  min-width: 100px;
+  padding: 8px;
+  color: white;
+  margin: 8px;
+
+  @extend .rounded-border;
+  @extend .clickable;
+}
 
 .anime-sched-card {
   padding: 8px 4px;
@@ -96,7 +107,6 @@
 
         .update {
           background-color: $secondary;
-          margin: 8px;
 
           @extend .clickable-button;
         }
@@ -122,21 +132,18 @@
 
         .mark-complete {
           background-color: $positive;
-          margin: 8px;
 
           @extend .clickable-button;
         }
 
         .hold {
           background-color: $primary;
-          margin: 8px;
 
           @extend .clickable-button;
         }
 
         .drop {
           background-color: $negative;
-          margin: 8px;
 
           @extend .clickable-button;
         }
