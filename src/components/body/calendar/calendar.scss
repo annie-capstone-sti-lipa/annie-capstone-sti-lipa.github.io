@@ -2,57 +2,44 @@
 @import "../../../styles/hover-effects";
 
 .calendar {
-  .week-day {
-    padding: 16px;
-    margin: 8px;
-    color: white;
-    font-weight: bold;
-    background-color: #333;
+  .title-container {
+    margin-bottom: 16px;
+    text-align: end;
+    box-sizing: border-box;
 
-    @extend .box-shadow;
-    @extend .rounded-border;
+    .title {
+      display: inline-block;
+      color: white;
+      font-size: small;
+      font-weight: bold;
+      background-color: #333;
+      border-radius: 0 $borderRadius;
+      padding: 16px;
+    }
   }
 
-  .title {
-    font-size: x-large;
-    font-weight: bold;
-    background-color: #333;
-    color: white;
-    margin: 4px;
-    padding: 32px;
+  .view-container {
+    @extend .default-padding;
 
-    @extend .rounded-border;
-  }
-
-  .week-view {
-    width: 100%;
-    padding: 4px;
-    border-spacing: 4px 12px;
-
-    @extend .hover-pointer;
-
-    .day-card-week {
-      max-width: 32px;
-      max-height: 32px;
-      margin: 12px;
-      padding: 8px;
+    .week-day {
+      padding: 16px;
+      margin: 8px;
+      color: white;
+      font-weight: bold;
+      background-color: #333;
 
       @extend .box-shadow;
       @extend .rounded-border;
     }
-  }
 
-  .month-view {
-    width: 100%;
-    padding: 4px;
-    border-spacing: 4px 12px;
+    .week-view {
+      width: 100%;
+      padding: 4px;
+      border-spacing: 4px 12px;
 
-    @extend .hover-pointer;
+      @extend .hover-pointer;
 
-    .week-row {
-      @extend .clickable;
-
-      .day-card-month {
+      .day-card-week {
         max-width: 32px;
         max-height: 32px;
         margin: 12px;
@@ -60,6 +47,28 @@
 
         @extend .box-shadow;
         @extend .rounded-border;
+      }
+    }
+
+    .month-view {
+      width: 100%;
+      padding: 4px;
+      border-spacing: 4px 12px;
+
+      @extend .hover-pointer;
+
+      .week-row {
+        @extend .clickable;
+
+        .day-card-month {
+          max-width: 32px;
+          max-height: 32px;
+          margin: 12px;
+          padding: 8px;
+
+          @extend .box-shadow;
+          @extend .rounded-border;
+        }
       }
     }
   }

@@ -47,8 +47,10 @@ export default function Calendar() {
 
   return (
     <div className="calendar">
-      <div className="title">April, Spring 2022</div>
-      {viewSwitch()}
+      <div className="title-container">
+        <span className="title">April, Spring 2022</span>
+      </div>
+      <div className="view-container">{viewSwitch()}</div>
     </div>
   );
 }

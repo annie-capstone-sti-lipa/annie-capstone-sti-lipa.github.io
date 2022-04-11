@@ -4,7 +4,7 @@ import "./body.scss";
 import Calendar from "./calendar/calendar";
 import SauceFinder from "./sauce-finder/sauce-finder";
 
-export default function Body() {
+export default function Body({ noPadding }: { noPadding?: boolean }) {
   const selected = useSelector((state: any) => state.tabnav.selected);
 
   function bodySwitch() {
@@ -20,7 +20,9 @@ export default function Body() {
 
   return (
     <div className="container">
-      <div id="body">{bodySwitch()}</div>
+      <div id="body" style={{ padding: `${noPadding ? "0px" : ""}` }}>
+        {bodySwitch()}
+      </div>
     </div>
   );
 }
