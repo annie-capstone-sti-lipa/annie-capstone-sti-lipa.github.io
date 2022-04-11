@@ -40,7 +40,8 @@
       }
 
       .selected {
-        @extend .box-shadow;
+        color: white;
+        background-color: $secondary;
       }
 
       .tabnav-item {
