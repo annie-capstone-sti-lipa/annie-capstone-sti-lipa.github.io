@@ -4,10 +4,9 @@
 .clickable-button {
   text-align: center;
   font-weight: bold;
-  min-width: 100px;
   padding: 8px;
   color: white;
-  margin: 8px;
+  margin: 8px auto;
 
   @extend .rounded-border;
   @extend .clickable;
@@ -41,6 +40,7 @@
     justify-content: space-around;
     font-size: small;
     background-color: $secondary;
+    max-width: 70%;
 
     @extend .clickable-button;
 
@@ -145,19 +145,25 @@
           }
         }
 
-        .mark-complete {
+        .blue-button {
+          background-color: $secondary;
+
+          @extend .clickable-button;
+        }
+
+        .green-button {
           background-color: $positive;
 
           @extend .clickable-button;
         }
 
-        .hold {
+        .yellow-button {
           background-color: $primary;
 
           @extend .clickable-button;
         }
 
-        .drop {
+        .red-button {
           background-color: $negative;
 
           @extend .clickable-button;

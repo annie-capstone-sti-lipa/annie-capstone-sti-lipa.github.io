@@ -3,6 +3,7 @@ import "./calendar.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
 import AnimeCard from "../../general/anime-card/anime-card";
+import animeType from "../../../types/enums/anime-type";
 
 enum view {
   monthView,
@@ -106,7 +107,7 @@ function WeekView({
               {Array(Math.floor(Math.random() * (3 - 0) + 0))
                 .fill("")
                 .map((_, index) => {
-                  return <AnimeCard key={index} />;
+                  return <AnimeCard type={animeType.watching} key={index} />;
                 })}
             </td>
           ))}

@@ -6,51 +6,22 @@
     font-weight: bold;
     background-color: $secondary;
     color: white;
-    width: 90%;
-    max-width: 400px;
-    margin: auto;
-    border-radius: 0 0 $borderRadius $borderRadius;
     padding: 16px;
-  }
-
-  .recommendation-container {
-    @extend .default-padding;
-  }
-}
-
-.recommendation-card {
-  padding: 8px 4px;
-  margin: 12px;
-  max-width: 160px;
-  border-top: 4px solid $secondary;
-
-  @extend .box-shadow;
-  @extend .rounded-border;
-  @extend .clickable;
-  @extend .unselectable;
-
-  .anime-name {
-    font-size: small;
-    margin: 8px;
-  }
-
-  .thumbnail {
-    max-width: 80px;
 
     @extend .rounded-border;
   }
 
-  .play-button {
-    display: flex;
+  .recommendation-container {
+    @extend .default-padding;
+
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: auto;
     align-items: center;
-    justify-content: space-around;
-    font-size: small;
-    background-color: $secondary;
+    justify-content: center;
 
-    @extend .clickable;
-
-    .play-icon {
-      @extend .white-icon;
+    .anime-card {
+      max-width: 120px;
     }
   }
 }
