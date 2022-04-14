@@ -27,3 +27,56 @@
     }
   }
 }
+
+.code-modal {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  .numbers-image {
+    width: 80%;
+    max-width: 500px;
+
+    @extend .rounded-border;
+  }
+
+  .question-container {
+    .input-container {
+      .question {
+        font-weight: bold;
+      }
+      .input {
+        border: 1px solid $bgDark;
+        padding: 8px;
+        margin: 4px 8px;
+        text-align: center;
+        width: 80%;
+
+        @extend .rounded-border;
+      }
+    }
+
+    .submit-button {
+      background-color: $positive;
+      padding: 8px;
+      color: white;
+      font-weight: bold;
+      align-self: flex-end;
+      display: inline-flex;
+      align-items: center;
+      margin: 20px;
+
+      @extend .clickable;
+      @extend .rounded-border;
+
+      .submit-icon {
+        margin-right: 20px;
+        width: 16px;
+        height: 16px;
+
+        @extend .white-icon;
+      }
+    }
+  }
+}
