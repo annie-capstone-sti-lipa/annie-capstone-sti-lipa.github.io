@@ -2,9 +2,28 @@
 @import "../../styles/hover-effects";
 
 .code-vault {
-  .add-button {
-    background-color: $positive;
+  .button-container {
+    text-align: end;
 
-    @extend .clickable;
+    .add-button {
+      background-color: $positive;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      align-self: flex-end;
+      display: inline-flex;
+      align-items: center;
+      border-radius: 0 $borderRadius 0 $borderRadius;
+
+      @extend .clickable;
+
+      .add-icon {
+        margin-right: 20px;
+        width: 20px;
+        height: 20px;
+
+        @extend .white-icon;
+      }
+    }
   }
 }

@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import "./App.scss";
 import Body from "./components/body/body";
 import Footer from "./components/footer/footer";
