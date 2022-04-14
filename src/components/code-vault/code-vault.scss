@@ -1,0 +1,10 @@
+@import "../../styles/presets";
+@import "../../styles/hover-effects";
+
+.code-vault {
+  .add-button {
+    background-color: $positive;
+
+    @extend .clickable;
+  }
+}

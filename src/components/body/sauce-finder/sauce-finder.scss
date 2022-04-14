@@ -7,6 +7,8 @@
   flex-wrap: wrap;
   justify-content: space-around;
 
+  @extend .default-padding;
+
   .sauce-card {
     border-left: 8px solid $secondary;
     margin: 12px;

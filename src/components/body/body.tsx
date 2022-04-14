@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import tabnavItem from "../../types/enums/tabnavItem";
+import CodeVault from "../code-vault/code-vault";
 import "./body.scss";
 import Calendar from "./calendar/calendar";
 import Recommendations from "./recommendations/recommendations";
 import SauceFinder from "./sauce-finder/sauce-finder";
 
-export default function Body({ noPadding }: { noPadding?: boolean }) {
+export default function Body() {
   const selected = useSelector((state: any) => state.tabnav.selected);
 
   function bodySwitch() {
@@ -16,6 +17,8 @@ export default function Body({ noPadding }: { noPadding?: boolean }) {
         return <Calendar />;
       case tabnavItem.recommendations:
         return <Recommendations />;
+      case tabnavItem.codeVault:
+        return <CodeVault />;
       default:
         return <div>{selected}</div>;
     }
@@ -23,9 +26,7 @@ export default function Body({ noPadding }: { noPadding?: boolean }) {
 
   return (
     <div className="container">
-      <div id="body" style={{ padding: `${noPadding ? "0px" : ""}` }}>
-        {bodySwitch()}
-      </div>
+      <div id="body">{bodySwitch()}</div>
     </div>
   );
 }

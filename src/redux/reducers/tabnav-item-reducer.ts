@@ -4,7 +4,7 @@ import tabnavItem from "../../types/enums/tabnavItem";
 export const tabnavSlice = createSlice({
   name: "tabnav",
   initialState: {
-    selected: tabnavItem.recommendations,
+    selected: tabnavItem.codeVault,
   },
   reducers: {
     select: (state, action) => {
