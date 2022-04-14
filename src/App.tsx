@@ -8,7 +8,8 @@ import tabnavItem from "./types/enums/tabnavItem";
 function App() {
   const selected = useSelector((state: any) => state.tabnav.selected);
 
-  const noPadding = selected === tabnavItem.calendar;
+  const noPadding =
+    selected === tabnavItem.calendar || selected === tabnavItem.recommendations;
 
   return (
     <div id="app">

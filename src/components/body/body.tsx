@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import tabnavItem from "../../types/enums/tabnavItem";
 import "./body.scss";
 import Calendar from "./calendar/calendar";
+import Recommendations from "./recommendations/recommendations";
 import SauceFinder from "./sauce-finder/sauce-finder";
 
 export default function Body({ noPadding }: { noPadding?: boolean }) {
@@ -13,6 +14,8 @@ export default function Body({ noPadding }: { noPadding?: boolean }) {
         return <SauceFinder />;
       case tabnavItem.calendar:
         return <Calendar />;
+      case tabnavItem.recommendations:
+        return <Recommendations />;
       default:
         return <div>{selected}</div>;
     }

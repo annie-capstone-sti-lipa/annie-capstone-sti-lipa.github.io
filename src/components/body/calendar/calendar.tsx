@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./calendar.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
-import AnimeSchedCard from "./anime-sched-card/anime-sched-card";
+import AnimeCard from "../../general/anime-card/anime-card";
 
 enum view {
   monthView,
@@ -106,7 +106,7 @@ function WeekView({
               {Array(Math.floor(Math.random() * (3 - 0) + 0))
                 .fill("")
                 .map((_, index) => {
-                  return <AnimeSchedCard key={index} />;
+                  return <AnimeCard key={index} />;
                 })}
             </td>
           ))}

@@ -1,5 +1,5 @@
-@import "../../../../styles/presets";
-@import "../../../../styles/hover-effects";
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
 
 .clickable-button {
   text-align: center;
@@ -13,9 +13,10 @@
   @extend .clickable;
 }
 
-.anime-sched-card {
+.anime-card {
   padding: 8px 4px;
   margin: 12px;
+  max-width: 160px;
   border-top: 4px solid $secondary;
 
   @extend .box-shadow;
@@ -49,7 +50,7 @@
   }
 }
 
-.anime-sched-modal {
+.anime-modal {
   max-height: 70vh;
   overflow: auto;
 

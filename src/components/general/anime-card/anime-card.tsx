@@ -1,14 +1,14 @@
 import { useState } from "react";
-import Modal from "../../../modal/modal";
-import "./anime-sched-card.scss";
+import Modal from "../modal/modal";
+import "./anime-card.scss";
 
-import playIcon from "../../../../assets/icons/right.svg";
+import playIcon from "../../../assets/icons/right.svg";
 
-export default function AnimeSchedCard() {
+export default function AnimeCard() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="anime-sched-card" onClick={() => setShowModal(true)}>
+    <div className="anime-card" onClick={() => setShowModal(true)}>
       <Modal
         showModal={showModal}
         closeModal={() => setShowModal(() => false)}
@@ -38,10 +38,7 @@ export default function AnimeSchedCard() {
 
 function ModalBody({ closeModal }: { closeModal: () => void }) {
   return (
-    <div
-      className="anime-sched-modal"
-      onClick={(event) => event.stopPropagation()}
-    >
+    <div className="anime-modal" onClick={(event) => event.stopPropagation()}>
       <div className="anime-details-container">
         <img
           src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Ancient_Magus%27_Bride%2C_volume_1.jpg/220px-The_Ancient_Magus%27_Bride%2C_volume_1.jpg"

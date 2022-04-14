@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "../../modal/modal";
+import Modal from "../../general/modal/modal";
 import "./bio.scss";
 
 import EditIcon from "../../edit-icon/edit-icon";

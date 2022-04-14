@@ -3,7 +3,7 @@ import Modal from "react-modal";
 
 import "./modal.scss";
 
-import closeIcon from "../../assets/icons/close.svg";
+import closeIcon from "../../../assets/icons/close.svg";
 
 export default function Dialog({
   showModal,
