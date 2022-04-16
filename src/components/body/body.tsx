@@ -5,6 +5,7 @@ import "./body.scss";
 import Calendar from "./calendar/calendar";
 import Recommendations from "./recommendations/recommendations";
 import SauceFinder from "./sauce-finder/sauce-finder";
+import Quiz from "./quiz/quiz";
 
 export default function Body() {
   const selected = useSelector((state: any) => state.tabnav.selected);
@@ -17,6 +18,8 @@ export default function Body() {
         return <Calendar />;
       case tabnavItem.recommendations:
         return <Recommendations />;
+      case tabnavItem.quiz:
+        return <Quiz />;
       case tabnavItem.codeVault:
         return <CodeVault />;
       default:
