@@ -1,4 +1,4 @@
-import editIcon from "../../assets/icons/edit.svg";
+import editIcon from "../../../assets/icons/edit.svg";
 
 import "./edit-icon.scss";
 

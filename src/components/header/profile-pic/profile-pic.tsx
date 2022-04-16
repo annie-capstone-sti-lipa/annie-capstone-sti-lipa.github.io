@@ -3,7 +3,7 @@ import "./profile-pic.scss";
 import tempPfp from "../../../assets/temp/profile.png";
 import { useState } from "react";
 import Modal from "../../general/modal/modal";
-import EditIcon from "../../edit-icon/edit-icon";
+import EditIcon from "../../general/edit-icon/edit-icon";
 
 export default function ProfilePic() {
   const [showModal, setShowModal] = useState(false);

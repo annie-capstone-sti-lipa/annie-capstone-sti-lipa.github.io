@@ -1,12 +1,12 @@
 import "./manga-card.scss";
 
-import trashIcon from "../../../assets/icons/trash.svg";
-import editIcon from "../../../assets/icons/edit.svg";
-import backIcon from "../../../assets/icons/left.svg";
-import nextIcon from "../../../assets/icons/right.svg";
+import trashIcon from "../../../../assets/icons/trash.svg";
+import editIcon from "../../../../assets/icons/edit.svg";
+import backIcon from "../../../../assets/icons/left.svg";
+import nextIcon from "../../../../assets/icons/right.svg";
 
 import { useState } from "react";
-import Modal from "../../general/modal/modal";
+import Modal from "../../../general/modal/modal";
 
 export default function MangaCard({ sauce }: { sauce: number }) {
   const [showModal, setShowModal] = useState(false);

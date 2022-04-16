@@ -1,10 +1,10 @@
 import "./code-vault.scss";
 
-import addIcon from "../../assets/icons/add.svg";
+import addIcon from "../../../assets/icons/add.svg";
 import { useState } from "react";
-import Modal from "../general/modal/modal";
+import Modal from "../../general/modal/modal";
 
-import theNumbers from "../../assets/images/numbers.jpg";
+import theNumbers from "../../../assets/images/numbers.jpg";
 import MangaCard from "./manga-card/manga-card";
 
 export default function CodeVault() {

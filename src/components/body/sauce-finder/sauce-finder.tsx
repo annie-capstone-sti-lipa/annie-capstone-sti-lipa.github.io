@@ -5,7 +5,7 @@ import linkIcon from "../../../assets/icons/link.svg";
 
 import { useEffect, useState } from "react";
 import sauce from "../../../types/sauce";
-import EditIcon from "../../edit-icon/edit-icon";
+import EditIcon from "../../general/edit-icon/edit-icon";
 
 export default function SauceFinder() {
   const [image, setImage] = useState<any>(addImageIcon);
