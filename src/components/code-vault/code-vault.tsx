@@ -5,6 +5,7 @@ import { useState } from "react";
 import Modal from "../general/modal/modal";
 
 import theNumbers from "../../assets/images/numbers.jpg";
+import MangaCard from "./manga-card/manga-card";
 
 export default function CodeVault() {
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +22,14 @@ export default function CodeVault() {
           <img className="add-icon" src={addIcon} alt="add code" />
           <span>Add</span>
         </div>
+      </div>
+      <div className="card-container">
+        <MangaCard sauce={2056560} />
+        <MangaCard sauce={2056560} />
+        <MangaCard sauce={2056560} />
+        <MangaCard sauce={2056560} />
+        <MangaCard sauce={2056560} />
+        <MangaCard sauce={2056560} />
       </div>
     </div>
   );

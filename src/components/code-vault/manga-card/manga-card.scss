@@ -1,0 +1,51 @@
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
+
+.manga-card {
+  max-width: 140px;
+  border-top: 4px solid $secondary;
+  margin: 8px;
+
+  @extend .box-shadow;
+  @extend .rounded-border;
+  @extend .clickable;
+
+  .thumbnail {
+    max-width: 80%;
+
+    @extend .rounded-border;
+  }
+
+  .sauce {
+    padding: 4px 8px;
+  }
+
+  .buttons {
+    .action-button {
+      display: inline-block;
+      margin: 8px;
+
+      @extend .rounded-border;
+      @extend .clickable;
+
+      .button-icon {
+        width: 16px;
+        height: 16px;
+
+        @extend .icon;
+      }
+    }
+
+    .delete-button {
+      background-color: $negative;
+
+      @extend .action-button;
+    }
+
+    .edit-button {
+      background-color: $secondary;
+
+      @extend .action-button;
+    }
+  }
+}
