@@ -49,3 +49,47 @@
     }
   }
 }
+
+.manga-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(black, 0.5);
+  padding: 20px;
+}
+
+.manga-modal {
+  .page-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .page {
+      width: 90%;
+      max-width: 500px;
+      max-height: 80vh;
+
+      @extend .rounded-border;
+    }
+
+    .control-icon-container {
+      height: 16px;
+      width: 16px;
+      padding: 8px;
+
+      @extend .clickable;
+      @extend .rounded-border;
+
+      .control-icon {
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+
+  .counter {
+    padding: 16px;
+  }
+}
