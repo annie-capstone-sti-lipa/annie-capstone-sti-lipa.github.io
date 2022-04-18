@@ -7,15 +7,29 @@ enum quizType {
   kanji = "Kanji",
 }
 
+enum quizDifficulty {
+  easy = "Hard",
+  normal = "Normal",
+  hard = "Easy",
+}
+
 export default function Quiz() {
   const [quizType, setQuizType] = useState<quizType | null>(null);
+  const [quizDifficulty, setQuizDifficulty] = useState<quizDifficulty | null>(
+    null
+  );
 
   return (
     <div className="quiz">
-      {quizType != null ? (
-        <QuizQuestions />
-      ) : (
+      {quizType == null ? (
         <QuizChoice chooseQuiz={(choice) => setQuizType(choice)} />
+      ) : quizDifficulty == null ? (
+        <QuizDifficulty
+          writingStyle={quizType}
+          chooseDifficulty={(choice) => setQuizDifficulty(choice)}
+        />
+      ) : (
+        <QuizQuestions />
       )}
     </div>
   );
@@ -29,23 +43,41 @@ function QuizChoice({
   return (
     <div className="quiz-choice">
       <div className="instruction">Choose Writing System.</div>
-      <QuizTypeCard type={quizType.hiragana} chooseQuiz={chooseQuiz} />
-      <QuizTypeCard type={quizType.katakana} chooseQuiz={chooseQuiz} />
-      <QuizTypeCard type={quizType.kanji} chooseQuiz={chooseQuiz} />
+      <QuizChoiceCard item={quizType.hiragana} onClick={chooseQuiz} />
+      <QuizChoiceCard item={quizType.katakana} onClick={chooseQuiz} />
+      <QuizChoiceCard item={quizType.kanji} onClick={chooseQuiz} />
     </div>
   );
 }
 
-function QuizTypeCard({
-  type,
-  chooseQuiz,
+function QuizDifficulty({
+  writingStyle,
+  chooseDifficulty,
 }: {
-  type: quizType;
-  chooseQuiz: (quizType: quizType) => void;
+  writingStyle: quizType;
+  chooseDifficulty: (difficulty: quizDifficulty) => void;
 }) {
   return (
-    <div className="quiz-type-card" onClick={() => chooseQuiz(type)}>
-      {type}
+    <div className="quiz-difficulty">
+      <div className="writing-style">{writingStyle}</div>
+      <div className="instruction">Choose Difficulty.</div>
+      <QuizChoiceCard item={quizDifficulty.easy} onClick={chooseDifficulty} />
+      <QuizChoiceCard item={quizDifficulty.normal} onClick={chooseDifficulty} />
+      <QuizChoiceCard item={quizDifficulty.hard} onClick={chooseDifficulty} />
+    </div>
+  );
+}
+
+function QuizChoiceCard({
+  item,
+  onClick,
+}: {
+  item: any;
+  onClick: (quizType: any) => void;
+}) {
+  return (
+    <div className="quiz-choice-card" onClick={() => onClick(item)}>
+      {item}
     </div>
   );
 }

@@ -18,7 +18,7 @@
       font-size: large;
     }
 
-    .quiz-type-card {
+    .quiz-choice-card {
       font-weight: bolder;
       margin: 24px 0;
       padding: 24px 32px;
@@ -28,6 +28,16 @@
       @extend .rounded-border;
       @extend .clickable;
       @extend .hover-highlight;
+    }
+  }
+
+  .quiz-difficulty {
+    @extend .quiz-choice;
+
+    .writing-style {
+      font-size: xx-large;
+      font-weight: bold;
+      margin: 16px;
     }
   }
 
