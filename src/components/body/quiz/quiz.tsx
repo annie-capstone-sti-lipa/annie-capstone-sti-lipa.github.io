@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./quiz.scss";
 
+import backIcon from "../../../assets/icons/back.svg";
+
 enum quizType {
   hiragana = "Hiragana",
   katakana = "Katakana",
@@ -21,6 +23,24 @@ export default function Quiz() {
 
   return (
     <div className="quiz">
+      <div className="title-container">
+        <div
+          className="back-button"
+          onClick={() =>
+            quizDifficulty === null
+              ? setQuizType(null)
+              : setQuizDifficulty(null)
+          }
+        >
+          <img className="back-icon" src={backIcon} alt="back" />
+        </div>
+        <div className="title">
+          <span>Quiz</span>
+          {quizType !== null && ` > ${quizType}`}
+          {quizDifficulty !== null && ` > ${quizDifficulty}`}
+        </div>
+        <div></div>
+      </div>
       {quizType == null ? (
         <QuizChoice chooseQuiz={(choice) => setQuizType(choice)} />
       ) : quizDifficulty == null ? (
@@ -31,6 +51,7 @@ export default function Quiz() {
       ) : (
         <QuizQuestions />
       )}
+      <div className="spacer"></div>
     </div>
   );
 }

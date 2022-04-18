@@ -5,9 +5,36 @@
   min-height: inherit;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
 
-  @extend .default-padding;
+  .title-container {
+    position: relative;
+
+    .title {
+      padding: 16px;
+      font-size: small;
+      font-style: italic;
+    }
+
+    .back-button {
+      height: 100%;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $secondary;
+      border-radius: $borderRadius 0;
+      width: 30%;
+      max-width: 80px;
+
+      @extend .clickable;
+
+      .back-icon {
+        display: block;
+        @extend .icon;
+      }
+    }
+  }
 
   .quiz-choice {
     margin: auto;
@@ -65,5 +92,9 @@
         @extend .hover-highlight;
       }
     }
+  }
+
+  .spacer {
+    padding: 16px;
   }
 }
