@@ -1,0 +1,35 @@
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
+
+.quiz {
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @extend .default-padding;
+
+  .character-card {
+    padding: 20px;
+    font-size: 52px;
+    font-weight: bolder;
+  }
+
+  .choice-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .choice-card {
+      margin: 16px;
+      padding: 8px 16px;
+      border-bottom: 4px solid $secondary;
+
+      @extend .box-shadow;
+      @extend .rounded-border;
+      @extend .clickable;
+      @extend .hover-highlight;
+    }
+  }
+}
