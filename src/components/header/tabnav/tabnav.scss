@@ -34,9 +34,10 @@
       border-radius: 0 0 $borderRadius * 3 $borderRadius * 3;
       overflow-y: hidden;
       overflow-x: auto;
+      justify-content: space-around;
 
-      @include desktop {
-        justify-content: space-around;
+      @include mobile {
+        justify-content: space-between;
       }
 
       .selected {
