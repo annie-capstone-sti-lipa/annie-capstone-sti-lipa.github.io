@@ -24,7 +24,8 @@
 
 .hover-highlight:hover {
   @include desktop {
-    background-color: $secondaryLight;
+    color: white;
+    background-color: $secondaryLight1;
   }
 }
 
@@ -43,6 +44,7 @@
 }
 
 .hover-highlight:active {
+  color: #fff;
   background-color: $secondary;
 }
 

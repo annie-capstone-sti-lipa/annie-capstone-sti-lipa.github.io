@@ -1,0 +1,95 @@
+@import "../../../../styles/presets";
+@import "../../../../styles/hover-effects";
+
+.manga-card {
+  max-width: 140px;
+  border-top: 4px solid $secondary;
+  margin: 8px;
+
+  @extend .box-shadow;
+  @extend .rounded-border;
+  @extend .clickable;
+
+  .thumbnail {
+    max-width: 80%;
+
+    @extend .rounded-border;
+  }
+
+  .sauce {
+    padding: 4px 8px;
+  }
+
+  .buttons {
+    .action-button {
+      display: inline-block;
+      margin: 8px;
+
+      @extend .rounded-border;
+      @extend .clickable;
+
+      .button-icon {
+        width: 16px;
+        height: 16px;
+
+        @extend .icon;
+      }
+    }
+
+    .delete-button {
+      background-color: $negative;
+
+      @extend .action-button;
+    }
+
+    .edit-button {
+      background-color: $secondary;
+
+      @extend .action-button;
+    }
+  }
+}
+
+.manga-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(black, 0.5);
+  padding: 20px;
+}
+
+.manga-modal {
+  .page-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .page {
+      width: 90%;
+      max-width: 500px;
+      max-height: 80vh;
+
+      @extend .rounded-border;
+    }
+
+    .control-icon-container {
+      height: 16px;
+      width: 16px;
+      padding: 8px;
+
+      @extend .clickable;
+      @extend .rounded-border;
+
+      .control-icon {
+        height: 24px;
+        width: 24px;
+      }
+    }
+  }
+
+  .counter {
+    padding: 16px;
+  }
+}

@@ -1,0 +1,148 @@
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
+
+.calendar {
+  color: $secondary;
+
+  .title-container {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    text-align: end;
+    box-sizing: border-box;
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $secondary;
+      border-radius: $borderRadius 0;
+      width: 30%;
+      max-width: 80px;
+
+      @extend .clickable;
+
+      .back-icon {
+        display: block;
+        @extend .icon;
+      }
+    }
+
+    .title {
+      display: inline-block;
+      color: white;
+      font-weight: bold;
+      background-color: $secondary;
+      border-radius: 0 $borderRadius;
+      padding: 16px;
+    }
+  }
+
+  overflow-x: auto;
+
+  .view-container {
+    @extend .default-padding;
+
+    .week-view {
+      border-bottom: 4px solid $secondary;
+      width: 100%;
+      padding: 4px;
+      border-spacing: 0 12px;
+
+      @extend .hover-pointer;
+      @extend .rounded-border;
+
+      .week-header {
+        .week-day {
+          border-bottom: 1px solid #ddd;
+
+          .day-name {
+            font-size: small;
+            font-weight: lighter;
+            margin-bottom: 8px;
+          }
+
+          .day-date-container {
+            margin-bottom: 16px;
+
+            .today {
+              color: white;
+              background-color: $secondary;
+            }
+
+            .day-date {
+              margin: auto;
+              padding: 8px;
+              width: 20px;
+              height: 20px;
+
+              @extend .circular-border;
+            }
+          }
+        }
+      }
+
+      .anime-scheds {
+        align-items: flex-start;
+        justify-items: flex-start;
+        justify-content: start;
+        align-content: flex-start;
+
+        td {
+          border-right: 1px solid #ddd;
+          width: 100px;
+          vertical-align: baseline;
+        }
+
+        :last-child {
+          border-right: none;
+        }
+      }
+    }
+
+    .month-view {
+      width: 100%;
+      border-bottom: 4px solid $secondary;
+      border-spacing: 0;
+
+      @extend .rounded-border;
+      @extend .hover-pointer;
+
+      .week-day {
+        padding: 16px;
+        font-weight: bold;
+        color: $secondary;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .week-row {
+        @extend .hover-highlight;
+
+        .day-card-month-container {
+          max-width: 32px;
+          max-height: 32px;
+          padding: 12px;
+
+          @extend .rounded-border;
+
+          .day-card-month {
+            padding: 18px;
+
+            @extend .rounded-border;
+          }
+
+          .today {
+            color: white;
+            font-weight: bold;
+            background-color: $secondary;
+            width: 20px;
+            height: 20px;
+            margin: auto;
+
+            @extend .circular-border;
+          }
+        }
+      }
+    }
+  }
+}

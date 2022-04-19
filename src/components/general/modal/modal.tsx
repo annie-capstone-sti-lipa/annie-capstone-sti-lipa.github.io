@@ -3,22 +3,24 @@ import Modal from "react-modal";
 
 import "./modal.scss";
 
-import closeIcon from "../../assets/icons/close.svg";
+import closeIcon from "../../../assets/icons/close.svg";
 
 export default function Dialog({
   showModal,
   closeModal,
   body,
+  overlayClassName,
 }: {
   showModal: boolean;
   closeModal: () => void;
   body: ReactElement;
+  overlayClassName?: string;
 }) {
   return (
     <Modal
       isOpen={showModal}
       className="modal"
-      overlayClassName="modal-overlay"
+      overlayClassName={overlayClassName ?? "modal-overlay"}
       ariaHideApp={false}
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}

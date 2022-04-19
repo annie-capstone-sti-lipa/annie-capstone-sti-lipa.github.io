@@ -1,0 +1,138 @@
+@import "../../../styles/presets";
+@import "../../../styles/globals";
+@import "../../../styles/hover-effects";
+
+.sauce-finder-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  @extend .default-padding;
+
+  .sauce-card {
+    border-left: 8px solid $secondary;
+    margin: 12px;
+    width: 90%;
+    max-width: 300px;
+    font-size: small;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @extend .subtle-hover-grow;
+    @extend .hover-pointer;
+    @extend .default-padding;
+
+    .key {
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .found {
+      font-size: x-large;
+      font-weight: bold;
+      margin: 24px;
+    }
+
+    .thumbnail {
+      width: 90%;
+      margin: 20px auto;
+
+      @extend .rounded-border;
+    }
+
+    .view-button {
+      display: flex;
+      align-items: center;
+      background-color: $secondary;
+      padding: 4px 16px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      max-width: min-content;
+      white-space: nowrap;
+      justify-content: center;
+      margin: 20px auto;
+
+      @extend .clickable;
+      @extend .rounded-border;
+
+      .link-icon {
+        height: 16px;
+
+        @extend .icon;
+      }
+    }
+
+    @extend .box-shadow;
+    @extend .rounded-border;
+  }
+
+  .sauce-finder {
+    width: 90%;
+    max-width: 300px;
+    margin: 12px;
+
+    .hint-text {
+      font-size: large;
+      font-weight: bold;
+      margin: 24px;
+    }
+
+    .or {
+      margin: 20px;
+    }
+
+    .image-input {
+      #image-input {
+        display: none;
+      }
+
+      .preview-image-container {
+        margin: auto;
+        padding: 12px;
+        max-width: 200px;
+        max-height: 200px;
+
+        @extend .clickable;
+
+        .preview-image-placeholder {
+          @extend .gray-icon;
+        }
+
+        .preview-image {
+          margin: auto;
+          width: 90%;
+
+          @extend .rounded-border;
+        }
+
+        @extend .edit-icon-container;
+      }
+    }
+
+    .url-input {
+      display: block;
+      text-align: center;
+      border-radius: 32px;
+      padding: 12px;
+      width: 90%;
+      border: 1px solid #888;
+      margin: 12px auto;
+    }
+
+    .search-button {
+      width: 90%;
+      max-width: 300px;
+      background-color: $secondary;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      margin: 24px auto;
+
+      @extend .rounded-border;
+      @extend .clickable;
+    }
+  }
+}

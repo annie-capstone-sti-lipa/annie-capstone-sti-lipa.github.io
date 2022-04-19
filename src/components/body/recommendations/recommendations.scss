@@ -1,0 +1,27 @@
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
+
+.recommendations {
+  .title {
+    font-weight: bold;
+    background-color: $secondary;
+    color: white;
+    padding: 16px;
+
+    @extend .rounded-border;
+  }
+
+  .recommendation-container {
+    @extend .default-padding;
+
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+
+    .anime-card {
+      max-width: 120px;
+    }
+  }
+}

@@ -1,0 +1,174 @@
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
+
+.clickable-button {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px;
+  color: white;
+  margin: 8px auto;
+
+  @extend .rounded-border;
+  @extend .clickable;
+}
+
+.anime-card {
+  padding: 8px 4px;
+  margin: 12px;
+  max-width: 160px;
+  border-top: 4px solid $secondary;
+
+  @extend .box-shadow;
+  @extend .rounded-border;
+  @extend .clickable;
+  @extend .unselectable;
+
+  .anime-name {
+    font-size: small;
+    margin: 8px;
+  }
+
+  .thumbnail {
+    max-width: 80px;
+
+    @extend .rounded-border;
+  }
+
+  .play-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: small;
+    background-color: $secondary;
+    max-width: 70%;
+
+    @extend .clickable-button;
+
+    .play-icon {
+      @extend .white-icon;
+    }
+  }
+}
+
+.anime-modal {
+  max-height: 70vh;
+  overflow: auto;
+
+  @extend .default-padding;
+
+  .anime-details-container {
+    display: flex;
+
+    @include mobile {
+      flex-wrap: wrap;
+    }
+
+    .thumbnail {
+      margin: 20px;
+      max-height: 300px;
+
+      @include mobile {
+        margin: auto;
+      }
+
+      @extend .rounded-border;
+    }
+
+    .anime-details {
+      max-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: start;
+      padding: 0 16px;
+
+      .title {
+        margin: 16px 0;
+        text-align: center;
+
+        .name {
+          font-size: large;
+          font-weight: bold;
+        }
+
+        .ratings {
+          font-size: small;
+        }
+      }
+
+      .synopsis {
+        margin: 16px 0;
+        text-align: center;
+      }
+
+      .link-input {
+        display: flex;
+        align-items: center;
+        margin: 16px 0;
+
+        @include mobile {
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .input {
+          margin-left: 16px;
+          text-align: center;
+          width: 80%;
+          padding: 8px;
+
+          @extend .rounded-border;
+        }
+
+        .update {
+          background-color: $secondary;
+
+          @extend .clickable-button;
+        }
+      }
+
+      .hint {
+        font-size: small;
+        margin-bottom: 12px;
+        color: $bgDark;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        justify-content: flex-end;
+
+        @include mobile {
+          * {
+            margin: 4px auto !important;
+          }
+        }
+
+        .blue-button {
+          background-color: $secondary;
+
+          @extend .clickable-button;
+        }
+
+        .green-button {
+          background-color: $positive;
+
+          @extend .clickable-button;
+        }
+
+        .yellow-button {
+          background-color: $primary;
+
+          @extend .clickable-button;
+        }
+
+        .red-button {
+          background-color: $negative;
+
+          @extend .clickable-button;
+        }
+      }
+    }
+  }
+}

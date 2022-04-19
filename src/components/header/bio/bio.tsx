@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Modal from "../../modal/modal";
+import Modal from "../../general/modal/modal";
 import "./bio.scss";
 
-import EditIcon from "../../edit-icon/edit-icon";
+import EditIcon from "../../general/edit-icon/edit-icon";
 
 export default function Bio() {
   const [showModal, setShowModal] = useState(false);

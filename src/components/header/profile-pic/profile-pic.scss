@@ -1,24 +1,14 @@
 @import "../../../styles/presets";
 @import "../../../styles/keyframes";
 @import "../../../styles/hover-effects";
-
-.profile-pic-container .icon-container {
-  @include desktop {
-    visibility: hidden;
-  }
-}
-
-.profile-pic-container:hover .icon-container {
-  @include desktop {
-    visibility: visible;
-  }
-}
+@import "../../../styles/globals";
 
 .profile-pic-container {
   position: relative;
 
   @extend .clickable;
   @extend .circular-border;
+  @extend .edit-icon-container;
 
   @include mobile {
     margin: auto;

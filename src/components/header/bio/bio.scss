@@ -3,18 +3,7 @@
 @import "../../../styles/presets";
 @import "../../../styles/hover-cursors";
 @import "../../../styles/hover-effects";
-
-.name-and-bio .icon-container {
-  @include desktop {
-    visibility: hidden;
-  }
-}
-
-.name-and-bio:hover .icon-container {
-  @include desktop {
-    visibility: visible;
-  }
-}
+@import "../../../styles/globals";
 
 .name-and-bio {
   text-align: center;
@@ -24,6 +13,7 @@
   @extend .clickable;
   @extend .hover-pointer;
   @extend .rounded-border;
+  @extend .edit-icon-container;
 
   @include mobile {
     margin: auto;
