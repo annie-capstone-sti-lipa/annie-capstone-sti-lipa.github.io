@@ -10,7 +10,7 @@
   @extend .default-padding;
 
   .sauce-card {
-    border-left: 8px solid $secondary;
+    border-left: 8px solid $primary;
     margin: 12px;
     width: 90%;
     max-width: 300px;
@@ -45,7 +45,7 @@
     .view-button {
       display: flex;
       align-items: center;
-      background-color: $secondary;
+      background-color: $primary;
       padding: 4px 16px;
       color: white;
       font-weight: bold;
@@ -125,7 +125,7 @@
     .search-button {
       width: 90%;
       max-width: 300px;
-      background-color: $secondary;
+      background-color: $primary;
       padding: 16px;
       color: white;
       font-weight: bold;

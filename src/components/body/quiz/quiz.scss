@@ -22,7 +22,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $secondary;
+      background-color: $primary;
       border-radius: $borderRadius 0;
       width: 30%;
       max-width: 80px;
@@ -49,7 +49,7 @@
       font-weight: bolder;
       margin: 24px 0;
       padding: 24px 32px;
-      border-bottom: 4px solid $secondary;
+      border-bottom: 4px solid $primary;
 
       @extend .box-shadow;
       @extend .rounded-border;
@@ -84,7 +84,7 @@
       .choice-card {
         margin: 16px;
         padding: 8px 16px;
-        border-bottom: 4px solid $secondary;
+        border-bottom: 4px solid $primary;
 
         @extend .box-shadow;
         @extend .rounded-border;

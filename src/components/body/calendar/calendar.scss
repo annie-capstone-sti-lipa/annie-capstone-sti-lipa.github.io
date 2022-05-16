@@ -2,7 +2,7 @@
 @import "../../../styles/hover-effects";
 
 .calendar {
-  color: $secondary;
+  color: $primary;
 
   .title-container {
     margin-bottom: 16px;
@@ -15,7 +15,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $secondary;
+      background-color: $primary;
       border-radius: $borderRadius 0;
       width: 30%;
       max-width: 80px;
@@ -32,7 +32,7 @@
       display: inline-block;
       color: white;
       font-weight: bold;
-      background-color: $secondary;
+      background-color: $primary;
       border-radius: 0 $borderRadius;
       padding: 16px;
     }
@@ -44,7 +44,7 @@
     @extend .default-padding;
 
     .week-view {
-      border-bottom: 4px solid $secondary;
+      border-bottom: 4px solid $primary;
       width: 100%;
       padding: 4px;
       border-spacing: 0 12px;
@@ -67,7 +67,7 @@
 
             .today {
               color: white;
-              background-color: $secondary;
+              background-color: $primary;
             }
 
             .day-date {
@@ -102,7 +102,7 @@
 
     .month-view {
       width: 100%;
-      border-bottom: 4px solid $secondary;
+      border-bottom: 4px solid $primary;
       border-spacing: 0;
 
       @extend .rounded-border;
@@ -111,7 +111,7 @@
       .week-day {
         padding: 16px;
         font-weight: bold;
-        color: $secondary;
+        color: $primary;
         border-bottom: 1px solid #ddd;
       }
 
@@ -134,7 +134,7 @@
           .today {
             color: white;
             font-weight: bold;
-            background-color: $secondary;
+            background-color: $primary;
             width: 20px;
             height: 20px;
             margin: auto;

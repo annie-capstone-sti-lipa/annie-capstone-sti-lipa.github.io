@@ -16,7 +16,7 @@
   padding: 8px 4px;
   margin: 12px;
   max-width: 160px;
-  border-top: 4px solid $secondary;
+  border-top: 4px solid $primary;
 
   @extend .box-shadow;
   @extend .rounded-border;
@@ -39,7 +39,7 @@
     align-items: center;
     justify-content: space-around;
     font-size: small;
-    background-color: $secondary;
+    background-color: $primary;
     max-width: 70%;
 
     @extend .clickable-button;
@@ -121,7 +121,7 @@
         }
 
         .update {
-          background-color: $secondary;
+          background-color: $primary;
 
           @extend .clickable-button;
         }
@@ -146,7 +146,7 @@
         }
 
         .blue-button {
-          background-color: $secondary;
+          background-color: $primary;
 
           @extend .clickable-button;
         }
@@ -158,7 +158,7 @@
         }
 
         .yellow-button {
-          background-color: $primary;
+          background-color: $neutral;
 
           @extend .clickable-button;
         }

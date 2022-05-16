@@ -3,7 +3,7 @@
 
 .manga-card {
   max-width: 140px;
-  border-top: 4px solid $secondary;
+  border-top: 4px solid $primary;
   margin: 8px;
 
   @extend .box-shadow;
@@ -43,7 +43,7 @@
     }
 
     .edit-button {
-      background-color: $secondary;
+      background-color: $primary;
 
       @extend .action-button;
     }

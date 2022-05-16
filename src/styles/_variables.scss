@@ -1,7 +1,6 @@
 // COLORS
 // $primary: #fee65c;
 $primary: #007ae6;
-$secondary: #007ae6;
 
 $primaryDark1: darken($primary, 30%);
 
@@ -9,15 +8,12 @@ $primaryLight: lighten($primary, 10%);
 $primaryLight1: lighten($primary, 20%);
 $primaryLight2: lighten($primary, 30%);
 
-$secondaryLight: lighten($secondary, 10%);
-$secondaryLight1: lighten($secondary, 20%);
-$secondaryLight2: lighten($secondary, 30%);
-
 $bgLight: #f0f2f5;
 $bgDark: #888888;
 
 $positive: #52ce9c;
 $negative: #d20000;
+$neutral: #f6bf26;
 
 // SIZES
 
