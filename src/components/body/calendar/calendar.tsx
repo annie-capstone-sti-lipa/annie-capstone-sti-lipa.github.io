@@ -62,7 +62,12 @@ export default function Calendar() {
         ) : (
           <span></span>
         )}
-        <span className="title">April, Spring 2022</span>
+        <span className="title">
+          {new Date().toLocaleDateString("default", {
+            month: "long",
+            year: "numeric",
+          })}
+        </span>
       </div>
       <div className="view-container">{viewSwitch()}</div>
     </div>
@@ -141,6 +146,8 @@ function MonthView({
       let row = [];
 
       for (let i = 0; i < daysInWeek.length; i++) {
+        if (daysArr.length === 0) break;
+
         let day = daysArr.shift()!.toString();
         row.push(
           <DayCardMonth
