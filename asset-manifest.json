@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/annie_client/static/css/main.36a63cee.css",
-    "main.js": "/annie_client/static/js/main.82c86407.js",
+    "main.js": "/annie_client/static/js/main.d84070d6.js",
     "static/js/787.5b4cde1a.chunk.js": "/annie_client/static/js/787.5b4cde1a.chunk.js",
     "static/media/profile.png": "/annie_client/static/media/profile.91ca2da846efb7f5279b.png",
     "static/media/numbers.jpg": "/annie_client/static/media/numbers.9f88408010388820a4d3.jpg",
@@ -18,11 +18,11 @@
     "static/media/right.svg": "/annie_client/static/media/right.da3b173a823e703a4af1e7731667ebfa.svg",
     "static/media/back.svg": "/annie_client/static/media/back.1ac7475bcdafb0c402b46cbc67d4c262.svg",
     "main.36a63cee.css.map": "/annie_client/static/css/main.36a63cee.css.map",
-    "main.82c86407.js.map": "/annie_client/static/js/main.82c86407.js.map",
+    "main.d84070d6.js.map": "/annie_client/static/js/main.d84070d6.js.map",
     "787.5b4cde1a.chunk.js.map": "/annie_client/static/js/787.5b4cde1a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.36a63cee.css",
-    "static/js/main.82c86407.js"
+    "static/js/main.d84070d6.js"
   ]
 }
