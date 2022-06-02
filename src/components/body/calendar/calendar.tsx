@@ -4,7 +4,6 @@ import "./calendar.scss";
 import backIcon from "../../../assets/icons/back.svg";
 import AnimeCard from "../../general/anime-card/anime-card";
 import animeType from "../../../types/enums/anime-type";
-
 enum view {
   monthView,
   weekView,
@@ -81,6 +80,9 @@ function WeekView({
   daysInWeek: Array<string>;
   selectedWeek?: Array<string>;
 }) {
+  while (selectedWeek?.length !== 7) {
+    selectedWeek?.push("_");
+  }
   return (
     <table className="week-view">
       <thead className="week-header">
