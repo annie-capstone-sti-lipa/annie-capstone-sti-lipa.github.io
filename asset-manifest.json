@@ -1,28 +1,25 @@
 {
   "files": {
-    "main.css": "/annie_client/static/css/main.36a63cee.css",
-    "main.js": "/annie_client/static/js/main.d84070d6.js",
+    "main.css": "/annie_client/static/css/main.0e44c25f.css",
+    "main.js": "/annie_client/static/js/main.90fbf1f2.js",
     "static/js/787.5b4cde1a.chunk.js": "/annie_client/static/js/787.5b4cde1a.chunk.js",
     "static/media/profile.png": "/annie_client/static/media/profile.91ca2da846efb7f5279b.png",
-    "static/media/numbers.jpg": "/annie_client/static/media/numbers.9f88408010388820a4d3.jpg",
     "static/media/link.svg": "/annie_client/static/media/link.baafc9bb8d430c39e7dd78304ded4a81.svg",
-    "static/media/trash.svg": "/annie_client/static/media/trash.b23542dae60628ca20552c9f96e44d56.svg",
     "static/media/discord.svg": "/annie_client/static/media/discord.61d53db1792b72466025725963a88fbb.svg",
     "static/media/add_image.svg": "/annie_client/static/media/add_image.a1ad828c5634b2923f88548329070734.svg",
     "static/media/edit.svg": "/annie_client/static/media/edit.f4279e5bc6c692be08bea65ecdcf1212.svg",
     "static/media/mal.svg": "/annie_client/static/media/mal.3755bd58418093932fa30f33c687ca50.svg",
-    "static/media/add.svg": "/annie_client/static/media/add.b7b86d9d9b01b6fbbd3af7e489f88f31.svg",
     "index.html": "/annie_client/index.html",
     "static/media/close.svg": "/annie_client/static/media/close.e0dd63f22bd0db11d844254c7ca35906.svg",
     "static/media/left.svg": "/annie_client/static/media/left.82d168dbbddee401d31ef9492de724e5.svg",
     "static/media/right.svg": "/annie_client/static/media/right.da3b173a823e703a4af1e7731667ebfa.svg",
     "static/media/back.svg": "/annie_client/static/media/back.1ac7475bcdafb0c402b46cbc67d4c262.svg",
-    "main.36a63cee.css.map": "/annie_client/static/css/main.36a63cee.css.map",
-    "main.d84070d6.js.map": "/annie_client/static/js/main.d84070d6.js.map",
+    "main.0e44c25f.css.map": "/annie_client/static/css/main.0e44c25f.css.map",
+    "main.90fbf1f2.js.map": "/annie_client/static/js/main.90fbf1f2.js.map",
     "787.5b4cde1a.chunk.js.map": "/annie_client/static/js/787.5b4cde1a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.36a63cee.css",
-    "static/js/main.d84070d6.js"
+    "static/css/main.0e44c25f.css",
+    "static/js/main.90fbf1f2.js"
   ]
 }
