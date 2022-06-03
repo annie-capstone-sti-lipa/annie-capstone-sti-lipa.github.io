@@ -3,7 +3,7 @@ enum tabnavItem {
   calendar = "Calendar",
   recommendations = "Recommendations",
   quiz = "Quiz",
-  codeVault = "Code Vault",
+  // codeVault = "Code Vault",
 }
 
 export default tabnavItem;

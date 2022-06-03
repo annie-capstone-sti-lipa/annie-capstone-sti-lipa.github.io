@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import tabnavItem from "../../types/enums/tabnavItem";
-import CodeVault from "./code-vault/code-vault";
+// import CodeVault from "./code-vault/code-vault";
 import "./body.scss";
 import Calendar from "./calendar/calendar";
 import Recommendations from "./recommendations/recommendations";
@@ -20,8 +20,8 @@ export default function Body() {
         return <Recommendations />;
       case tabnavItem.quiz:
         return <Quiz />;
-      case tabnavItem.codeVault:
-        return <CodeVault />;
+      // case tabnavItem.codeVault:
+      //   return <CodeVault />;
       default:
         return <div>{selected}</div>;
     }
