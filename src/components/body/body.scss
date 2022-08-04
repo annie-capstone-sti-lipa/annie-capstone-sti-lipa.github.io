@@ -2,10 +2,6 @@
 @import "../../styles/presets";
 
 #body {
-  min-height: 60vh;
   background-color: white;
   margin: 20px 0;
-
-  @extend .box-shadow;
-  @extend .rounded-border;
 }

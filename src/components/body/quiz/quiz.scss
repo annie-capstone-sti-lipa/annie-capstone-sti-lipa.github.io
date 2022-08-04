@@ -7,6 +7,9 @@
   flex-direction: column;
   justify-content: space-between;
 
+  @extend .box-shadow;
+  @extend .rounded-border;
+
   .title-container {
     position: relative;
 

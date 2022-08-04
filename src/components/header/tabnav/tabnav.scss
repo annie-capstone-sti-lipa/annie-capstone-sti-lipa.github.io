@@ -2,59 +2,32 @@
 @import "../../../styles/variables";
 @import "../../../styles/hover-effects";
 
-.arrow-container {
-  position: relative;
+.container {
+  .tabnav {
+    display: flex;
+    border-top: 1px solid rgba(black, 0.1);
+    overflow-y: hidden;
+    overflow-x: auto;
+    justify-content: space-around;
 
-  .arrow {
-    position: absolute;
-    max-width: 12px;
-    top: 45%;
-    bottom: 45%;
-  }
-
-  .right {
-    right: 4px;
-  }
-
-  .left {
-    left: 4px;
-  }
-
-  @include desktop {
-    .arrow {
-      visibility: hidden;
+    @include mobile {
+      justify-content: space-between;
     }
-  }
 
-  .container {
-    .tabnav {
-      position: relative;
+    .selected {
+      color: white;
+      background-color: $primary;
+    }
+
+    .tabnav-item {
+      font-weight: bold;
       display: flex;
-      border-top: 1px solid rgba(black, 0.1);
-      border-radius: 0 0 $borderRadius * 3 $borderRadius * 3;
-      overflow-y: hidden;
-      overflow-x: auto;
-      justify-content: space-around;
+      align-items: center;
+      white-space: nowrap;
 
-      @include mobile {
-        justify-content: space-between;
-      }
-
-      .selected {
-        color: white;
-        background-color: $primary;
-      }
-
-      .tabnav-item {
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-
-        @extend .clickable;
-        @extend .rounded-border;
-        @extend .default-padding;
-      }
+      @extend .clickable;
+      @extend .rounded-border;
+      @extend .default-padding;
     }
   }
 }

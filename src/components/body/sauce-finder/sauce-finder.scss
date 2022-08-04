@@ -7,6 +7,8 @@
   flex-wrap: wrap;
   justify-content: space-around;
 
+  @extend .box-shadow;
+  @extend .rounded-border;
   @extend .default-padding;
 
   .sauce-card {

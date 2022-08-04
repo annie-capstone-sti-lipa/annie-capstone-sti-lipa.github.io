@@ -2,6 +2,9 @@
 @import "../../../styles/hover-effects";
 
 .code-vault {
+  @extend .box-shadow;
+  @extend .rounded-border;
+
   .button-container {
     text-align: end;
 

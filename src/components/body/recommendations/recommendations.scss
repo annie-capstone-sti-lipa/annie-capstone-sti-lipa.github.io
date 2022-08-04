@@ -2,6 +2,9 @@
 @import "../../../styles/hover-effects";
 
 .recommendations {
+  @extend .box-shadow;
+  @extend .rounded-border;
+
   .title {
     font-weight: bold;
     background-color: $primary;

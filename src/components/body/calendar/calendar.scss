@@ -4,6 +4,9 @@
 .calendar {
   color: $primary;
 
+  @extend .box-shadow;
+  @extend .rounded-border;
+
   .title-container {
     margin-bottom: 16px;
     display: flex;
@@ -44,7 +47,6 @@
     @extend .default-padding;
 
     .week-view {
-      border-bottom: 4px solid $primary;
       width: 100%;
       padding: 4px;
       border-spacing: 0 12px;
@@ -102,7 +104,6 @@
 
     .month-view {
       width: 100%;
-      border-bottom: 4px solid $primary;
       border-spacing: 0;
 
       @extend .rounded-border;
@@ -112,7 +113,6 @@
         padding: 16px;
         font-weight: bold;
         color: $primary;
-        border-bottom: 1px solid #ddd;
       }
 
       .week-row {

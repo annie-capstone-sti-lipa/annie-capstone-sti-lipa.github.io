@@ -1,0 +1,20 @@
+@import "../../styles/variables";
+@import "../../styles/presets";
+@import "../../styles/hover-effects";
+@import "../../styles/globals";
+
+#account {
+  @extend .box-shadow;
+  @extend .rounded-border;
+
+  .container {
+    .header-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+
+      @extend .default-padding;
+    }
+  }
+}
