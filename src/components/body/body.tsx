@@ -5,7 +5,6 @@ import Calendar from "./calendar/calendar";
 import Recommendations from "./recommendations/recommendations";
 import SauceFinder from "./sauce-finder/sauce-finder";
 import Quiz from "./quiz/quiz";
-import CodeVault from "./code-vault/code-vault";
 import Account from "../account/account";
 
 export default function Body() {
@@ -13,6 +12,8 @@ export default function Body() {
 
   function bodySwitch() {
     switch (selected) {
+      case tabnavItem.account:
+        return <Account />;
       case tabnavItem.sauceFinder:
         return <SauceFinder />;
       case tabnavItem.calendar:
@@ -21,10 +22,8 @@ export default function Body() {
         return <Recommendations />;
       case tabnavItem.quiz:
         return <Quiz />;
-      case tabnavItem.codeVault:
-        return <CodeVault />;
-      case tabnavItem.account:
-        return <Account />;
+      // case tabnavItem.codeVault:
+      //   return <CodeVault />;
       default:
         return <div>{selected}</div>;
     }
