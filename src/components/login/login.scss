@@ -1,0 +1,72 @@
+@import "../../styles/variables";
+@import "../../styles/presets";
+@import "../../styles/hover-effects";
+@import "../../styles/globals";
+@import "../../styles/keyframes";
+
+#login,
+#signup {
+  background-color: $bgLight;
+  height: 100vh;
+
+  .error-text {
+    color: red;
+  }
+
+  .login-form-container {
+    animation: bounce-pop 150ms;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    .login-form {
+      text-align: center;
+      margin: auto;
+      max-width: 500px;
+      width: 80vw;
+      padding: 32px;
+      background-color: white;
+
+      @extend .default-padding;
+      @extend .rounded-border;
+      @extend .box-shadow;
+
+      .login-title {
+        color: $primary;
+        font-weight: bold;
+        font-size: 44px;
+
+        @extend .default-padding;
+      }
+
+      .input-field {
+        display: block;
+        margin: auto;
+        border-style: solid;
+        padding: 8px;
+        margin: 8px auto;
+
+        @extend .rounded-border;
+      }
+
+      .submit-button {
+        margin: 24px auto;
+        max-width: 300px;
+        color: white;
+        font-weight: bold;
+        width: 90%;
+        background-color: $primary;
+
+        @extend .clickable;
+        @extend .default-padding;
+        @extend .rounded-border;
+      }
+
+      .signup-cta {
+        color: $primary;
+
+        @extend .clickable;
+      }
+    }
+  }
+}
