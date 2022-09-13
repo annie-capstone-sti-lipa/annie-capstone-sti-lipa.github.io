@@ -6,12 +6,12 @@ export const loginSlice = createSlice({
     value: false,
   },
   reducers: {
-    select: (state, action) => {
-      state = action.payload;
+    login: (state, action) => {
+      state.value = action.payload;
     },
   },
 });
 
-export const { select } = loginSlice.actions;
+export const { login } = loginSlice.actions;
 
 export default loginSlice.reducer;

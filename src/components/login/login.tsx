@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/reducers/login";
 import "./login.scss";
 
 function LoginFrame() {
+  const dispatch = useDispatch();
+
   const [isLogin, setIsLogin] = useState(true);
 
   const [formKey, setFormKey] = useState(1);
@@ -57,12 +61,12 @@ function LoginFrame() {
               className="submit-button"
               onClick={() => {
                 setLoginError("");
-                if (true) {
+                if (false) {
                   setLoginError("sample login error");
                 }
 
                 if (loginError === "") {
-                  alert(loginUsername + " " + loginPassword);
+                  dispatch(login(true));
                 }
               }}
             >
