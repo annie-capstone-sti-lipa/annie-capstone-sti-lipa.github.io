@@ -28,7 +28,6 @@ export default class AnnieAPI {
     let response = await fetch("http://localhost:8080/weekSchedule", {
       mode: "cors",
     });
-    console.log("requesting");
 
     let parsedResponse = await response.json();
 
@@ -58,8 +57,6 @@ export default class AnnieAPI {
     parsedResponse.forEach((day: DaySchedules, dayIndex: number) => {
       day.animes.sort((a, b) => b.score - a.score);
     });
-
-    console.log(parsedResponse);
 
     return parsedResponse;
   }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import AlertHelper from "../../helpers/alert-helper";
 import AnnieAPI from "../../helpers/annie-api";
-import { setSchedules } from "../../redux/reducers/anime-schedules";
+import { setLoading, setSchedules } from "../../redux/reducers/anime-schedules";
 import { login } from "../../redux/reducers/login";
 import "./login.scss";
 
@@ -40,9 +40,10 @@ function LoginFrame() {
   }, [isLogin]);
 
   async function preloadData() {
+    dispatch(setLoading(true));
     await AnnieAPI.getWeekSchedule().then((schedules) => {
-      console.log("got schedules");
       dispatch(setSchedules(schedules));
+      dispatch(setLoading(false));
     });
   }
 
@@ -89,7 +90,6 @@ function LoginFrame() {
                     })
                     .catch((e) => {
                       AlertHelper.errorToast(e);
-                      console.log(e);
                     });
                 }
               }}

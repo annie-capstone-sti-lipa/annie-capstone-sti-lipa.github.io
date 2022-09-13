@@ -1,4 +1,3 @@
-
 import "./loader.scss";
 
 export function MiniLoader() {
@@ -9,7 +8,11 @@ export function MiniLoader() {
   );
 }
 
-export function Loader() {
+export function Loader({ show = true }: { show?: boolean }) {
+  if (!show) {
+    return <span></span>;
+  }
+
   return (
     <div className="loader-container">
       <div className="loader" />

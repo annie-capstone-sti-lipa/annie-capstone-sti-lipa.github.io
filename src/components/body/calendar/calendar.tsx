@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./calendar.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
@@ -6,6 +6,7 @@ import AnimeCard from "../../general/anime-card/anime-card";
 import animeType from "../../../types/enums/anime-type";
 import { DaySchedules } from "../../../types/day-schedules";
 import { useSelector } from "react-redux";
+import { Loader } from "../../general/loader/loader";
 enum view {
   monthView,
   weekView,
@@ -94,64 +95,62 @@ function WeekView({
   while (selectedWeek?.length !== 7) {
     selectedWeek?.push("_");
   }
-  return (
-    <table className="week-view">
-      <thead className="week-header">
-        <tr>
-          {daysInWeek.map((day, index) => (
-            <th className="week-day" key={`${day} ${index}`}>
-              <div className="day-name">{day}</div>
-              <div className="day-date-container">
-                <div
-                  className={`day-date ${
-                    selectedWeek![index] === new Date().getDate().toString()
-                      ? "today"
-                      : ""
-                  }`}
-                >
-                  {selectedWeek![index].length === 0
-                    ? "_"
-                    : selectedWeek![index]}
-                </div>
-              </div>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="anime-scheds">
-          {selectedWeek!.map((day, index) => {
-            console.log(daysInWeek[index]);
-            console.log(
-              schedules.find(
-                (element) =>
-                  element.day.toLowerCase() === daysInWeek[index].toLowerCase()
-              )
-            );
 
-            return (
-              <td key={`${day} ${index}`}>
-                {schedules
-                  ?.find(
-                    (element) =>
-                      element.day.toLowerCase() ===
-                      daysInWeek[index].toLowerCase()
-                  )
-                  ?.animes.map((anime, index) => {
-                    return (
-                      <AnimeCard
-                        type={animeType.watching}
-                        animeItem={anime}
-                        key={index}
-                      />
-                    );
-                  })}
-              </td>
-            );
-          })}
-        </tr>
-      </tbody>
-    </table>
+  const isLoading = useSelector((state: any) => state.animeSchedules.isLoading);
+
+  return (
+    <>
+      <table className="week-view">
+        <thead className="week-header">
+          <tr>
+            {daysInWeek.map((day, index) => (
+              <th className="week-day" key={`${day} ${index}`}>
+                <div className="day-name">{day}</div>
+                <div className="day-date-container">
+                  <div
+                    className={`day-date ${
+                      selectedWeek![index] === new Date().getDate().toString()
+                        ? "today"
+                        : ""
+                    }`}
+                  >
+                    {selectedWeek![index].length === 0
+                      ? "_"
+                      : selectedWeek![index]}
+                  </div>
+                </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="anime-scheds">
+            {selectedWeek!.map((day, index) => {
+              return (
+                <td key={`${day} ${index}`}>
+                  {schedules
+                    ?.find(
+                      (element) =>
+                        element.day.toLowerCase() ===
+                        daysInWeek[index].toLowerCase()
+                    )
+                    ?.animes.map((anime, index) => {
+                      return (
+                        <AnimeCard
+                          type={animeType.watching}
+                          animeItem={anime}
+                          key={index}
+                        />
+                      );
+                    })}
+                </td>
+              );
+            })}
+          </tr>
+        </tbody>
+      </table>
+      <Loader show={isLoading}></Loader>
+    </>
   );
 }
 
