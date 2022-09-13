@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./calendar.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
 import AnimeCard from "../../general/anime-card/anime-card";
 import animeType from "../../../types/enums/anime-type";
+import AnnieAPI from "../../../helpers/annie-api";
 enum view {
   monthView,
   weekView,
@@ -27,6 +28,13 @@ export default function Calendar() {
     "Friday",
     "Saturday",
   ];
+
+  useEffect(() => {
+    async function getSchedule() {
+      console.log(await AnnieAPI.getWeekSchedule());
+    }
+    getSchedule();
+  }, []);
 
   const _setSelectedView = (view: view) => setSelectedView(() => view);
   const _setSelectedWeek = (week: Array<string>) => setSelectedWeek(() => week);

@@ -1,6 +1,6 @@
 import SuccessResponse from "../types/success-response";
 
-export default class Annie {
+export default class AnnieAPI {
   static link: string = "localhost:3000";
 
   static isLoggedIn = () => null;
@@ -20,5 +20,15 @@ export default class Annie {
     });
     let parsedResponse = await loginResponse.json();
     return new SuccessResponse(parsedResponse.success, parsedResponse.message);
+  }
+
+  static async getWeekSchedule(): Promise<Array<Object>> {
+    let response = await fetch("http://localhost:8080/weekSchedule", {
+      mode: "cors",
+    });
+
+    let parsedResponse = await response.json();
+
+    return parsedResponse;
   }
 }
