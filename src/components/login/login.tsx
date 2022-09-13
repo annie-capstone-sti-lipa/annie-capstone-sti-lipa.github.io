@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import AlertHelper from "../../helpers/alert-helper";
+import Annie from "../../helpers/annie";
 import { login } from "../../redux/reducers/login";
 import "./login.scss";
 
@@ -66,7 +68,15 @@ function LoginFrame() {
                 }
 
                 if (loginError === "") {
-                  dispatch(login(true));
+                  AlertHelper.showLoading("Logging in");
+                  Annie.logIn().then((response) => {
+                    if (response.success) {
+                      dispatch(login(true));
+                      AlertHelper.successToast(response.message);
+                    } else {
+                      AlertHelper.errorToast(response.message);
+                    }
+                  });
                 }
               }}
             >
