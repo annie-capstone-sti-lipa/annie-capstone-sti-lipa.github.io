@@ -29,7 +29,8 @@
   }
 
   .thumbnail {
-    max-width: 80px;
+    max-width: 100px;
+    min-height: 120px;
 
     @extend .rounded-border;
   }

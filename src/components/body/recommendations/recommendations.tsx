@@ -1,3 +1,4 @@
+import AnimeItem from "../../../types/anime-item";
 import animeType from "../../../types/enums/anime-type";
 import AnimeCard from "../../general/anime-card/anime-card";
 import "./recommendations.scss";
@@ -10,7 +11,19 @@ export default function Recommendations() {
         {Array(Math.floor(Math.random() * (39 - 10) + 10))
           .fill("")
           .map((_, index) => {
-            return <AnimeCard type={animeType.recommendation} key={index} />;
+            return (
+              <AnimeCard
+                type={animeType.recommendation}
+                key={index}
+                animeItem={
+                  new AnimeItem(
+                    "monday",
+                    "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png",
+                    6.6
+                  )
+                }
+              />
+            );
           })}
       </div>
     </div>

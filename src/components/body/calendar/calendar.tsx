@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./calendar.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
 import AnimeCard from "../../general/anime-card/anime-card";
 import animeType from "../../../types/enums/anime-type";
-import AnnieAPI from "../../../helpers/annie-api";
+import { DaySchedules } from "../../../types/day-schedules";
+import { useSelector } from "react-redux";
 enum view {
   monthView,
   weekView,
 }
 
 export default function Calendar() {
+  const schedules = useSelector((state: any) => state.animeSchedules.schedules);
   const [selectedView, setSelectedView] = useState(view.monthView);
   const [selectedWeek, setSelectedWeek] = useState<Array<string>>();
 
@@ -29,20 +31,19 @@ export default function Calendar() {
     "Saturday",
   ];
 
-  useEffect(() => {
-    async function getSchedule() {
-      console.log(await AnnieAPI.getWeekSchedule());
-    }
-    getSchedule();
-  }, []);
-
   const _setSelectedView = (view: view) => setSelectedView(() => view);
   const _setSelectedWeek = (week: Array<string>) => setSelectedWeek(() => week);
 
   function viewSwitch() {
     switch (selectedView) {
       case view.weekView:
-        return <WeekView daysInWeek={daysInWeek} selectedWeek={selectedWeek} />;
+        return (
+          <WeekView
+            daysInWeek={daysInWeek}
+            selectedWeek={selectedWeek}
+            schedules={schedules ?? []}
+          />
+        );
       default:
         return (
           <MonthView
@@ -84,9 +85,11 @@ export default function Calendar() {
 function WeekView({
   daysInWeek,
   selectedWeek,
+  schedules,
 }: {
   daysInWeek: Array<string>;
   selectedWeek?: Array<string>;
+  schedules: Array<DaySchedules>;
 }) {
   while (selectedWeek?.length !== 7) {
     selectedWeek?.push("_");
@@ -117,15 +120,35 @@ function WeekView({
       </thead>
       <tbody>
         <tr className="anime-scheds">
-          {selectedWeek!.map((day, index) => (
-            <td key={`${day} ${index}`}>
-              {Array(Math.floor(Math.random() * (3 - 0) + 0))
-                .fill("")
-                .map((_, index) => {
-                  return <AnimeCard type={animeType.watching} key={index} />;
-                })}
-            </td>
-          ))}
+          {selectedWeek!.map((day, index) => {
+            console.log(daysInWeek[index]);
+            console.log(
+              schedules.find(
+                (element) =>
+                  element.day.toLowerCase() === daysInWeek[index].toLowerCase()
+              )
+            );
+
+            return (
+              <td key={`${day} ${index}`}>
+                {schedules
+                  ?.find(
+                    (element) =>
+                      element.day.toLowerCase() ===
+                      daysInWeek[index].toLowerCase()
+                  )
+                  ?.animes.map((anime, index) => {
+                    return (
+                      <AnimeCard
+                        type={animeType.watching}
+                        animeItem={anime}
+                        key={index}
+                      />
+                    );
+                  })}
+              </td>
+            );
+          })}
         </tr>
       </tbody>
     </table>

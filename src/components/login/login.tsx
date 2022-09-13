@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import AlertHelper from "../../helpers/alert-helper";
 import AnnieAPI from "../../helpers/annie-api";
+import { setSchedules } from "../../redux/reducers/anime-schedules";
 import { login } from "../../redux/reducers/login";
 import "./login.scss";
 
@@ -38,6 +39,13 @@ function LoginFrame() {
     setFormKey(Math.random());
   }, [isLogin]);
 
+  async function preloadData() {
+    await AnnieAPI.getWeekSchedule().then((schedules) => {
+      console.log("got schedules");
+      dispatch(setSchedules(schedules));
+    });
+  }
+
   if (isLogin) {
     return (
       <div id="login" key={formKey}>
@@ -72,6 +80,7 @@ function LoginFrame() {
                   AnnieAPI.logIn()
                     .then((response) => {
                       if (response.success) {
+                        preloadData();
                         dispatch(login(true));
                         AlertHelper.successToast(response.message);
                       } else {

@@ -4,8 +4,15 @@ import "./anime-card.scss";
 
 import playIcon from "../../../assets/icons/right.svg";
 import animeType from "../../../types/enums/anime-type";
+import AnimeItem from "../../../types/anime-item";
 
-export default function AnimeCard({ type }: { type: animeType }) {
+export default function AnimeCard({
+  type,
+  animeItem,
+}: {
+  type: animeType;
+  animeItem: AnimeItem;
+}) {
   const [showModal, setShowModal] = useState(false);
 
   function bottomButton() {
@@ -53,12 +60,12 @@ export default function AnimeCard({ type }: { type: animeType }) {
         }
       />
       <img
-        src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Ancient_Magus%27_Bride%2C_volume_1.jpg/220px-The_Ancient_Magus%27_Bride%2C_volume_1.jpg"
+        src={animeItem.thumbnail}
         alt="thumbnail"
         className="thumbnail"
         draggable={false}
       />
-      <div className="anime-name">Mahoutsukai no yome</div>
+      <div className="anime-name">{animeItem.name}</div>
       {bottomButton()}
     </div>
   );
