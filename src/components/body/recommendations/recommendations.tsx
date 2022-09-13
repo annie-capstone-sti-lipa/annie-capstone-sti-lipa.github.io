@@ -19,7 +19,8 @@ export default function Recommendations() {
                   new AnimeItem(
                     "monday",
                     "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png",
-                    6.6
+                    6.6,
+                    "https://www.youtube.com/embed/dKRnwClVxT4?enablejsapi=1&wmode=opaque&autoplay=1"
                   )
                 }
               />

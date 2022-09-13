@@ -12,7 +12,6 @@ export const animeSchedulesSlice = createSlice({
       state.schedules = action.payload;
     },
     setLoading: (state, action) => {
-      console.log("changed to " + action.payload);
       state.isLoading = action.payload;
     },
   },

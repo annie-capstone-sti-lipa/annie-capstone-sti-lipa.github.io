@@ -40,7 +40,8 @@ export default class AnnieAPI {
               new AnimeItem(
                 anime.title,
                 anime.images.jpg.large_image_url,
-                anime.score
+                anime.score,
+                anime.trailer.embed_url
               )
           )
         )

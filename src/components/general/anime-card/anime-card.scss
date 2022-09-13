@@ -173,3 +173,15 @@
     }
   }
 }
+.trailer-modal {
+  height: 70vh;
+  overflow: auto;
+
+  .player {
+    height: 100%;
+    width: 100%;
+    border: none;
+
+    @extend .rounded-border;
+  }
+}

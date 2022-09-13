@@ -14,49 +14,56 @@ export default function AnimeCard({
   animeItem: AnimeItem;
 }) {
   const [showModal, setShowModal] = useState(false);
+  const [showTrailerModal, setShowTrailerModal] = useState(false);
 
   function bottomButton() {
     switch (type) {
       case animeType.watching:
-        return (
-          <div
-            className="play-button"
-            onClick={(event) => {
-              event.stopPropagation();
-              //todo : add auto track of episodes
-              window.open("https://www.netflix.com/watch/81511413");
-            }}
-          >
-            <span>Ep 1</span>
-            <img className="play-icon" src={playIcon} alt="play" />
-          </div>
-        );
       case animeType.recommendation:
-        return (
-          <div
-            className="play-button"
-            onClick={(event) => {
-              event.stopPropagation();
-              //todo : add auto track of episodes
-              window.open("https://www.netflix.com/watch/81511413");
-            }}
-          >
-            <span>Trailer</span>
-            <img className="play-icon" src={playIcon} alt="play" />
-          </div>
-        );
+        if (animeItem.trailer) {
+          return (
+            <div
+              className="play-button"
+              onClick={(event) => {
+                event.stopPropagation();
+                setShowTrailerModal(true);
+              }}
+            >
+              <span>Trailer</span>
+              <img className="play-icon" src={playIcon} alt="play" />
+            </div>
+          );
+        } else {
+          return <span></span>;
+        }
       default:
         return <div>hehe</div>;
     }
   }
 
   return (
-    <div className="anime-card" onClick={() => setShowModal(true)}>
+    <div
+      className="anime-card"
+      onClick={(event) => {
+        event.stopPropagation();
+        setShowModal(true);
+      }}
+    >
       <Modal
         showModal={showModal}
         closeModal={() => setShowModal(() => false)}
         body={
           <ModalBody closeModal={() => setShowModal(() => false)} type={type} />
+        }
+      />
+      <Modal
+        showModal={showTrailerModal}
+        closeModal={() => setShowTrailerModal(() => false)}
+        body={
+          <TrailerModalBody
+            closeModal={() => setShowTrailerModal(() => false)}
+            link={animeItem.trailer!}
+          />
         }
       />
       <img
@@ -67,6 +74,20 @@ export default function AnimeCard({
       />
       <div className="anime-name">{animeItem.name}</div>
       {bottomButton()}
+    </div>
+  );
+}
+
+function TrailerModalBody({
+  closeModal,
+  link,
+}: {
+  closeModal: () => void;
+  link: string;
+}) {
+  return (
+    <div className="trailer-modal" onClick={(event) => event.stopPropagation()}>
+      <iframe className="player" src={link} title="Trailer"></iframe>
     </div>
   );
 }
