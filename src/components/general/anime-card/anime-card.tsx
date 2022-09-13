@@ -5,6 +5,7 @@ import "./anime-card.scss";
 import playIcon from "../../../assets/icons/right.svg";
 import animeType from "../../../types/enums/anime-type";
 import AnimeItem from "../../../types/anime-item";
+import star from "../../../assets/icons/star.svg";
 
 export default function AnimeCard({
   type,
@@ -53,7 +54,11 @@ export default function AnimeCard({
         showModal={showModal}
         closeModal={() => setShowModal(() => false)}
         body={
-          <ModalBody closeModal={() => setShowModal(() => false)} type={type} />
+          <ModalBody
+            closeModal={() => setShowModal(() => false)}
+            type={type}
+            animeItem={animeItem}
+          />
         }
       />
       <Modal
@@ -95,9 +100,11 @@ function TrailerModalBody({
 function ModalBody({
   closeModal,
   type,
+  animeItem,
 }: {
   closeModal: () => void;
   type: animeType;
+  animeItem: AnimeItem;
 }) {
   const isWatching = type === animeType.watching;
 
@@ -105,41 +112,23 @@ function ModalBody({
     <div className="anime-modal" onClick={(event) => event.stopPropagation()}>
       <div className="anime-details-container">
         <img
-          src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Ancient_Magus%27_Bride%2C_volume_1.jpg/220px-The_Ancient_Magus%27_Bride%2C_volume_1.jpg"
-          alt=""
+          src={animeItem.thumbnail}
+          alt={animeItem.name}
           className="thumbnail"
         />
         <div className="anime-details">
           <div className="title">
-            <div className="name">Mahoutsukai no yome</div>
-            <div className="ratings">********</div>
+            <div className="name">{animeItem.name}</div>
+            <div className="ratings">
+              <div className="score">({animeItem.score})</div>
+              {Array(Math.round(animeItem.score))
+                .fill("")
+                .map((_) => (
+                  <img src={star} alt="" className="star-icon" />
+                ))}
+            </div>
           </div>
-          <div className="synopsis">
-            Cupidatat voluptate cupidatat magna Lorem occaecat fugiat
-            exercitation sit sit. Lorem incididunt minim ipsum proident
-            incididunt. Dolor ipsum cillum esse non consequat ea Lorem culpa.
-            Culpa elit voluptate veniam laborum veniam consequat nulla fugiat
-            laboris. Culpa voluptate proident qui incididunt deserunt quis enim
-            eiusmod duis quis.
-          </div>
-          {isWatching && (
-            <>
-              <div className="link-input">
-                <div>Link:</div>
-                <input
-                  type="text"
-                  className="input"
-                  placeholder="https://www.netflix.com/watch/81511413"
-                />
-                <div className="update">Update</div>
-              </div>
-              <div className="hint">
-                *add the link for the website that you want to stream the anime
-                on and it will automatically redirect you it when you press the
-                play button in the calendar.
-              </div>
-            </>
-          )}
+          <div className="synopsis">{animeItem.synopsis}</div>
           <div className="actions">
             <div className="blue-button">Plan to watch</div>
             <div className="green-button">Mark Complete</div>

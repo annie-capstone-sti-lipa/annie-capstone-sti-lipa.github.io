@@ -41,6 +41,7 @@ export default class AnnieAPI {
                 anime.title,
                 anime.images.jpg.large_image_url,
                 anime.score,
+                anime.synopsis,
                 anime.trailer.embed_url
               )
           )

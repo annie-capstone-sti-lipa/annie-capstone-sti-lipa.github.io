@@ -20,6 +20,7 @@ export default function Recommendations() {
                     "monday",
                     "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png",
                     6.6,
+                    "Eveniet sit voluptatem inventore ut tempora provident suscipit.",
                     "https://www.youtube.com/embed/dKRnwClVxT4?enablejsapi=1&wmode=opaque&autoplay=1"
                   )
                 }

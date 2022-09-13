@@ -94,6 +94,15 @@
 
         .ratings {
           font-size: small;
+
+          .star-icon {
+            height: 24px;
+            width: 24px;
+          }
+
+          .score {
+            padding-left: 8px;
+          }
         }
       }
 
