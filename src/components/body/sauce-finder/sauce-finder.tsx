@@ -4,23 +4,21 @@ import addImageIcon from "../../../assets/icons/add_image.svg";
 import linkIcon from "../../../assets/icons/link.svg";
 
 import { useEffect, useState } from "react";
-import sauce from "../../../types/sauce";
 import EditIcon from "../../general/edit-icon/edit-icon";
+import AnnieAPI from "../../../helpers/annie-api";
+import Sauce from "../../../types/sauce";
+import AlertHelper from "../../../helpers/alert-helper";
 
 export default function SauceFinder() {
   const [image, setImage] = useState<any>(addImageIcon);
-  const [sauce, setSauce] = useState<sauce | null>();
-  const [isInitial, setIsInitial] = useState(true);
+  const [link, setLink] = useState<any>("");
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [rawImage, setRawImage] = useState<any>();
+  const [sauces, setSauces] = useState<Array<Sauce>>();
 
   useEffect(() => {
-    setSauce({
-      title: "Sakurasou",
-      thumbnail:
-        "https://static.wikia.nocookie.net/sakurasounopetnakanojo/images/c/c2/Ep05_01.jpg",
-      accuracy: 88,
-      source: "https://anilist.co/anime/13759/Sakurasou-no-Pet-na-Kanojo",
-    });
-  }, []);
+    setIsDisabled(() => !(link.length > 0 || rawImage !== undefined));
+  }, [link, rawImage]);
 
   return (
     <div className="sauce-finder-container">
@@ -35,7 +33,7 @@ export default function SauceFinder() {
           >
             <img
               className={`preview-image ${
-                isInitial ? "preview-image-placeholder" : ""
+                rawImage === undefined ? "preview-image-placeholder" : ""
               }`}
               src={image}
               alt="upload"
@@ -51,8 +49,12 @@ export default function SauceFinder() {
                 let reader = new FileReader();
                 reader.onload = (e) => {
                   setImage(() => e.target?.result);
-                  setIsInitial(false);
                 };
+                setRawImage(() => event!.target!.files![0]!);
+                setLink("");
+                (
+                  document.getElementById("link-input") as HTMLInputElement
+                ).value = "";
                 reader.readAsDataURL(event.target.files[0]);
               }
             }}
@@ -61,33 +63,66 @@ export default function SauceFinder() {
         <div className="or">or</div>
         <span className="hint-text">Paste image URL:</span>
         <input
+          id="link-input"
           className="url-input"
           type="text"
           placeholder="https://site/image.png"
+          onChange={(event) => {
+            setImage(() => addImageIcon);
+            setRawImage(() => undefined);
+            setLink(() => event.target.value);
+          }}
         />
-        <div className="search-button">Search</div>
+        <div
+          className={`search-button ${isDisabled ? "disabled-button" : ""}`}
+          onClick={async () => {
+            AlertHelper.showLoading("Fetching...");
+            let _sauces: Array<Sauce> = [];
+            let formData = new FormData();
+
+            if (link.length > 0) {
+              formData.append("imageLink", link);
+
+              _sauces = await AnnieAPI.getSauceFromLink(formData);
+            } else {
+              formData.append("image", rawImage, "upload.png");
+
+              _sauces = await AnnieAPI.getSauceFromImage(formData);
+            }
+            setSauces(() => _sauces);
+          }}
+        >
+          Search
+        </div>
       </div>
 
-      {sauce && <SauceCard sauce={sauce} />}
+      <div className="sauces-container">
+        {sauces?.length !== 0 ? (
+          sauces?.map((sauce, index) => (
+            <SauceCard sauce={sauce} key={`${sauce.sauce} ${index}`} />
+          ))
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }
 
-function SauceCard({ sauce }: { sauce: sauce }) {
+function SauceCard({ sauce }: { sauce: Sauce }) {
   return (
     <div className="sauce-card">
-      <div className="found">Sauce Found!</div>
       <div className="title">
-        <span className="key">Title:</span> {sauce.title}
+        <span className="key">Sauce:</span> {sauce.sauce}
       </div>
       <img className="thumbnail" src={sauce.thumbnail} alt="thumbnail" />
       <div className="accuracy">
         <span className="key">Accuracy:</span>
-        {sauce.accuracy.toPrecision(3)}%
+        {sauce.similarity}%
       </div>
       <a
         className="view-button"
-        href={sauce.source}
+        href={sauce.extUrls[0]}
         target="_blank"
         rel="noreferrer"
       >

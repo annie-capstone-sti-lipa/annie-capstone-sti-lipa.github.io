@@ -1,8 +1,13 @@
-type sauce = {
-  title: string;
+export default class Sauce {
+  similarity: string;
+  sauce: string;
   thumbnail: string;
-  accuracy: number;
-  source: string;
-};
+  extUrls: Array<string>;
 
-export default sauce;
+  constructor(result: any) {
+    this.similarity = result?.similarity;
+    this.sauce = result?.sauce ?? "No Title found";
+    this.thumbnail = result?.thumbnail;
+    this.extUrls = result?.extUrls ?? [];
+  }
+}

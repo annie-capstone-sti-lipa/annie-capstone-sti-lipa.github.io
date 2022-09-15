@@ -1,14 +1,58 @@
 import AnimeItem from "../types/anime-item";
 import { DaySchedules } from "../types/day-schedules";
+import Sauce from "../types/sauce";
 import SuccessResponse from "../types/success-response";
+import AlertHelper from "./alert-helper";
 
 export default class AnnieAPI {
-  static link: string = "localhost:3000";
-
   static isLoggedIn = () => null;
 
+  static _link = (path: string) => `${process.env.REACT_APP_API!}/${path}`;
+
+  static async getSauceFromImage(data: FormData): Promise<Array<Sauce>> {
+    let loginResponse = await fetch(this._link("sauce"), {
+      method: "POST",
+      mode: "cors",
+      body: data,
+    });
+    let parsedResponse = await loginResponse.json();
+
+    let formattedResponse: Array<Sauce> = [];
+
+    parsedResponse.data.forEach((sauce: any) => {
+      formattedResponse.push(new Sauce(sauce));
+    });
+    if (parsedResponse?.error !== undefined) {
+      AlertHelper.errorToast(parsedResponse.error);
+    } else {
+      AlertHelper.successToast("Success");
+    }
+    return formattedResponse;
+  }
+
+  static async getSauceFromLink(data: FormData): Promise<Array<Sauce>> {
+    let loginResponse = await fetch(this._link("sauce"), {
+      method: "POST",
+      mode: "cors",
+      body: data,
+    });
+    let parsedResponse = await loginResponse.json();
+
+    let formattedResponse: Array<Sauce> = [];
+
+    parsedResponse.data.forEach((sauce: any) => {
+      formattedResponse.push(new Sauce(sauce));
+    });
+    if (parsedResponse?.error !== undefined) {
+      AlertHelper.errorToast(parsedResponse.error);
+    } else {
+      AlertHelper.successToast("Success");
+    }
+    return formattedResponse;
+  }
+
   static async logIn(): Promise<SuccessResponse> {
-    let loginResponse = await fetch("http://localhost:8080/login", {
+    let loginResponse = await fetch(this._link("login"), {
       method: "POST",
       mode: "cors",
       headers: {
@@ -25,7 +69,7 @@ export default class AnnieAPI {
   }
 
   static async getWeekSchedule(): Promise<Array<DaySchedules>> {
-    let response = await fetch("http://localhost:8080/weekSchedule", {
+    let response = await fetch(this._link("weekSchedule"), {
       mode: "cors",
     });
 
