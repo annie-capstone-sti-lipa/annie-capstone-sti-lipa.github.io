@@ -7,7 +7,16 @@ import AlertHelper from "./alert-helper";
 export default class AnnieAPI {
   static isLoggedIn = () => null;
 
-  static _link = (path: string) => `${process.env.REACT_APP_API!}/${path}`;
+  private static _link = (path: string) =>
+    `${process.env.REACT_APP_API!}/${path}`;
+
+  static getMALAuthLink = async (): Promise<string> => {
+    let response = await fetch(this._link("mal-auth"), { method: "GET" });
+    let parsedResponse = await response.json();
+    console.log(response);
+    console.log(parsedResponse);
+    return (parsedResponse as any)["authLink"];
+  };
 
   static async getSauceFromImage(data: FormData): Promise<Array<Sauce>> {
     let loginResponse = await fetch(this._link("sauce"), {

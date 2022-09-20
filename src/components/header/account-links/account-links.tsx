@@ -2,6 +2,10 @@ import "./account-links.scss";
 
 import discordIcon from "../../../assets/icons/discord.svg";
 import malIcon from "../../../assets/icons/mal.svg";
+import AnnieAPI from "../../../helpers/annie-api";
+import { useEffect, useState } from "react";
+import AlertHelper from "../../../helpers/alert-helper";
+import { WatchDirectoryKind } from "typescript";
 
 export default function AccountLinks() {
   return (
@@ -16,7 +20,14 @@ export default function AccountLinks() {
         icon={malIcon}
         name="My Anime List"
         color="#2e51a2"
-        onClick={() => console.log("MAL")}
+        onClick={async () => {
+          let authLoading = AlertHelper.showLoading(
+            "Requesting Authentication..."
+          );
+          let _malAuthLink = await AnnieAPI.getMALAuthLink();
+          authLoading.close();
+          window.open(_malAuthLink, "_blank", "toolbar=0,location=0,menubar=0");
+        }}
       />
     </div>
   );
@@ -36,7 +47,7 @@ function AccountButton({
   return (
     <div
       className="account-button"
-      onClick={onClick}
+      onClick={() => onClick()}
       style={{ backgroundColor: color }}
     >
       <div className="account-link-container">

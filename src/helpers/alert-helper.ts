@@ -103,13 +103,14 @@ export default class AlertHelper {
     });
   };
 
-  static showLoading = (message: string) => {
-    Swal.fire({
+  static showLoading = (message: string): any => {
+    let loading = Swal.fire({
       title: message,
       didOpen: () => {
         Swal.showLoading();
       },
     });
+    return loading;
   };
 
   static confirmDialog = ({
