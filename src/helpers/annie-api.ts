@@ -64,6 +64,7 @@ export default class AnnieAPI {
     let loginResponse = await fetch(this._link("login"), {
       method: "POST",
       mode: "cors",
+      credentials: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
