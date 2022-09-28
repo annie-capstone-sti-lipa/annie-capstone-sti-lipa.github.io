@@ -8,8 +8,8 @@ function LoadingScreen() {
   const dispatch = useDispatch();
 
   authenticationHelper.auth.onAuthStateChanged((user) => {
-    if (user !== null) {
-      dispatch(login(true));
+    if (user === null) {
+      dispatch(login(false));
     } else {
       dispatch(login(true));
     }

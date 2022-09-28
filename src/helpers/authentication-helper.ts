@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
   updateProfile,
   updateCurrentUser,
+  signOut,
 } from "firebase/auth";
 
 export default class AuthenticationHelper {
@@ -30,6 +31,10 @@ export default class AuthenticationHelper {
 
   public triggerUpdate() {
     return updateCurrentUser(this.auth, this.auth.currentUser);
+  }
+
+  public signOut() {
+    return signOut(this.auth);
   }
 
   constructor(firebaseInstance: FirebaseApp) {

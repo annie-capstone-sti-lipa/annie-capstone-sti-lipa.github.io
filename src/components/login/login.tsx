@@ -49,7 +49,7 @@ function LoginFrame() {
     return (
       <div id="login" key={formKey}>
         <div className="login-form-container">
-          <div className="login-form">
+          <form className="login-form">
             <div className="login-title">Login</div>
             <small>email</small>
             <input
@@ -118,7 +118,7 @@ function LoginFrame() {
             <div className="signup-cta" onClick={() => setIsLogin(false)}>
               Sign up.
             </div>
-          </div>
+          </form>
         </div>
       </div>
     );
@@ -163,8 +163,13 @@ function LoginFrame() {
                 let loading = AlertHelper.showLoading("Signing Up.");
                 authenticationHelper
                   .signup(SignupEmail, signupPassword)
-                  .then((response) => {
+                  .then(() => {
+                    preloadData();
+                    dispatch(login(true));
                     loading.close();
+                  })
+                  .catch((e) => {
+                    AlertHelper.errorToast(Helpers.getFirebaseError(e));
                   });
               }
             }}

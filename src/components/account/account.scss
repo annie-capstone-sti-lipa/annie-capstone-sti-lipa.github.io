@@ -15,6 +15,25 @@
       align-items: center;
 
       @extend .default-padding;
+
+      .logout {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $negative;
+
+        @include mobile {
+          margin: auto;
+        }
+
+        @extend .rounded-border;
+        @extend .clickable;
+
+        .logout-icon {
+          display: block;
+          @extend .icon;
+        }
+      }
     }
   }
 }
