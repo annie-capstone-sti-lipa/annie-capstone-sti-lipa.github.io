@@ -18,7 +18,7 @@ function LoginFrame() {
   const [loginEmail, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [SignupEmail, setSignupUsername] = useState("");
+  const [signupEmail, setSignupUsername] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupPassword1, setSignupPassword1] = useState("");
 
@@ -70,22 +70,22 @@ function LoginFrame() {
               className="submit-button"
               onClick={() => {
                 setLoginError("");
-                if (false) {
-                  setLoginError("sample login error");
-                }
-
-                if (loginError === "") {
-                  let loading = AlertHelper.showLoading("Logging in");
-                  authenticationHelper
-                    .login(loginEmail, loginPassword)
-                    .then(() => {
-                      preloadData();
-                      dispatch(login(true));
-                      loading.close();
-                    })
-                    .catch((e) => {
-                      AlertHelper.errorToast(Helpers.getFirebaseError(e));
-                    });
+                if (loginEmail.length === 0 || loginPassword.length === 0) {
+                  setLoginError("Please fill all the fields.");
+                } else {
+                  if (loginError === "") {
+                    let loading = AlertHelper.showLoading("Logging in");
+                    authenticationHelper
+                      .login(loginEmail, loginPassword)
+                      .then(() => {
+                        preloadData();
+                        dispatch(login(true));
+                        loading.close();
+                      })
+                      .catch((e) => {
+                        AlertHelper.errorToast(Helpers.getFirebaseError(e));
+                      });
+                  }
                 }
               }}
             >
@@ -115,7 +115,13 @@ function LoginFrame() {
               Forgot Password
             </div>
             <div>Don't have an account yet? </div>
-            <div className="signup-cta" onClick={() => setIsLogin(false)}>
+            <div
+              className="signup-cta"
+              onClick={() => {
+                setFormKey(isLogin ? 1 : 0);
+                setIsLogin(false);
+              }}
+            >
               Sign up.
             </div>
           </form>
@@ -132,7 +138,7 @@ function LoginFrame() {
           <small>email</small>
           <input
             type="email"
-            defaultValue={SignupEmail}
+            defaultValue={signupEmail}
             className="input-field"
             onChange={(event) => setSignupUsername(event.target.value)}
           />
@@ -155,29 +161,41 @@ function LoginFrame() {
             className="submit-button"
             onClick={() => {
               setSignupError("");
-              if (signupPassword !== signupPassword1) {
+              if (
+                signupPassword.length === 0 ||
+                signupPassword1.length === 0 ||
+                signupEmail.length === 0
+              ) {
                 setSignupError("Passwords do not match.");
-              }
-
-              if (signupError === "") {
-                let loading = AlertHelper.showLoading("Signing Up.");
-                authenticationHelper
-                  .signup(SignupEmail, signupPassword)
-                  .then(() => {
-                    preloadData();
-                    dispatch(login(true));
-                    loading.close();
-                  })
-                  .catch((e) => {
-                    AlertHelper.errorToast(Helpers.getFirebaseError(e));
-                  });
+              } else if (signupPassword !== signupPassword1) {
+                setSignupError("Please fill all the fields.");
+              } else {
+                if (signupError === "") {
+                  let loading = AlertHelper.showLoading("Signing Up.");
+                  authenticationHelper
+                    .signup(signupEmail, signupPassword)
+                    .then(() => {
+                      preloadData();
+                      dispatch(login(true));
+                      loading.close();
+                    })
+                    .catch((e) => {
+                      AlertHelper.errorToast(Helpers.getFirebaseError(e));
+                    });
+                }
               }
             }}
           >
             Sign up
           </div>
           <div>Already have an account?</div>
-          <div className="signup-cta" onClick={() => setIsLogin(true)}>
+          <div
+            className="signup-cta"
+            onClick={() => {
+              setFormKey(isLogin ? 1 : 0);
+              setIsLogin(true);
+            }}
+          >
             Login.
           </div>
         </div>

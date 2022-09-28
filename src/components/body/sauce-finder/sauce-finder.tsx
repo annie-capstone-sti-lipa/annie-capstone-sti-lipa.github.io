@@ -76,20 +76,22 @@ export default function SauceFinder() {
         <div
           className={`search-button ${isDisabled ? "disabled-button" : ""}`}
           onClick={async () => {
-            AlertHelper.showLoading("Fetching...");
-            let _sauces: Array<Sauce> = [];
-            let formData = new FormData();
+            if (link.length !== 0 || rawImage !== undefined) {
+              AlertHelper.showLoading("Fetching...");
+              let _sauces: Array<Sauce> = [];
+              let formData = new FormData();
 
-            if (link.length > 0) {
-              formData.append("imageLink", link);
+              if (link.length > 0) {
+                formData.append("imageLink", link);
 
-              _sauces = await AnnieAPI.getSauceFromLink(formData);
-            } else {
-              formData.append("image", rawImage, "upload.png");
+                _sauces = await AnnieAPI.getSauceFromLink(formData);
+              } else {
+                formData.append("image", rawImage, "upload.png");
 
-              _sauces = await AnnieAPI.getSauceFromImage(formData);
+                _sauces = await AnnieAPI.getSauceFromImage(formData);
+              }
+              setSauces(() => _sauces);
             }
-            setSauces(() => _sauces);
           }}
         >
           Search
@@ -121,7 +123,9 @@ function SauceCard({ sauce }: { sauce: Sauce }) {
         {sauce.similarity}%
       </div>
       <a
-        className="view-button"
+        className={`view-button ${
+          sauce.extUrls.length === 0 ? "disabled-button" : ""
+        }`}
         href={sauce.extUrls[0]}
         target="_blank"
         rel="noreferrer"
