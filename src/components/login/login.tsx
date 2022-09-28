@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import { authenticationHelper } from "../../App";
 import AlertHelper from "../../helpers/alert-helper";
 import AnnieAPI from "../../helpers/annie-api";
+import Helpers from "../../helpers/helpers";
 import { setLoading, setSchedules } from "../../redux/reducers/anime-schedules";
 import { login } from "../../redux/reducers/login";
 import "./login.scss";
@@ -13,10 +15,10 @@ function LoginFrame() {
 
   const [formKey, setFormKey] = useState(1);
 
-  const [loginUsername, setLoginUsername] = useState("");
+  const [loginEmail, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [signupUsername, setSignupUsername] = useState("");
+  const [SignupEmail, setSignupUsername] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupPassword1, setSignupPassword1] = useState("");
 
@@ -53,10 +55,10 @@ function LoginFrame() {
         <div className="login-form-container">
           <div className="login-form">
             <div className="login-title">Login</div>
-            <small>username</small>
+            <small>email</small>
             <input
-              type="text"
-              defaultValue={loginUsername}
+              type="email"
+              defaultValue={loginEmail}
               className="input-field"
               onChange={(event) => setLoginUsername(event.target.value)}
             />
@@ -96,6 +98,29 @@ function LoginFrame() {
             >
               Login
             </div>
+            <div
+              className="signup-cta"
+              onClick={() =>
+                AlertHelper.textInputAlert(
+                  "Please Enter your email",
+                  async (email) => {
+                    try {
+                      let loading = AlertHelper.showLoading("Processing");
+                      await authenticationHelper
+                        .resetPassword(email)
+                        .then(() => loading.close());
+                      AlertHelper.successAlert(
+                        "We've sent the reset password link to your email."
+                      );
+                    } catch (e) {
+                      AlertHelper.errorToast(Helpers.getFirebaseError(e));
+                    }
+                  }
+                )
+              }
+            >
+              Forgot Password
+            </div>
             <div>Don't have an account yet? </div>
             <div className="signup-cta" onClick={() => setIsLogin(false)}>
               Sign up.
@@ -111,10 +136,10 @@ function LoginFrame() {
       <div className="login-form-container">
         <div className="login-form">
           <div className="login-title">Sign up</div>
-          <small>username</small>
+          <small>email</small>
           <input
-            type="text"
-            defaultValue={signupUsername}
+            type="email"
+            defaultValue={SignupEmail}
             className="input-field"
             onChange={(event) => setSignupUsername(event.target.value)}
           />
@@ -142,7 +167,13 @@ function LoginFrame() {
               }
 
               if (signupError === "") {
-                alert(signupUsername + " " + signupPassword);
+                let loading = AlertHelper.showLoading("Signing Up.");
+                authenticationHelper
+                  .signup(SignupEmail, signupPassword)
+                  .then((response) => {
+                    console.log(response);
+                    loading.close();
+                  });
               }
             }}
           >
