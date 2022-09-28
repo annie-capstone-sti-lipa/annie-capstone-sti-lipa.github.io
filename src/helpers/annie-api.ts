@@ -13,8 +13,7 @@ export default class AnnieAPI {
   static getMALAuthLink = async (): Promise<string> => {
     let response = await fetch(this._link("mal-auth"), { method: "GET" });
     let parsedResponse = await response.json();
-    console.log(response);
-    console.log(parsedResponse);
+
     return (parsedResponse as any)["authLink"];
   };
 

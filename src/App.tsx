@@ -21,6 +21,9 @@ export const authenticationHelper = new AuthenticationHelper(
 
 function App() {
   const isLoggedIn = useSelector((state: any) => state.isLoggedIn.value);
+  if (isLoggedIn === null) {
+    return <LoadingScreen></LoadingScreen>;
+  }
 
   if (isLoggedIn) {
     return (
@@ -29,11 +32,9 @@ function App() {
         <Body />
       </div>
     );
-  } else if (!isLoggedIn) {
+  } else {
     return <Login></Login>;
   }
-
-  return <LoadingScreen></LoadingScreen>;
 }
 
 export default App;

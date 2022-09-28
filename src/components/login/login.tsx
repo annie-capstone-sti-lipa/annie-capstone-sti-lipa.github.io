@@ -37,10 +37,6 @@ function LoginFrame() {
     }
   }, [loginError]);
 
-  useEffect(() => {
-    setFormKey(Math.random());
-  }, [isLogin]);
-
   async function preloadData() {
     dispatch(setLoading(true));
     await AnnieAPI.getWeekSchedule().then((schedules) => {
@@ -79,19 +75,16 @@ function LoginFrame() {
                 }
 
                 if (loginError === "") {
-                  AlertHelper.showLoading("Logging in");
-                  AnnieAPI.logIn()
-                    .then((response) => {
-                      if (response.success) {
-                        preloadData();
-                        dispatch(login(true));
-                        AlertHelper.successToast(response.message);
-                      } else {
-                        AlertHelper.errorToast(response.message);
-                      }
+                  let loading = AlertHelper.showLoading("Logging in");
+                  authenticationHelper
+                    .login(loginEmail, loginPassword)
+                    .then(() => {
+                      preloadData();
+                      dispatch(login(true));
+                      loading.close();
                     })
                     .catch((e) => {
-                      AlertHelper.errorToast(e);
+                      AlertHelper.errorToast(Helpers.getFirebaseError(e));
                     });
                 }
               }}
@@ -171,7 +164,6 @@ function LoginFrame() {
                 authenticationHelper
                   .signup(SignupEmail, signupPassword)
                   .then((response) => {
-                    console.log(response);
                     loading.close();
                   });
               }
