@@ -106,8 +106,6 @@ function ModalBody({
   type: animeType;
   animeItem: AnimeItem;
 }) {
-  const isWatching = type === animeType.watching;
-
   return (
     <div className="anime-modal" onClick={(event) => event.stopPropagation()}>
       <div className="anime-details-container">
@@ -123,8 +121,13 @@ function ModalBody({
               <div className="score">({animeItem.score})</div>
               {Array(Math.round(animeItem.score))
                 .fill("")
-                .map((_) => (
-                  <img src={star} alt="" className="star-icon" />
+                .map((_, index) => (
+                  <img
+                    src={star}
+                    alt="*"
+                    className="star-icon"
+                    key={"star" + index}
+                  />
                 ))}
             </div>
           </div>

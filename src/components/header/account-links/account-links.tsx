@@ -3,9 +3,7 @@ import "./account-links.scss";
 import discordIcon from "../../../assets/icons/discord.svg";
 import malIcon from "../../../assets/icons/mal.svg";
 import AnnieAPI from "../../../helpers/annie-api";
-import { useEffect, useState } from "react";
 import AlertHelper from "../../../helpers/alert-helper";
-import { WatchDirectoryKind } from "typescript";
 
 export default function AccountLinks() {
   return (
