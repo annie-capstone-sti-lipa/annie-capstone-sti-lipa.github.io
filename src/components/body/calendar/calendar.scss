@@ -85,19 +85,10 @@
       }
 
       .anime-scheds {
-        align-items: flex-start;
-        justify-items: flex-start;
-        justify-content: start;
-        align-content: flex-start;
-
         td {
           border-right: 1px solid #ddd;
           width: 100px;
-          vertical-align: baseline;
-        }
-
-        :last-child {
-          border-right: none;
+          vertical-align: top;
         }
       }
     }
