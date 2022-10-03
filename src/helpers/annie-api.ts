@@ -59,26 +59,8 @@ export default class AnnieAPI {
     return formattedResponse;
   }
 
-  static async logIn(): Promise<SuccessResponse> {
-    let loginResponse = await fetch(this._link("login"), {
-      method: "POST",
-      mode: "cors",
-      credentials: "same-origin",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: "username",
-        password: "password",
-      }),
-    });
-    let parsedResponse = await loginResponse.json();
-    return new SuccessResponse(parsedResponse.success, parsedResponse.message);
-  }
-
   static async getWeekSchedule(): Promise<Array<DaySchedules>> {
-    let response = await fetch(this._link("weekSchedule"), {
+    let response = await fetch(this._link("getWeekSchedule"), {
       mode: "cors",
     });
 

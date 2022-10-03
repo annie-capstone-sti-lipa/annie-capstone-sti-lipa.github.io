@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authenticationHelper } from "../../App";
 import AlertHelper from "../../helpers/alert-helper";
-import AnnieAPI from "../../helpers/annie-api";
 import Helpers from "../../helpers/helpers";
-import { setLoading, setSchedules } from "../../redux/reducers/anime-schedules";
 import { login } from "../../redux/reducers/login";
 import "./login.scss";
 
@@ -36,14 +34,6 @@ function LoginFrame() {
       document.querySelector(".error-text")!.innerHTML = loginError;
     }
   }, [loginError]);
-
-  async function preloadData() {
-    dispatch(setLoading(true));
-    await AnnieAPI.getWeekSchedule().then((schedules) => {
-      dispatch(setSchedules(schedules));
-      dispatch(setLoading(false));
-    });
-  }
 
   if (isLogin) {
     return (
@@ -78,7 +68,6 @@ function LoginFrame() {
                     authenticationHelper
                       .login(loginEmail, loginPassword)
                       .then(() => {
-                        preloadData();
                         dispatch(login(true));
                         loading.close();
                       })
@@ -175,7 +164,6 @@ function LoginFrame() {
                   authenticationHelper
                     .signup(signupEmail, signupPassword)
                     .then(() => {
-                      preloadData();
                       dispatch(login(true));
                       loading.close();
                     })
