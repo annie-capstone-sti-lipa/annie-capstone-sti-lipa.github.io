@@ -12,7 +12,7 @@ export default function AccountLinks() {
         icon={discordIcon}
         name="Discord"
         color="#5865f2"
-        onClick={() => console.log("Discord")}
+        onClick={() => console.log("Discord discord")}
       />
       <AccountButton
         icon={malIcon}
