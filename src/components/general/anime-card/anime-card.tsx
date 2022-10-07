@@ -38,7 +38,7 @@ export default function AnimeCard({
           return <span></span>;
         }
       default:
-        return <div>hehe</div>;
+        return <div></div>;
     }
   }
 
@@ -78,6 +78,10 @@ export default function AnimeCard({
         draggable={false}
       />
       <div className="anime-name">{animeItem.name}</div>
+      <div className="rating">
+        <span className="rating-text">{animeItem.score ?? "??"}</span>
+        <img className="mini-rating" src={star} alt="*" />
+      </div>
       {bottomButton()}
     </div>
   );

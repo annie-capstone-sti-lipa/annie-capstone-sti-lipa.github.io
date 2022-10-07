@@ -28,6 +28,21 @@
     margin: 8px;
   }
 
+  .rating {
+    display: flex;
+    justify-content: center;
+
+    .rating-text {
+      font-size: small;
+      color: black;
+    }
+
+    .mini-rating {
+      margin-left: 4px;
+      height: 16px;
+    }
+  }
+
   .thumbnail {
     max-width: 100px;
     min-height: 120px;

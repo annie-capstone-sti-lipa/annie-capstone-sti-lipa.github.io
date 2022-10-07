@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./calendar.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
@@ -7,6 +7,7 @@ import animeType from "../../../types/enums/anime-type";
 import { DaySchedules } from "../../../types/day-schedules";
 import { useSelector } from "react-redux";
 import { Loader } from "../../general/loader/loader";
+
 enum view {
   monthView,
   weekView,
@@ -92,14 +93,48 @@ function WeekView({
   selectedWeek?: Array<string>;
   schedules: Array<DaySchedules>;
 }) {
+  const [sortBy, setSortBy] = useState("rating");
+  const [scheds, setScheds] = useState(schedules);
+
   while (selectedWeek?.length !== 7) {
     selectedWeek?.push("_");
   }
 
   const isLoading = useSelector((state: any) => state.animeSchedules.isLoading);
 
+  useEffect(() => {
+    let newScheds: Array<DaySchedules> = [];
+    schedules.forEach((day: DaySchedules, dayIndex: number) => {
+      if (sortBy === "rating") {
+        let sortedAnimes = day.animes.sort((a, b) => b.score - a.score);
+        newScheds.push(new DaySchedules(day.day, sortedAnimes));
+      }
+      if (sortBy === "popularity") {
+        let sortedAnimes = day.animes.sort(
+          (a, b) => a.popularity - b.popularity
+        );
+        newScheds.push(new DaySchedules(day.day, sortedAnimes));
+      }
+    });
+    setScheds(newScheds);
+  }, [sortBy, schedules]);
+
   return (
     <>
+      <div className="sort-by">
+        <span className="title">Sort by:</span>
+        <select
+          name="sort-by"
+          id=""
+          defaultValue={sortBy}
+          onChange={(event) => {
+            setSortBy(event.target.value);
+          }}
+        >
+          <option value="rating">rating</option>
+          <option value="popularity">popularity</option>
+        </select>
+      </div>
       <table className="week-view">
         <thead className="week-header">
           <tr>
@@ -128,7 +163,7 @@ function WeekView({
             {selectedWeek!.map((day, index) => {
               return (
                 <td key={`${day} ${index}`}>
-                  {schedules
+                  {scheds
                     ?.find(
                       (element) =>
                         element.day.toLowerCase() ===

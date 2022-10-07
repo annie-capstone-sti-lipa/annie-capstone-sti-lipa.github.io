@@ -5,13 +5,13 @@ import { login } from "../../redux/reducers/login";
 import "./loading-screen.scss";
 import { setLoading, setSchedules } from "../../redux/reducers/anime-schedules";
 import AnnieAPI from "../../helpers/annie-api";
-import { useEffect } from "react";
 
 function LoadingScreen() {
   const isLoading = useSelector((state: any) => state.animeSchedules.isLoading);
   const dispatch = useDispatch();
 
   async function preloadData() {
+    console.log("preload");
     dispatch(setLoading(true));
     if (!isLoading) {
       await AnnieAPI.getWeekSchedule().then((schedules) => {
@@ -20,10 +20,6 @@ function LoadingScreen() {
       });
     }
   }
-
-  useEffect(() => {
-    preloadData();
-  }, []);
 
   const unsubscribe = authenticationHelper.auth.onAuthStateChanged(
     async (user) => {
@@ -36,6 +32,7 @@ function LoadingScreen() {
     }
   );
 
+  preloadData();
   return (
     <div id="loading-screen">
       <Loader></Loader>

@@ -1,7 +1,6 @@
 import AnimeItem from "../types/anime-item";
 import { DaySchedules } from "../types/day-schedules";
 import Sauce from "../types/sauce";
-import SuccessResponse from "../types/success-response";
 import AlertHelper from "./alert-helper";
 
 export default class AnnieAPI {
@@ -77,6 +76,7 @@ export default class AnnieAPI {
                 anime.images.jpg.large_image_url,
                 anime.score,
                 anime.synopsis,
+                anime.popularity,
                 anime.trailer.embed_url
               )
           )

@@ -7,6 +7,17 @@
   @extend .box-shadow;
   @extend .rounded-border;
 
+  .sort-by {
+    width: inherit;
+    text-align: start;
+
+    .title {
+      margin-right: 16px;
+      color: black;
+      display: inline;
+    }
+  }
+
   .title-container {
     margin-bottom: 16px;
     display: flex;
