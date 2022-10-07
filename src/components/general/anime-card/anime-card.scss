@@ -91,6 +91,7 @@
     }
 
     .anime-details {
+      flex: 1;
       max-height: 60vh;
       display: flex;
       flex-direction: column;
@@ -105,6 +106,11 @@
         .name {
           font-size: large;
           font-weight: bold;
+        }
+
+        .genre-list {
+          font-size: small;
+          margin: 12px 0;
         }
 
         .ratings {

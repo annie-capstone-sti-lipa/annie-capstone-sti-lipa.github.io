@@ -121,6 +121,9 @@ function ModalBody({
         <div className="anime-details">
           <div className="title">
             <div className="name">{animeItem.name}</div>
+            <div className="genre-list">
+              {animeItem.genres.toString().replaceAll(",", ", ")}
+            </div>
             <div className="ratings">
               <div className="score">({animeItem.score})</div>
               {Array(Math.round(animeItem.score))

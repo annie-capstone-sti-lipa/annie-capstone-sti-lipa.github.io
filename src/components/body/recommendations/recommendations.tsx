@@ -22,6 +22,7 @@ export default function Recommendations() {
                     6.6,
                     "Eveniet sit voluptatem inventore ut tempora provident suscipit.",
                     0,
+                    [],
                     "https://www.youtube.com/embed/J8BU9EeKio4?enablejsapi=1&wmode=opaque&autoplay=1"
                   )
                 }

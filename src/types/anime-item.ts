@@ -4,6 +4,7 @@ export default class AnimeItem {
   score: number;
   popularity: number;
   synopsis: string;
+  genres: Array<string>;
   trailer?: string;
 
   constructor(
@@ -12,6 +13,7 @@ export default class AnimeItem {
     score: number | null | undefined,
     synopsis: string,
     popularity: number | null | undefined,
+    genres: Array<string>,
     trailer?: string
   ) {
     this.name = name;
@@ -19,6 +21,7 @@ export default class AnimeItem {
     this.score = score ?? 0;
     this.synopsis = synopsis;
     this.popularity = popularity ?? 0;
+    this.genres = genres;
 
     this.trailer = trailer;
   }

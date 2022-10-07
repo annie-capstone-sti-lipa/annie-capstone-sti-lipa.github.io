@@ -77,6 +77,7 @@ export default class AnnieAPI {
                 anime.score,
                 anime.synopsis,
                 anime.popularity,
+                anime.genres.map((genre: any) => genre.name),
                 anime.trailer.embed_url
               )
           )
