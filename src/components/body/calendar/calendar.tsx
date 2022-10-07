@@ -110,9 +110,9 @@ function WeekView({
         newScheds.push(new DaySchedules(day.day, sortedAnimes));
       }
       if (sortBy === "popularity") {
-        let sortedAnimes = day.animes.sort(
-          (a, b) => a.popularity - b.popularity
-        );
+        let sortedAnimes = day.animes.sort((a, b) => {
+          return a.popularity - b.popularity;
+        });
         newScheds.push(new DaySchedules(day.day, sortedAnimes));
       }
     });

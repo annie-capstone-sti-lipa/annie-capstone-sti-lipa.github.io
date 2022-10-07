@@ -20,7 +20,8 @@ export default class AnimeItem {
     this.thumbnail = thumbnail;
     this.score = score ?? 0;
     this.synopsis = synopsis;
-    this.popularity = popularity ?? 0;
+    this.popularity =
+      popularity === null || popularity === 0 ? 99999999 : popularity!;
     this.genres = genres;
 
     this.trailer = trailer;
