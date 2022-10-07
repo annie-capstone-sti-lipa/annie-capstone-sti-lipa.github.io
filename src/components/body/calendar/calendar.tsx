@@ -7,6 +7,8 @@ import animeType from "../../../types/enums/anime-type";
 import { DaySchedules } from "../../../types/day-schedules";
 import { useSelector } from "react-redux";
 import { Loader } from "../../general/loader/loader";
+import sortBy from "../../../types/enums/sort-by";
+import sortCategory from "../../../types/enums/sort-by";
 
 enum view {
   monthView,
@@ -93,7 +95,7 @@ function WeekView({
   selectedWeek?: Array<string>;
   schedules: Array<DaySchedules>;
 }) {
-  const [sortBy, setSortBy] = useState("rating");
+  const [sortBy, setSortBy] = useState<sortCategory>(sortCategory.rating);
   const [scheds, setScheds] = useState(schedules);
 
   while (selectedWeek?.length !== 7) {
@@ -105,11 +107,11 @@ function WeekView({
   useEffect(() => {
     let newScheds: Array<DaySchedules> = [];
     schedules.forEach((day: DaySchedules, dayIndex: number) => {
-      if (sortBy === "rating") {
+      if (sortBy === sortCategory.rating) {
         let sortedAnimes = day.animes.sort((a, b) => b.score - a.score);
         newScheds.push(new DaySchedules(day.day, sortedAnimes));
       }
-      if (sortBy === "popularity") {
+      if (sortBy === sortCategory.popularity) {
         let sortedAnimes = day.animes.sort((a, b) => {
           return a.popularity - b.popularity;
         });
@@ -128,11 +130,11 @@ function WeekView({
           id=""
           defaultValue={sortBy}
           onChange={(event) => {
-            setSortBy(event.target.value);
+            setSortBy(event.target.value as sortCategory);
           }}
         >
-          <option value="rating">rating</option>
-          <option value="popularity">popularity</option>
+          <option value={sortCategory.rating}>rating</option>
+          <option value={sortCategory.popularity}>popularity</option>
         </select>
       </div>
       <table className="week-view">
