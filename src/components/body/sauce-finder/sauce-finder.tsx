@@ -15,6 +15,7 @@ export default function SauceFinder() {
   const [isDisabled, setIsDisabled] = useState(true);
   const [rawImage, setRawImage] = useState<any>();
   const [sauces, setSauces] = useState<Array<Sauce>>();
+  const [showLessRelevant, setShowLessRelevant] = useState(false);
 
   useEffect(() => {
     setIsDisabled(() => !(link.length > 0 || rawImage !== undefined));
@@ -98,14 +99,44 @@ export default function SauceFinder() {
         </div>
       </div>
 
-      <div className="sauces-container">
-        {sauces?.length !== 0 ? (
-          sauces?.map((sauce, index) => (
-            <SauceCard sauce={sauce} key={`${sauce.sauce} ${index}`} />
-          ))
+      <div className="results-container">
+        {sauces != null && sauces!.length > 0 ? (
+          <>
+            <div className="less-relevant">
+              <div className="title">Results </div>
+              <small>Less relevant results have been hidden.</small>
+              <div
+                className="unhide-button"
+                onClick={() => {
+                  setShowLessRelevant((current) => !current);
+                }}
+              >
+                {showLessRelevant ? "hide" : "show"}
+              </div>
+            </div>
+          </>
         ) : (
-          <></>
+          <span></span>
         )}
+
+        <div className="sauces-container">
+          {sauces?.length !== 0 ? (
+            sauces?.map((sauce, index) => {
+              if (
+                Number.parseFloat(sauce.similarity) > 60 ||
+                showLessRelevant
+              ) {
+                return (
+                  <SauceCard sauce={sauce} key={`${sauce.sauce} ${index}`} />
+                );
+              } else {
+                return <span key={`${sauce.sauce} ${index}`}></span>;
+              }
+            })
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

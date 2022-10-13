@@ -19,45 +19,14 @@
     flex-direction: column;
   }
 
-  .sauces-container {
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-
-    @include mobile {
-      margin: auto;
-    }
-
-    .sauce-card {
-      border-left: 8px solid $primary;
-      margin: 12px;
-      width: 160px;
-      font-size: small;
-      animation: bounce-pop 150ms;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      @extend .subtle-hover-grow;
-      @extend .hover-pointer;
-      @extend .default-padding;
-
-      .key {
+  .results-container {
+    .less-relevant {
+      .title {
         font-weight: bold;
-        margin-right: 8px;
       }
 
-      .thumbnail {
-        width: 90%;
-        margin: 8px auto;
-
-        @extend .rounded-border;
-      }
-
-      .view-button {
-        display: flex;
-        align-items: center;
+      .unhide-button {
+        background-color: $primary;
         background-color: $primary;
         padding: 4px 16px;
         color: white;
@@ -70,16 +39,70 @@
 
         @extend .clickable;
         @extend .rounded-border;
+      }
+    }
+    .sauces-container {
+      justify-content: center;
+      display: flex;
+      flex-wrap: wrap;
 
-        .link-icon {
-          height: 16px;
-
-          @extend .icon;
-        }
+      @include mobile {
+        margin: auto;
       }
 
-      @extend .box-shadow;
-      @extend .rounded-border;
+      .sauce-card {
+        border-left: 8px solid $primary;
+        margin: 12px;
+        width: 160px;
+        font-size: small;
+        animation: bounce-pop 150ms;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        @extend .subtle-hover-grow;
+        @extend .hover-pointer;
+        @extend .default-padding;
+
+        .key {
+          font-weight: bold;
+          margin-right: 8px;
+        }
+
+        .thumbnail {
+          width: 90%;
+          margin: 8px auto;
+
+          @extend .rounded-border;
+        }
+
+        .view-button {
+          display: flex;
+          align-items: center;
+          background-color: $primary;
+          padding: 4px 16px;
+          color: white;
+          font-weight: bold;
+          text-decoration: none;
+          max-width: min-content;
+          white-space: nowrap;
+          justify-content: center;
+          margin: 8px auto;
+
+          @extend .clickable;
+          @extend .rounded-border;
+
+          .link-icon {
+            height: 16px;
+
+            @extend .icon;
+          }
+        }
+
+        @extend .box-shadow;
+        @extend .rounded-border;
+      }
     }
   }
 
