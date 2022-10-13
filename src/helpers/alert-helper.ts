@@ -103,6 +103,13 @@ export default class AlertHelper {
     });
   };
 
+  static infoAlert = (message: string) => {
+    Swal.fire({
+      icon: "info",
+      title: message,
+    });
+  };
+
   static showLoading = (message: string): any => {
     let loading = Swal.fire({
       title: message,

@@ -1,28 +1,17 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./quiz.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
-
-enum characterType {
-  hiragana = "Hiragana",
-  katakana = "Katakana",
-  kanji = "Kanji",
-}
-
-enum kanaOrderingSystem {
-  gojuuon = "Gojuuon",
-  dakuon = "Dakuon",
-  youon = "Youon",
-}
-
-enum kanjiReadings {
-  onyomi = "Onyomi",
-  kunyomi = "Kunyomi",
-  englishMeanings = "English Meanings",
-}
+import kanaOrderingSystem from "../../../types/enums/kana-ordering-system";
+import kanjiReadings from "../../../types/enums/kanji-readings";
+import writingSystem from "../../../types/enums/writing-system";
+import AnnieAPI from "../../../helpers/annie-api";
+import { Loader } from "../../general/loader/loader";
+import AlertHelper from "../../../helpers/alert-helper";
+import QuizQuestion from "../../../types/kana-quiz";
 
 export default function Quiz() {
-  const [quizType, setQuizType] = useState<characterType | null>(null);
+  const [quizType, setQuizType] = useState<writingSystem | null>(null);
   const [quiz, setQuiz] = useState<kanaOrderingSystem | kanjiReadings | null>(
     null
   );
@@ -49,11 +38,18 @@ export default function Quiz() {
       ) : quiz == null ? (
         <QuizDifficulty
           writingStyle={quizType}
-          isKanji={quizType === characterType.kanji}
+          isKanji={quizType === writingSystem.kanji}
           chooseQuiz={(choice) => setQuiz(choice)}
         />
       ) : (
-        <QuizQuestions />
+        <QuizQuestions
+          ordering={quiz}
+          writing={quizType}
+          exitQuiz={() => {
+            setQuiz(null);
+            setQuizType(null);
+          }}
+        />
       )}
       <div className="spacer"></div>
     </div>
@@ -63,13 +59,13 @@ export default function Quiz() {
 function QuizChoice({
   chooseQuiz,
 }: {
-  chooseQuiz: (quizType: characterType) => void;
+  chooseQuiz: (quizType: writingSystem) => void;
 }) {
   return (
     <div className="quiz-choice">
       <div className="instruction">Choose Writing System.</div>
-      {Object.values(characterType).map((item) => {
-        return <QuizChoiceCard item={item} onClick={chooseQuiz} />;
+      {Object.values(writingSystem).map((item) => {
+        return <QuizChoiceCard item={item} onClick={chooseQuiz} key={item} />;
       })}
     </div>
   );
@@ -80,7 +76,7 @@ function QuizDifficulty({
   chooseQuiz,
   isKanji,
 }: {
-  writingStyle: characterType;
+  writingStyle: writingSystem;
   chooseQuiz: (difficulty: kanaOrderingSystem | kanjiReadings) => void;
   isKanji: boolean;
 }) {
@@ -90,7 +86,7 @@ function QuizDifficulty({
       <div className="instruction">Choose Quiz</div>
       {Object.values(isKanji ? kanjiReadings : kanaOrderingSystem).map(
         (item) => {
-          return <QuizChoiceCard item={item} onClick={chooseQuiz} />;
+          return <QuizChoiceCard item={item} onClick={chooseQuiz} key={item} />;
         }
       )}
     </div>
@@ -111,17 +107,90 @@ function QuizChoiceCard({
   );
 }
 
-function QuizQuestions() {
+function QuizQuestions({
+  writing,
+  ordering,
+  exitQuiz,
+}: {
+  writing: writingSystem;
+  ordering: kanaOrderingSystem | kanjiReadings;
+  exitQuiz: () => void;
+}) {
+  const [questions, setQuestions] = useState<Array<QuizQuestion>>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [score, setScore] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const getQuestions = useCallback(() => {
+    AnnieAPI.getKanaQuiz(writing, ordering as kanaOrderingSystem)
+      .then((response) => {
+        setQuestions(response);
+      })
+      .catch((e) => {
+        AlertHelper.errorToast(e);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [writing, ordering]);
+
+  useEffect(() => {
+    if (questions.length === 0) {
+      getQuestions();
+    }
+  }, [questions.length, getQuestions]);
+
+  useEffect(() => {
+    if (currentIndex === questions.length && questions.length > 0) {
+      exitQuiz();
+      AlertHelper.successAlert("You scored: " + score);
+    }
+  }, [currentIndex, questions.length, score, exitQuiz]);
+
   return (
     <div className="quiz-questions">
-      <div>Choose the corresponding reading for the character below.</div>
-      <CharacterCard character="せ" />
-      <div className="choice-card-container">
-        <ChoiceCard choice="se" />
-        <ChoiceCard choice="re" />
-        <ChoiceCard choice="pe" />
-        <ChoiceCard choice="le" />
-      </div>
+      {isLoading ? (
+        <Loader></Loader>
+      ) : (
+        <>
+          {currentIndex === questions.length && questions.length > 0 ? (
+            <div>You scored {score}</div>
+          ) : (
+            <>
+              <div>
+                Choose the corresponding reading for the character below.
+              </div>
+              <div className="score-counter">
+                Score: {score} out of {questions.length}
+              </div>
+              <div className="score-counter">
+                Question number: {currentIndex + 1}
+              </div>
+              <CharacterCard character={questions[currentIndex].character} />
+              <div className="choice-card-container">
+                {questions[currentIndex].choices.map((item, index) => (
+                  <ChoiceCard
+                    key={item + index}
+                    choice={item}
+                    onClick={(answer) => {
+                      if (answer === questions[currentIndex].correctAnswer) {
+                        AlertHelper.successToast("Correct");
+                        setScore((current) => current + 1);
+                      } else {
+                        AlertHelper.infoAlert(
+                          "The correct answer is: " +
+                            questions[currentIndex].correctAnswer
+                        );
+                      }
+                      setCurrentIndex((current) => current + 1);
+                    }}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+        </>
+      )}
     </div>
   );
 }
@@ -130,6 +199,16 @@ function CharacterCard({ character }: { character: string }) {
   return <div className="character-card">{character}</div>;
 }
 
-function ChoiceCard({ choice }: { choice: string }) {
-  return <div className="choice-card">{choice}</div>;
+function ChoiceCard({
+  choice,
+  onClick,
+}: {
+  choice: string;
+  onClick: (choice: string) => void;
+}) {
+  return (
+    <div className="choice-card" onClick={() => onClick(choice)}>
+      {choice}
+    </div>
+  );
 }

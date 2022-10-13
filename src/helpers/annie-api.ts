@@ -1,5 +1,8 @@
 import AnimeItem from "../types/anime-item";
 import { DaySchedules } from "../types/day-schedules";
+import kanaOrderingSystem from "../types/enums/kana-ordering-system";
+import writingSystem from "../types/enums/writing-system";
+import QuizQuestion from "../types/kana-quiz";
 import Sauce from "../types/sauce";
 import AlertHelper from "./alert-helper";
 
@@ -29,6 +32,38 @@ export default class AnnieAPI {
     parsedResponse.data.forEach((sauce: any) => {
       formattedResponse.push(new Sauce(sauce));
     });
+    if (parsedResponse?.error !== undefined) {
+      AlertHelper.errorToast(parsedResponse.error);
+    } else {
+      AlertHelper.successToast("Success");
+    }
+    return formattedResponse;
+  }
+
+  static async getKanaQuiz(
+    writing: writingSystem,
+    ordering: kanaOrderingSystem
+  ): Promise<Array<QuizQuestion>> {
+    let quizResponse = await fetch(
+      this._link(`kana-quiz?ordering=${ordering}&writing=${writing}`),
+      {
+        method: "GET",
+      }
+    );
+    let parsedResponse = await quizResponse.json();
+
+    let formattedResponse: Array<QuizQuestion> = [];
+
+    parsedResponse.forEach((item: any) => {
+      if (writing === writingSystem.kanji) {
+        // formattedResponse.push(item as QuizQuestion);
+      } else {
+        formattedResponse.push(
+          new QuizQuestion(item.kana, item.correctAnswer, item.romajiChoices)
+        );
+      }
+    });
+
     if (parsedResponse?.error !== undefined) {
       AlertHelper.errorToast(parsedResponse.error);
     } else {

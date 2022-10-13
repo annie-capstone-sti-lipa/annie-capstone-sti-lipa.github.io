@@ -11,7 +11,6 @@ function LoadingScreen() {
   const dispatch = useDispatch();
 
   async function preloadData() {
-    console.log("preload");
     dispatch(setLoading(true));
     if (!isLoading) {
       await AnnieAPI.getWeekSchedule().then((schedules) => {
