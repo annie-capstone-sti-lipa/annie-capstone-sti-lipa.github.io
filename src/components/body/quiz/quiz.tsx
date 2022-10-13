@@ -122,7 +122,7 @@ function QuizQuestions({
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const getQuestions = useCallback(() => {
-    AnnieAPI.getKanaQuiz(writing, ordering as kanaOrderingSystem)
+    AnnieAPI.getQuiz(writing, ordering)
       .then((response) => {
         setQuestions(response);
       })

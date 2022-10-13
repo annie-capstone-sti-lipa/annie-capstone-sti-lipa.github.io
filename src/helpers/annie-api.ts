@@ -1,6 +1,7 @@
 import AnimeItem from "../types/anime-item";
 import { DaySchedules } from "../types/day-schedules";
 import kanaOrderingSystem from "../types/enums/kana-ordering-system";
+import kanjiReadings from "../types/enums/kanji-readings";
 import writingSystem from "../types/enums/writing-system";
 import QuizQuestion from "../types/kana-quiz";
 import Sauce from "../types/sauce";
@@ -40,9 +41,9 @@ export default class AnnieAPI {
     return formattedResponse;
   }
 
-  static async getKanaQuiz(
+  static async getQuiz(
     writing: writingSystem,
-    ordering: kanaOrderingSystem
+    ordering: kanaOrderingSystem | kanjiReadings
   ): Promise<Array<QuizQuestion>> {
     let quizResponse = await fetch(
       this._link(`kana-quiz?ordering=${ordering}&writing=${writing}`),
