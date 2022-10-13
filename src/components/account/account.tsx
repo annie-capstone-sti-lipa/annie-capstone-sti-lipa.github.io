@@ -8,8 +8,12 @@ import ProfilePic from "../header/profile-pic/profile-pic";
 
 import logoutIcon from "../../assets/icons/logout.svg";
 import "./account.scss";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/reducers/login";
 
 function Account() {
+  const dispatch = useDispatch();
+
   return (
     <div id="account">
       <div className="container">
@@ -27,6 +31,7 @@ function Account() {
                   authenticationHelper
                     .signOut()
                     .then((res) => {
+                      dispatch(login(false));
                       AlertHelper.successToast("Logged out successfully");
                     })
                     .catch((e) => {
