@@ -143,7 +143,10 @@ function QuizQuestions({
   useEffect(() => {
     if (currentIndex === questions.length && questions.length > 0) {
       exitQuiz();
-      AlertHelper.successAlert("You scored: " + score);
+      AlertHelper.successAlert(
+        writing + " Quiz Result:",
+        "You scored: " + score + " out of " + questions.length
+      );
     }
   }, [currentIndex, questions.length, score, exitQuiz]);
 

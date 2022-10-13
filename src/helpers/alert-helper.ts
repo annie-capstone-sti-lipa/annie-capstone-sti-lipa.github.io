@@ -96,10 +96,11 @@ export default class AlertHelper {
     });
   };
 
-  static successAlert = (message: string) => {
+  static successAlert = (title: string, message?: string) => {
     Swal.fire({
       icon: "success",
-      title: message,
+      title: title,
+      text: message,
     });
   };
 

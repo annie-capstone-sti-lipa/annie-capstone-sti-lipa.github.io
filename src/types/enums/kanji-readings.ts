@@ -1,7 +1,7 @@
 enum kanjiReadings {
   onyomi = "Onyomi",
   kunyomi = "Kunyomi",
-  englishMeanings = "English Meanings",
+  englishMeanings = "English",
 }
 
 export default kanjiReadings;

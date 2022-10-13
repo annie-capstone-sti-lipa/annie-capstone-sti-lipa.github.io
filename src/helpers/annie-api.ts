@@ -45,8 +45,11 @@ export default class AnnieAPI {
     writing: writingSystem,
     ordering: kanaOrderingSystem | kanjiReadings
   ): Promise<Array<QuizQuestion>> {
+    let isKanji = writing === writingSystem.kanji;
     let quizResponse = await fetch(
-      this._link(`kana-quiz?ordering=${ordering}&writing=${writing}`),
+      isKanji
+        ? this._link(`kanji-quiz?reading=${ordering}`)
+        : this._link(`kana-quiz?ordering=${ordering}&writing=${writing}`),
       {
         method: "GET",
       }
@@ -56,8 +59,10 @@ export default class AnnieAPI {
     let formattedResponse: Array<QuizQuestion> = [];
 
     parsedResponse.forEach((item: any) => {
-      if (writing === writingSystem.kanji) {
-        // formattedResponse.push(item as QuizQuestion);
+      if (isKanji) {
+        formattedResponse.push(
+          new QuizQuestion(item.character, item.correctAnswer, item.choices)
+        );
       } else {
         formattedResponse.push(
           new QuizQuestion(item.kana, item.correctAnswer, item.romajiChoices)
@@ -67,8 +72,6 @@ export default class AnnieAPI {
 
     if (parsedResponse?.error !== undefined) {
       AlertHelper.errorToast(parsedResponse.error);
-    } else {
-      AlertHelper.successToast("Success");
     }
     return formattedResponse;
   }
