@@ -6,6 +6,10 @@ export default class AnimeItem {
   synopsis: string;
   genres: Array<string>;
   trailer?: string;
+  //dateStart:
+  //dateEnd:
+
+  //TODO: add the date and don't show in the calendar if the date is past
 
   constructor(
     name: string,

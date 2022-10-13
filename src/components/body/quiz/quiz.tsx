@@ -3,21 +3,27 @@ import "./quiz.scss";
 
 import backIcon from "../../../assets/icons/back.svg";
 
-enum quizType {
+enum characterType {
   hiragana = "Hiragana",
   katakana = "Katakana",
   kanji = "Kanji",
 }
 
-enum quizDifficulty {
-  easy = "Hard",
-  normal = "Normal",
-  hard = "Easy",
+enum kanaOrderingSystem {
+  gojuuon = "Gojuuon",
+  dakuon = "Dakuon",
+  youon = "Youon",
+}
+
+enum kanjiReadings {
+  onyomi = "Onyomi",
+  kunyomi = "Kunyomi",
+  englishMeanings = "English Meanings",
 }
 
 export default function Quiz() {
-  const [quizType, setQuizType] = useState<quizType | null>(null);
-  const [quizDifficulty, setQuizDifficulty] = useState<quizDifficulty | null>(
+  const [quizType, setQuizType] = useState<characterType | null>(null);
+  const [quiz, setQuiz] = useState<kanaOrderingSystem | kanjiReadings | null>(
     null
   );
 
@@ -27,11 +33,7 @@ export default function Quiz() {
         {quizType !== null && (
           <div
             className="back-button"
-            onClick={() =>
-              quizDifficulty === null
-                ? setQuizType(null)
-                : setQuizDifficulty(null)
-            }
+            onClick={() => (quiz === null ? setQuizType(null) : setQuiz(null))}
           >
             <img className="back-icon" src={backIcon} alt="back" />
           </div>
@@ -39,15 +41,16 @@ export default function Quiz() {
         <div className="title">
           <span>Quiz</span>
           {quizType !== null && ` > ${quizType}`}
-          {quizDifficulty !== null && ` > ${quizDifficulty}`}
+          {quiz !== null && ` > ${quiz}`}
         </div>
       </div>
       {quizType == null ? (
         <QuizChoice chooseQuiz={(choice) => setQuizType(choice)} />
-      ) : quizDifficulty == null ? (
+      ) : quiz == null ? (
         <QuizDifficulty
           writingStyle={quizType}
-          chooseDifficulty={(choice) => setQuizDifficulty(choice)}
+          isKanji={quizType === characterType.kanji}
+          chooseQuiz={(choice) => setQuiz(choice)}
         />
       ) : (
         <QuizQuestions />
@@ -60,32 +63,36 @@ export default function Quiz() {
 function QuizChoice({
   chooseQuiz,
 }: {
-  chooseQuiz: (quizType: quizType) => void;
+  chooseQuiz: (quizType: characterType) => void;
 }) {
   return (
     <div className="quiz-choice">
       <div className="instruction">Choose Writing System.</div>
-      <QuizChoiceCard item={quizType.hiragana} onClick={chooseQuiz} />
-      <QuizChoiceCard item={quizType.katakana} onClick={chooseQuiz} />
-      <QuizChoiceCard item={quizType.kanji} onClick={chooseQuiz} />
+      {Object.values(characterType).map((item) => {
+        return <QuizChoiceCard item={item} onClick={chooseQuiz} />;
+      })}
     </div>
   );
 }
 
 function QuizDifficulty({
   writingStyle,
-  chooseDifficulty,
+  chooseQuiz,
+  isKanji,
 }: {
-  writingStyle: quizType;
-  chooseDifficulty: (difficulty: quizDifficulty) => void;
+  writingStyle: characterType;
+  chooseQuiz: (difficulty: kanaOrderingSystem | kanjiReadings) => void;
+  isKanji: boolean;
 }) {
   return (
     <div className="quiz-difficulty">
       <div className="writing-style">{writingStyle}</div>
-      <div className="instruction">Choose Difficulty.</div>
-      <QuizChoiceCard item={quizDifficulty.easy} onClick={chooseDifficulty} />
-      <QuizChoiceCard item={quizDifficulty.normal} onClick={chooseDifficulty} />
-      <QuizChoiceCard item={quizDifficulty.hard} onClick={chooseDifficulty} />
+      <div className="instruction">Choose Quiz</div>
+      {Object.values(isKanji ? kanjiReadings : kanaOrderingSystem).map(
+        (item) => {
+          return <QuizChoiceCard item={item} onClick={chooseQuiz} />;
+        }
+      )}
     </div>
   );
 }

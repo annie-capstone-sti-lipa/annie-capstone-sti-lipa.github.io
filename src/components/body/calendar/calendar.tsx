@@ -7,7 +7,6 @@ import animeType from "../../../types/enums/anime-type";
 import { DaySchedules } from "../../../types/day-schedules";
 import { useSelector } from "react-redux";
 import { Loader } from "../../general/loader/loader";
-import sortBy from "../../../types/enums/sort-by";
 import sortCategory from "../../../types/enums/sort-by";
 
 enum view {
