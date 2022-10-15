@@ -137,4 +137,21 @@ export default class AnnieAPI {
 
     return parsedResponse;
   }
+
+  static async getRecommendations(offset?: number): Promise<Array<AnimeItem>> {
+    let response = await fetch(
+      this._link(
+        `recommendations?offset=${offset}&limit=${
+          offset === undefined ? 30 : 10
+        }`
+      ),
+      {
+        mode: "cors",
+      }
+    );
+
+    let parsedResponse = await response.json();
+
+    return parsedResponse;
+  }
 }

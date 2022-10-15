@@ -15,16 +15,30 @@
   }
 
   .recommendation-container {
-    @extend .default-padding;
-
+    max-height: 75vh;
     display: inline-flex;
     flex-wrap: wrap;
     margin: auto;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    overflow-y: auto;
+
+    @extend .default-padding;
 
     .anime-card {
-      max-width: 120px;
+      width: 120px;
+    }
+
+    .load-more {
+      width: 90%;
+      background-color: $primary;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      margin: 24px auto;
+
+      @extend .rounded-border;
+      @extend .clickable;
     }
   }
 }

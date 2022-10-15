@@ -148,7 +148,7 @@ function QuizQuestions({
         "You scored: " + score + " out of " + questions.length
       );
     }
-  }, [currentIndex, questions.length, score, exitQuiz]);
+  }, [currentIndex, questions.length, score, exitQuiz, writing]);
 
   return (
     <div className="quiz-questions">

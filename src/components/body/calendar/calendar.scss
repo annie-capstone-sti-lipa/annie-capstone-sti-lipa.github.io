@@ -55,6 +55,7 @@
   overflow-x: auto;
 
   .view-container {
+    max-height: 75vh;
     @extend .default-padding;
 
     .week-view {

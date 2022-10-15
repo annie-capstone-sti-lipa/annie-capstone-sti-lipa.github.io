@@ -1,34 +1,90 @@
+import { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import AlertHelper from "../../../helpers/alert-helper";
+import AnnieAPI from "../../../helpers/annie-api";
+import {
+  setAnimes,
+  setLoading,
+} from "../../../redux/reducers/anime-recommendations";
 import AnimeItem from "../../../types/anime-item";
 import animeType from "../../../types/enums/anime-type";
 import AnimeCard from "../../general/anime-card/anime-card";
+import { Loader, MiniLoader } from "../../general/loader/loader";
 import "./recommendations.scss";
 
 export default function Recommendations() {
+  const dispatch = useDispatch();
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+
+  const recommendations = useSelector(
+    (state: any) => state.animeRecommendations.animes
+  );
+  const isLoading = useSelector(
+    (state: any) => state.animeRecommendations.isLoading
+  );
+
+  const getRecommendations = useCallback(() => {
+    if (recommendations.length <= 0) {
+      dispatch(setLoading(true));
+      AnnieAPI.getRecommendations()
+        .then((recommendations) => {
+          console.log(recommendations);
+          dispatch(setAnimes(recommendations));
+          dispatch(setLoading(false));
+        })
+        .catch((e) => {
+          dispatch(setLoading(false));
+          AlertHelper.errorToast(e);
+        });
+    }
+  }, [dispatch, recommendations.length]);
+
+  const getMore = () => {
+    console.log("get more");
+    setIsFetchingMore(true);
+    AnnieAPI.getRecommendations(recommendations.length)
+      .then((moreRecomendations) => {
+        dispatch(setAnimes([...recommendations, ...moreRecomendations]));
+      })
+      .catch((e) => {
+        AlertHelper.errorToast(e);
+      })
+      .finally(() => {
+        setIsFetchingMore(false);
+      });
+  };
+
+  useEffect(() => {
+    getRecommendations();
+  }, [getRecommendations]);
+
   return (
     <div className="recommendations">
       <div className="title">Recommendations based on your MAL profile.</div>
       <div className="recommendation-container">
-        {Array(Math.floor(Math.random() * (39 - 10) + 10))
-          .fill("")
-          .map((_, index) => {
-            return (
-              <AnimeCard
-                type={animeType.recommendation}
-                key={index}
-                animeItem={
-                  new AnimeItem(
-                    "monday",
-                    "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png",
-                    6.6,
-                    "Eveniet sit voluptatem inventore ut tempora provident suscipit.",
-                    0,
-                    [],
-                    "https://www.youtube.com/embed/J8BU9EeKio4?enablejsapi=1&wmode=opaque&autoplay=1"
-                  )
-                }
-              />
-            );
-          })}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            {recommendations.map((anime: AnimeItem, index: number) => {
+              return (
+                <AnimeCard
+                  type={animeType.recommendation}
+                  key={index}
+                  animeItem={anime}
+                />
+              );
+            })}
+            <div
+              className={`load-more ${isFetchingMore ? "disabled-button" : ""}`}
+              onClick={() => {
+                if (!isFetchingMore) getMore();
+              }}
+            >
+              {isFetchingMore ? <MiniLoader /> : "load more"}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
