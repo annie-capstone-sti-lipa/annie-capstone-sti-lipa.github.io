@@ -4,6 +4,7 @@ import kanaOrderingSystem from "../types/enums/kana-ordering-system";
 import kanjiReadings from "../types/enums/kanji-readings";
 import writingSystem from "../types/enums/writing-system";
 import QuizQuestion from "../types/kana-quiz";
+import QuizScores from "../types/quiz-scores";
 import Sauce from "../types/sauce";
 import AlertHelper from "./alert-helper";
 
@@ -162,5 +163,13 @@ export default class AnnieAPI {
     let parsedResponse = await response.json();
 
     return parsedResponse;
+  }
+
+  static async getScores(userId?: string): Promise<QuizScores> {
+    let response = await fetch(this._link(`quiz-scores?userId=${userId}`), {
+      mode: "cors",
+    });
+
+    return await response.json();
   }
 }

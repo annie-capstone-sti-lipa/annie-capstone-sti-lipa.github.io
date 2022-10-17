@@ -1,14 +1,37 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getJSDocParameterTags, getJSDocReadonlyTag } from "typescript";
+import AnnieAPI from "../../../helpers/annie-api";
+import QuizScores from "../../../types/quiz-scores";
+import { Loader } from "../../general/loader/loader";
 import "./kanji-kana.scss";
 
 export default function KanjiKana() {
+  const user = useSelector((state: any) => state.isLoggedIn.user);
+  const [scores, setScores] = useState<QuizScores | null>(null);
+  const [fetchingScores, setFetchingScores] = useState(false);
+
+  useEffect(() => {
+    setFetchingScores(true);
+    AnnieAPI.getScores(user.uid)
+      .then((response) => setScores(response))
+      .finally(() => setFetchingScores(false));
+  }, []);
+
   return (
     <div className="kanji-kana">
       <div className="title">Quiz Scores</div>
-      <div className="score-list">
-        <ScoreItem name="Kanji" score={88.2} />
-        <ScoreItem name="Hiragana" score={99.7} />
-        <ScoreItem name="Katakana" score={94.52} />
-      </div>
+      {fetchingScores && scores === null ? (
+        <Loader />
+      ) : !fetchingScores && scores === null ? (
+        <div>Couldn't fetch scores 😥</div>
+      ) : (
+        <div className="score-list">
+          <ScoreItem name="Kanji" score={scores?.kanji ?? 0} />
+          <ScoreItem name="Hiragana" score={scores?.hiragana ?? 0} />
+          <ScoreItem name="Katakana" score={scores?.katakana ?? 0} />
+        </div>
+      )}
     </div>
   );
 }
