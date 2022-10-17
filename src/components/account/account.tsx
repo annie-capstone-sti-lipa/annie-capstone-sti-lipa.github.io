@@ -10,6 +10,9 @@ import logoutIcon from "../../assets/icons/logout.svg";
 import "./account.scss";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/reducers/login";
+import { setAnimes } from "../../redux/reducers/anime-recommendations";
+import { select } from "../../redux/reducers/tabnav-item-reducer";
+import tabnavItem from "../../types/enums/tabnavItem";
 
 function Account() {
   const dispatch = useDispatch();
@@ -32,6 +35,8 @@ function Account() {
                     .signOut()
                     .then((res) => {
                       dispatch(login({ isLoggedIn: false, user: null }));
+                      dispatch(setAnimes([]));
+                      dispatch(select(tabnavItem.recommendations));
                       AlertHelper.successToast("Logged out successfully");
                     })
                     .catch((e) => {

@@ -67,8 +67,8 @@ function LoginFrame() {
                     let loading = AlertHelper.showLoading("Logging in");
                     authenticationHelper
                       .login(loginEmail, loginPassword)
-                      .then((user) => {
-                        dispatch(login({ isLoggedIn: true, user: user }));
+                      .then((auth) => {
+                        dispatch(login({ isLoggedIn: true, user: auth.user }));
                         loading.close();
                       })
                       .catch((e) => {
@@ -163,8 +163,8 @@ function LoginFrame() {
                   let loading = AlertHelper.showLoading("Signing Up.");
                   authenticationHelper
                     .signup(signupEmail, signupPassword)
-                    .then(() => {
-                      dispatch(login(true));
+                    .then((auth) => {
+                      dispatch(login({ isLoggedIn: true, user: auth.user }));
                       loading.close();
                     })
                     .catch((e) => {

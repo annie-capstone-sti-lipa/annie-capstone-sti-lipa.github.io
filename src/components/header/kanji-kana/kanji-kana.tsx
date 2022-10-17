@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getJSDocParameterTags, getJSDocReadonlyTag } from "typescript";
 import AnnieAPI from "../../../helpers/annie-api";
 import QuizScores from "../../../types/quiz-scores";
 import { Loader } from "../../general/loader/loader";
@@ -14,9 +13,11 @@ export default function KanjiKana() {
   useEffect(() => {
     setFetchingScores(true);
     AnnieAPI.getScores(user.uid)
-      .then((response) => setScores(response))
+      .then((response) => {
+        setScores(response);
+      })
       .finally(() => setFetchingScores(false));
-  }, []);
+  }, [user.uid]);
 
   return (
     <div className="kanji-kana">
