@@ -67,8 +67,8 @@ function LoginFrame() {
                     let loading = AlertHelper.showLoading("Logging in");
                     authenticationHelper
                       .login(loginEmail, loginPassword)
-                      .then(() => {
-                        dispatch(login(true));
+                      .then((user) => {
+                        dispatch(login({ isLoggedIn: true, user: user }));
                         loading.close();
                       })
                       .catch((e) => {

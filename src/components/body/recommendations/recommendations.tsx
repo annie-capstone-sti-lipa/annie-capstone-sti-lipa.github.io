@@ -28,7 +28,6 @@ export default function Recommendations() {
       dispatch(setLoading(true));
       AnnieAPI.getRecommendations()
         .then((recommendations) => {
-          console.log(recommendations);
           dispatch(setAnimes(recommendations));
           dispatch(setLoading(false));
         })
@@ -40,7 +39,6 @@ export default function Recommendations() {
   }, [dispatch, recommendations.length]);
 
   const getMore = () => {
-    console.log("get more");
     setIsFetchingMore(true);
     AnnieAPI.getRecommendations(recommendations.length)
       .then((moreRecomendations) => {

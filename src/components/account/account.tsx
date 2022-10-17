@@ -31,7 +31,7 @@ function Account() {
                   authenticationHelper
                     .signOut()
                     .then((res) => {
-                      dispatch(login(false));
+                      dispatch(login({ isLoggedIn: false, user: null }));
                       AlertHelper.successToast("Logged out successfully");
                     })
                     .catch((e) => {

@@ -23,9 +23,9 @@ function LoadingScreen() {
   const unsubscribe = authenticationHelper.auth.onAuthStateChanged(
     async (user) => {
       if (user === null) {
-        dispatch(login(false));
+        dispatch(login({ isLoggedIn: false, user: null }));
       } else {
-        dispatch(login(true));
+        dispatch(login({ isLoggedIn: true, user: user }));
       }
       unsubscribe();
     }

@@ -20,7 +20,7 @@ export const authenticationHelper = new AuthenticationHelper(
 );
 
 function App() {
-  const isLoggedIn = useSelector((state: any) => state.isLoggedIn.value);
+  const isLoggedIn = useSelector((state: any) => state.isLoggedIn.isLoggedIn);
   if (isLoggedIn === null) {
     return <LoadingScreen></LoadingScreen>;
   }

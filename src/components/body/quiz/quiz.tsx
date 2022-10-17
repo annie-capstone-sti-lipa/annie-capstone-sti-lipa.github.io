@@ -9,6 +9,7 @@ import AnnieAPI from "../../../helpers/annie-api";
 import { Loader } from "../../general/loader/loader";
 import AlertHelper from "../../../helpers/alert-helper";
 import QuizQuestion from "../../../types/kana-quiz";
+import { useSelector } from "react-redux";
 
 export default function Quiz() {
   const [quizType, setQuizType] = useState<writingSystem | null>(null);
@@ -116,6 +117,8 @@ function QuizQuestions({
   ordering: kanaOrderingSystem | kanjiReadings;
   exitQuiz: () => void;
 }) {
+  const user = useSelector((state: any) => state.isLoggedIn.user);
+
   const [questions, setQuestions] = useState<Array<QuizQuestion>>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [score, setScore] = useState(0);
@@ -143,12 +146,31 @@ function QuizQuestions({
   useEffect(() => {
     if (currentIndex === questions.length && questions.length > 0) {
       exitQuiz();
-      AlertHelper.successAlert(
-        writing + " Quiz Result:",
-        "You scored: " + score + " out of " + questions.length
-      );
+      let saveDialog = AlertHelper.showLoading("Saving quiz result...");
+
+      AnnieAPI.saveQuizResult({
+        userId: user.uid,
+        writingSystem: writing,
+        type: ordering,
+        items: questions.length,
+        score: score,
+      }).finally(() => {
+        saveDialog.close();
+        AlertHelper.successAlert(
+          writing + " Quiz Result:",
+          "You scored: " + score + " out of " + questions.length
+        );
+      });
     }
-  }, [currentIndex, questions.length, score, exitQuiz, writing]);
+  }, [
+    currentIndex,
+    questions.length,
+    score,
+    exitQuiz,
+    writing,
+    user.uid,
+    ordering,
+  ]);
 
   return (
     <div className="quiz-questions">

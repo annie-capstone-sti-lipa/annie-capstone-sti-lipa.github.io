@@ -8,8 +8,6 @@ import Sauce from "../types/sauce";
 import AlertHelper from "./alert-helper";
 
 export default class AnnieAPI {
-  static isLoggedIn = () => null;
-
   private static _link = (path: string) =>
     `${process.env.REACT_APP_API!}/${path}`;
 
@@ -19,6 +17,17 @@ export default class AnnieAPI {
 
     return (parsedResponse as any)["authLink"];
   };
+
+  static async saveQuizResult(data: {}): Promise<any> {
+    let saveQuizResponse = await fetch(this._link("save-quiz-result"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify(data),
+    });
+
+    return await saveQuizResponse.json();
+  }
 
   static async getSauceFromImage(data: FormData): Promise<Array<Sauce>> {
     let loginResponse = await fetch(this._link("sauce"), {
