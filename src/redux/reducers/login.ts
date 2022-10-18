@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import tempPfp from "../../assets/temp/profile.png";
+import tempPfp from "../../assets/icons/temp_pfp.svg";
 
 export const loginSlice = createSlice({
   name: "isLoggedIn",
