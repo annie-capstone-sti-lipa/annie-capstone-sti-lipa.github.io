@@ -15,8 +15,10 @@ export default class AnnieAPI {
   private static _link = (path: string) =>
     `${process.env.REACT_APP_API!}/${path}`;
 
-  static getMALAuthLink = async (): Promise<string> => {
-    let response = await fetch(this._link("mal-auth"), { method: "GET" });
+  static getMALAuthLink = async (userId: string): Promise<string> => {
+    let response = await fetch(this._link(`mal-auth?userId=${userId}`), {
+      method: "GET",
+    });
     let parsedResponse = await response.json();
 
     return (parsedResponse as any)["authLink"];

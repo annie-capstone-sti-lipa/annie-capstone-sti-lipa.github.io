@@ -4,8 +4,11 @@ import discordIcon from "../../../assets/icons/discord.svg";
 import malIcon from "../../../assets/icons/mal.svg";
 import AnnieAPI from "../../../helpers/annie-api";
 import AlertHelper from "../../../helpers/alert-helper";
+import { useSelector } from "react-redux";
 
 export default function AccountLinks() {
+  const user = useSelector((state: any) => state.isLoggedIn.user);
+
   return (
     <div className="account-links">
       <AccountButton
@@ -22,7 +25,7 @@ export default function AccountLinks() {
           let authLoading = AlertHelper.showLoading(
             "Requesting Authentication..."
           );
-          let _malAuthLink = await AnnieAPI.getMALAuthLink();
+          let _malAuthLink = await AnnieAPI.getMALAuthLink(user.uid);
           authLoading.close();
           window.open(_malAuthLink, "_blank", "toolbar=0,location=0,menubar=0");
         }}
