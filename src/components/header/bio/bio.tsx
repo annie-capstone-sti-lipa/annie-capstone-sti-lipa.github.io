@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUserInfo } from "../../../redux/reducers/login";
 import { Loader } from "../../general/loader/loader";
 import UserInfo from "../../../types/user-info";
+import AlertHelper from "../../../helpers/alert-helper";
 
 export default function Bio() {
   const dispatch = useDispatch();
@@ -123,13 +124,17 @@ function ModalBody({
         <div
           className="save-button"
           onClick={() => {
+            let updating = AlertHelper.showLoading("Updating User Info");
+            closeModal();
             AnnieAPI.saveUserInfo({
               name: nameInput,
               bio: bioInput,
               userId: user.uid,
             })
               .then(() => onUpdate())
-              .finally(() => closeModal());
+              .finally(() => {
+                updating.close();
+              });
           }}
         >
           Save Changes
