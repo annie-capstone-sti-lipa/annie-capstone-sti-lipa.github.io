@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.ae2cfa8f.css",
-    "main.js": "/static/js/main.4b9bd09c.js",
+    "main.css": "/static/css/main.c64793f4.css",
+    "main.js": "/static/js/main.704ec872.js",
     "static/js/787.5b4cde1a.chunk.js": "/static/js/787.5b4cde1a.chunk.js",
-    "static/media/profile.png": "/static/media/profile.91ca2da846efb7f5279b.png",
     "static/media/logout.svg": "/static/media/logout.9f92372b672dbbb2dd97a90a874dea4d.svg",
     "static/media/link.svg": "/static/media/link.baafc9bb8d430c39e7dd78304ded4a81.svg",
     "static/media/star.svg": "/static/media/star.b83852bfd5945cac64f97cc46851ab7a.svg",
+    "static/media/temp_pfp.svg": "/static/media/temp_pfp.408f2818b2b26eaceac93b9148731dd9.svg",
     "static/media/discord.svg": "/static/media/discord.61d53db1792b72466025725963a88fbb.svg",
     "static/media/add_image.svg": "/static/media/add_image.a1ad828c5634b2923f88548329070734.svg",
     "static/media/edit.svg": "/static/media/edit.f4279e5bc6c692be08bea65ecdcf1212.svg",
@@ -15,12 +15,12 @@
     "static/media/close.svg": "/static/media/close.e0dd63f22bd0db11d844254c7ca35906.svg",
     "static/media/right.svg": "/static/media/right.da3b173a823e703a4af1e7731667ebfa.svg",
     "static/media/back.svg": "/static/media/back.1ac7475bcdafb0c402b46cbc67d4c262.svg",
-    "main.ae2cfa8f.css.map": "/static/css/main.ae2cfa8f.css.map",
-    "main.4b9bd09c.js.map": "/static/js/main.4b9bd09c.js.map",
+    "main.c64793f4.css.map": "/static/css/main.c64793f4.css.map",
+    "main.704ec872.js.map": "/static/js/main.704ec872.js.map",
     "787.5b4cde1a.chunk.js.map": "/static/js/787.5b4cde1a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ae2cfa8f.css",
-    "static/js/main.4b9bd09c.js"
+    "static/css/main.c64793f4.css",
+    "static/js/main.704ec872.js"
   ]
 }
