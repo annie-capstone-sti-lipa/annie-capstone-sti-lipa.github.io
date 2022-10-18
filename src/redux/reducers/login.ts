@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import tempPfp from "../../assets/icons/temp_pfp.svg";
 
 export const loginSlice = createSlice({
   name: "isLoggedIn",
   initialState: {
     isLoggedIn: null,
     user: null,
-    image: tempPfp,
+    image: null,
+    userInfo: null,
+    quizScores: null,
   },
   reducers: {
     login: (state, action) => {
@@ -16,9 +17,16 @@ export const loginSlice = createSlice({
     updateImage: (state, action) => {
       state.image = action.payload;
     },
+    updateUserInfo: (state, action) => {
+      state.userInfo = action.payload;
+    },
+    updateScores: (state, action) => {
+      state.quizScores = action.payload;
+    },
   },
 });
 
-export const { login, updateImage } = loginSlice.actions;
+export const { login, updateImage, updateUserInfo, updateScores } =
+  loginSlice.actions;
 
 export default loginSlice.reducer;

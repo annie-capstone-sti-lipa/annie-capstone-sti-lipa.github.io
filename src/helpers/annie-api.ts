@@ -9,6 +9,7 @@ import Sauce from "../types/sauce";
 import AlertHelper from "./alert-helper";
 
 import { fireBaseHelper } from "../App";
+import { UserInfo } from "firebase/auth";
 
 export default class AnnieAPI {
   private static _link = (path: string) =>
@@ -30,6 +31,27 @@ export default class AnnieAPI {
     });
 
     return await saveQuizResponse.json();
+  }
+
+  static async saveUserInfo(data: {}): Promise<any> {
+    let saveInfoResponse = await fetch(this._link("save-user-info"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify(data),
+    });
+
+    return await saveInfoResponse.json();
+  }
+
+  static async getUserInfo(userId?: string): Promise<UserInfo | null> {
+    let response = await fetch(this._link(`user-info?userId=${userId}`), {
+      mode: "cors",
+    });
+
+    let parsedResponse = await response.json();
+
+    return parsedResponse.userInfo;
   }
 
   static async uploadProfilePic(id: string, file: any): Promise<any> {

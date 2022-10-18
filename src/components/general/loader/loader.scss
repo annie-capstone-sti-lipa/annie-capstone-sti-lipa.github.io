@@ -5,12 +5,12 @@
 }
 
 .loader {
-  margin: 4em auto;
+  margin: 2em auto;
   border: 1em solid $bgDark;
   border-top: 1em solid white;
   border-radius: 50%;
-  width: 90px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
   animation: spin 1s linear infinite;
 }
 

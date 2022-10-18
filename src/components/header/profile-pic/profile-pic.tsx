@@ -10,6 +10,7 @@ import AlertHelper from "../../../helpers/alert-helper";
 import { fireBaseHelper } from "../../../App";
 import { Loader } from "../../general/loader/loader";
 import { updateImage } from "../../../redux/reducers/login";
+import tempPfp from "../../../assets/icons/temp_pfp.svg";
 
 export default function ProfilePic() {
   const dispatch = useDispatch();
@@ -22,18 +23,20 @@ export default function ProfilePic() {
   const [picUpdated, setPicUpdated] = useState(0);
 
   useEffect(() => {
-    setLoadingImage(true);
-    fireBaseHelper
-      .getUserImage(user.uid)
-      .then((link) => {
-        if (link) {
-          dispatch(updateImage(link));
-        }
-      })
-      .finally(() => {
-        setLoadingImage(false);
-      });
-  }, [user.uid, picUpdated]);
+    if (picUpdated > 0 || image === null) {
+      setLoadingImage(true);
+      fireBaseHelper
+        .getUserImage(user.uid)
+        .then((link) => {
+          if (link) {
+            dispatch(updateImage(link));
+          }
+        })
+        .finally(() => {
+          setLoadingImage(false);
+        });
+    }
+  }, [user.uid, picUpdated, dispatch, image]);
 
   return (
     <div
@@ -56,7 +59,7 @@ export default function ProfilePic() {
       {loadingImage ? (
         <Loader />
       ) : (
-        <img className="profile-pic" src={image} alt=" " />
+        <img className="profile-pic" src={image ?? tempPfp} alt=" " />
       )}
     </div>
   );
