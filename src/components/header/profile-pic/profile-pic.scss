@@ -29,6 +29,32 @@
 
   @extend .unselectable;
 
+  #image-input {
+    display: none;
+  }
+
+  .preview-image-container {
+    margin: auto;
+    padding: 12px;
+    max-width: 200px;
+    max-height: 200px;
+
+    @extend .clickable;
+
+    .preview-image-placeholder {
+      @extend .gray-icon;
+    }
+
+    .preview-image {
+      margin: auto;
+      width: 90%;
+
+      @extend .rounded-border;
+    }
+
+    @extend .edit-icon-container;
+  }
+
   .modal-pfp {
     width: 90%;
     max-width: 500px;

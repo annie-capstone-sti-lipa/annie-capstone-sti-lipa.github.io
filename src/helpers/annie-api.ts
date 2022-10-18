@@ -8,6 +8,8 @@ import QuizScores from "../types/quiz-scores";
 import Sauce from "../types/sauce";
 import AlertHelper from "./alert-helper";
 
+import { fireBaseHelper } from "../App";
+
 export default class AnnieAPI {
   private static _link = (path: string) =>
     `${process.env.REACT_APP_API!}/${path}`;
@@ -28,6 +30,10 @@ export default class AnnieAPI {
     });
 
     return await saveQuizResponse.json();
+  }
+
+  static async uploadProfilePic(id: string, file: any): Promise<any> {
+    return await fireBaseHelper.uploadImage(id, file);
   }
 
   static async getSauceFromImage(data: FormData): Promise<Array<Sauce>> {

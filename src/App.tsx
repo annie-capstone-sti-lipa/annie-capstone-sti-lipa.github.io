@@ -6,6 +6,7 @@ import LoadingScreen from "./components/loading-screen/loading-screen";
 import Login from "./components/login/login";
 import AuthenticationHelper from "./helpers/authentication-helper";
 import { initializeApp } from "firebase/app";
+import FireBaseHelper from "./helpers/firebase-helper";
 
 export const authenticationHelper = new AuthenticationHelper(
   initializeApp({
@@ -18,6 +19,8 @@ export const authenticationHelper = new AuthenticationHelper(
     measurementId: process.env.REACT_APP_MEASUREMENT_ID,
   })
 );
+
+export const fireBaseHelper = new FireBaseHelper();
 
 function App() {
   const isLoggedIn = useSelector((state: any) => state.isLoggedIn.isLoggedIn);

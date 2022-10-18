@@ -10,9 +10,9 @@ import Sauce from "../../../types/sauce";
 import AlertHelper from "../../../helpers/alert-helper";
 
 export default function SauceFinder() {
-  const [image, setImage] = useState<any>(addImageIcon);
   const [link, setLink] = useState<any>("");
   const [isDisabled, setIsDisabled] = useState(true);
+  const [image, setImage] = useState<any>(addImageIcon);
   const [rawImage, setRawImage] = useState<any>();
   const [sauces, setSauces] = useState<Array<Sauce>>();
   const [showLessRelevant, setShowLessRelevant] = useState(false);
