@@ -1,18 +1,39 @@
 import "./profile-pic.scss";
 
-import tempPfp from "../../../assets/temp/profile.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "../../general/modal/modal";
 import EditIcon from "../../general/edit-icon/edit-icon";
 import addImageIcon from "../../../assets/icons/add_image.svg";
-import Helpers from "../../../helpers/helpers";
 import AnnieAPI from "../../../helpers/annie-api";
-import { useSelector } from "react-redux";
-import { fireBaseHelper } from "../../../App";
+import { useDispatch, useSelector } from "react-redux";
 import AlertHelper from "../../../helpers/alert-helper";
+import { fireBaseHelper } from "../../../App";
+import { Loader } from "../../general/loader/loader";
+import { updateImage } from "../../../redux/reducers/login";
 
 export default function ProfilePic() {
+  const dispatch = useDispatch();
+
+  const user = useSelector((state: any) => state.isLoggedIn.user);
+  const image = useSelector((state: any) => state.isLoggedIn.image);
+
+  const [loadingImage, setLoadingImage] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [picUpdated, setPicUpdated] = useState(0);
+
+  useEffect(() => {
+    setLoadingImage(true);
+    fireBaseHelper
+      .getUserImage(user.uid)
+      .then((link) => {
+        if (link) {
+          dispatch(updateImage(link));
+        }
+      })
+      .finally(() => {
+        setLoadingImage(false);
+      });
+  }, [user.uid, picUpdated]);
 
   return (
     <div
@@ -24,15 +45,30 @@ export default function ProfilePic() {
       <Modal
         showModal={showModal}
         closeModal={() => setShowModal(() => false)}
-        body={<ModalBody closeModal={() => setShowModal(() => false)} />}
+        body={
+          <ModalBody
+            closeModal={() => setShowModal(() => false)}
+            onUpload={() => setPicUpdated((current) => (current += 1))}
+          />
+        }
       />
       <EditIcon />
-      <img className="profile-pic" src={tempPfp} alt="profile pic" />
+      {loadingImage ? (
+        <Loader />
+      ) : (
+        <img className="profile-pic" src={image} alt=" " />
+      )}
     </div>
   );
 }
 
-function ModalBody({ closeModal }: { closeModal: () => void }) {
+function ModalBody({
+  closeModal,
+  onUpload,
+}: {
+  closeModal: () => void;
+  onUpload: () => void;
+}) {
   const [image, setImage] = useState<any>(addImageIcon);
   const [rawImage, setRawImage] = useState<any>();
   const user = useSelector((state: any) => state.isLoggedIn.user);
@@ -82,6 +118,7 @@ function ModalBody({ closeModal }: { closeModal: () => void }) {
                 .then((success) => {
                   if (success) {
                     AlertHelper.successToast("Image updated");
+                    onUpload();
                   }
                 })
                 .finally(() => {

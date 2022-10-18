@@ -1,10 +1,20 @@
 import { getFirestore } from "firebase/firestore";
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Helpers from "./helpers";
 
 export default class FireBaseHelper {
   firestore = getFirestore();
   storage = getStorage();
+
+  public getUserImage = async (userId: string): Promise<string | null> => {
+    try {
+      return await getDownloadURL(
+        ref(this.storage, `user_images/${userId}.png`)
+      );
+    } catch {
+      return null;
+    }
+  };
 
   public uploadImage = async (id: string, file: any): Promise<boolean> => {
     let shrunkFile;
