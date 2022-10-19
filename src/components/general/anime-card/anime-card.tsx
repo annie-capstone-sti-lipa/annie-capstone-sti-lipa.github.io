@@ -9,6 +9,7 @@ import star from "../../../assets/icons/star.svg";
 import AnnieAPI from "../../../helpers/annie-api";
 import AnimeStatus from "../../../types/anime-status";
 import { useSelector } from "react-redux";
+import AlertHelper from "../../../helpers/alert-helper";
 
 export default function AnimeCard({
   type,
@@ -148,25 +149,42 @@ function ModalBody({
             <div
               className="blue-button"
               onClick={() => {
+                closeModal();
+                let updateStatus = AlertHelper.showLoading("Updating");
                 AnnieAPI.updateAnimeStatus(
                   animeItem.id,
                   AnimeStatus.plan_to_watch,
                   user.uid
-                );
+                ).finally(() => {
+                  updateStatus.close();
+                });
               }}
             >
               Plan to watch
             </div>
             <div
               className="green-button"
-              onClick={() => {
+              onClick={async () => {
+                let leaveRating = await AlertHelper.confirmDialog({
+                  question: "Would you like to add a rating?",
+                });
+                let rating = undefined;
+                if (leaveRating) {
+                  await AlertHelper.numberInputAlert("Rate", (response) => {
+                    rating = response;
+                  });
+                }
+
+                closeModal();
+                let updateStatus = AlertHelper.showLoading("Updating");
                 AnnieAPI.updateAnimeStatus(
                   animeItem.id,
                   AnimeStatus.completed,
                   user.uid,
-                  10,
-                  10
-                );
+                  rating
+                ).finally(() => {
+                  updateStatus.close();
+                });
               }}
             >
               Mark Complete
@@ -174,11 +192,15 @@ function ModalBody({
             <div
               className="yellow-button"
               onClick={() => {
+                closeModal();
+                let updateStatus = AlertHelper.showLoading("Updating");
                 AnnieAPI.updateAnimeStatus(
                   animeItem.id,
                   AnimeStatus.on_hold,
                   user.uid
-                );
+                ).finally(() => {
+                  updateStatus.close();
+                });
               }}
             >
               Put on hold
@@ -186,11 +208,15 @@ function ModalBody({
             <div
               className="red-button"
               onClick={() => {
+                closeModal();
+                let updateStatus = AlertHelper.showLoading("Updating");
                 AnnieAPI.updateAnimeStatus(
                   animeItem.id,
                   AnimeStatus.dropped,
                   user.uid
-                );
+                ).finally(() => {
+                  updateStatus.close();
+                });
               }}
             >
               Drop

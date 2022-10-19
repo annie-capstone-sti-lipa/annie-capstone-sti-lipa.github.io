@@ -30,7 +30,8 @@ function Account() {
             onClick={async () => {
               AlertHelper.confirmDialog({
                 question: "Are you sure you want to Logout?",
-                onConfirm: () => {
+              }).then((confirmed) => {
+                if (confirmed) {
                   authenticationHelper
                     .signOut()
                     .then((res) => {
@@ -42,7 +43,7 @@ function Account() {
                     .catch((e) => {
                       AlertHelper.errorToast(Helpers.getFirebaseError(e));
                     });
-                },
+                }
               });
             }}
           >

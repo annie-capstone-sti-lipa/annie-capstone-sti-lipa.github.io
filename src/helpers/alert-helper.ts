@@ -27,7 +27,6 @@ function fireToast({ icon, message, duration, showTimer }: fireToastProps) {
 
 interface confirmDialogProps {
   question: string;
-  onConfirm: () => void;
   confirmButtonColor?: string;
 }
 
@@ -77,6 +76,36 @@ export default class AlertHelper {
     });
   };
 
+  static numberInputAlert = (
+    question: string,
+    onConfirm: (value: any) => void
+  ) => {
+    return Swal.fire({
+      icon: "question",
+      html: `
+      <span id="number-input-alert">
+        <small>Appalling</small>
+        <input
+          type="range"
+          class="swal2-input"
+          min="1"
+          max="10"
+          id="range-value"> 
+        <small>Masterpiece</small>
+      </span>`,
+      title: question,
+      showCancelButton: true,
+    }).then((value: any) => {
+      if (value.isConfirmed) {
+        onConfirm(
+          (document.getElementById("range-value") as HTMLInputElement).value
+        );
+      } else {
+        onConfirm(undefined);
+      }
+    });
+  };
+
   static fileInputAlert = (
     question: string,
     accept: string,
@@ -121,20 +150,17 @@ export default class AlertHelper {
     return loading;
   };
 
-  static confirmDialog = ({
+  static confirmDialog = async ({
     question,
-    onConfirm,
     confirmButtonColor,
   }: confirmDialogProps) => {
-    Swal.fire({
+    return Swal.fire({
       icon: "question",
       title: question,
       showCancelButton: true,
       confirmButtonColor: confirmButtonColor ?? "red",
     }).then((value: any) => {
-      if (value.isConfirmed) {
-        onConfirm();
-      }
+      return value.isConfirmed;
     });
   };
 }

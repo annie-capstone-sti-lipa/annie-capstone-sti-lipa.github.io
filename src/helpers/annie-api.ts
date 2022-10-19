@@ -68,9 +68,9 @@ export default class AnnieAPI {
     });
 
     let parsedResponse = await updateResponse.json();
-    console.log(parsedResponse);
-
-    return parsedResponse;
+    if (parsedResponse.status === status) {
+      AlertHelper.successToast("Anime Status Updated!");
+    }
   }
 
   static async getUserInfo(userId?: string): Promise<UserInfo | null> {

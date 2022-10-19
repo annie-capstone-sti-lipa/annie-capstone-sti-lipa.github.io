@@ -19,3 +19,14 @@
     visibility: visible;
   }
 }
+
+#number-input-alert {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+
+  .span {
+    display: block;
+  }
+}
