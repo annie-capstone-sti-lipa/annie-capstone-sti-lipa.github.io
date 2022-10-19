@@ -10,6 +10,7 @@ import AlertHelper from "./alert-helper";
 
 import { fireBaseHelper } from "../App";
 import { UserInfo } from "firebase/auth";
+import AnimeStatus from "../types/anime-status";
 
 export default class AnnieAPI {
   private static _link = (path: string) =>
@@ -46,6 +47,32 @@ export default class AnnieAPI {
     return await saveInfoResponse.json();
   }
 
+  static async updateAnimeStatus(
+    animeId: string,
+    status: AnimeStatus,
+    userId: string,
+    score?: number,
+    num_watched_episodes?: number
+  ) {
+    let updateResponse = await fetch(this._link("update-anime-status"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify({
+        animeId: animeId,
+        status: status,
+        userId: userId,
+        score: score,
+        num_watched_episodes: num_watched_episodes,
+      }),
+    });
+
+    let parsedResponse = await updateResponse.json();
+    console.log(parsedResponse);
+
+    return parsedResponse;
+  }
+
   static async getUserInfo(userId?: string): Promise<UserInfo | null> {
     let response = await fetch(this._link(`user-info?userId=${userId}`), {
       mode: "cors",
@@ -61,12 +88,12 @@ export default class AnnieAPI {
   }
 
   static async getSauceFromImage(data: FormData): Promise<Array<Sauce>> {
-    let loginResponse = await fetch(this._link("sauce"), {
+    let sauceResponse = await fetch(this._link("sauce"), {
       method: "POST",
       mode: "cors",
       body: data,
     });
-    let parsedResponse = await loginResponse.json();
+    let parsedResponse = await sauceResponse.json();
 
     let formattedResponse: Array<Sauce> = [];
 
@@ -117,12 +144,12 @@ export default class AnnieAPI {
   }
 
   static async getSauceFromLink(data: FormData): Promise<Array<Sauce>> {
-    let loginResponse = await fetch(this._link("sauce"), {
+    let sauceResponse = await fetch(this._link("sauce"), {
       method: "POST",
       mode: "cors",
       body: data,
     });
-    let parsedResponse = await loginResponse.json();
+    let parsedResponse = await sauceResponse.json();
 
     let formattedResponse: Array<Sauce> = [];
 
@@ -151,6 +178,7 @@ export default class AnnieAPI {
           (element.schedules ?? []).map(
             (anime: any) =>
               new AnimeItem(
+                anime.mal_id,
                 anime.title,
                 anime.images.jpg.large_image_url,
                 anime.score,

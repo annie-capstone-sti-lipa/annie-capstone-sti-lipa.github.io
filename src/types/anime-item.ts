@@ -1,4 +1,5 @@
 export default class AnimeItem {
+  id: string;
   name: string;
   thumbnail: string;
   score: number;
@@ -12,6 +13,7 @@ export default class AnimeItem {
   //TODO: add the date and don't show in the calendar if the date is past
 
   constructor(
+    id: string,
     name: string,
     thumbnail: string,
     score: number | null | undefined,
@@ -20,6 +22,7 @@ export default class AnimeItem {
     genres: Array<string>,
     trailer?: string
   ) {
+    this.id = id;
     this.name = name;
     this.thumbnail = thumbnail;
     this.score = score ?? 0;

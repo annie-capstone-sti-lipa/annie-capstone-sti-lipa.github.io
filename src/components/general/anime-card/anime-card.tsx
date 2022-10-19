@@ -6,6 +6,9 @@ import playIcon from "../../../assets/icons/right.svg";
 import animeType from "../../../types/enums/anime-type";
 import AnimeItem from "../../../types/anime-item";
 import star from "../../../assets/icons/star.svg";
+import AnnieAPI from "../../../helpers/annie-api";
+import AnimeStatus from "../../../types/anime-status";
+import { useSelector } from "react-redux";
 
 export default function AnimeCard({
   type,
@@ -110,6 +113,8 @@ function ModalBody({
   type: animeType;
   animeItem: AnimeItem;
 }) {
+  const user = useSelector((state: any) => state.isLoggedIn.user);
+
   return (
     <div className="anime-modal" onClick={(event) => event.stopPropagation()}>
       <div className="anime-details-container">
@@ -140,10 +145,56 @@ function ModalBody({
           </div>
           <div className="synopsis">{animeItem.synopsis}</div>
           <div className="actions">
-            <div className="blue-button">Plan to watch</div>
-            <div className="green-button">Mark Complete</div>
-            <div className="yellow-button">Put on hold</div>
-            <div className="red-button">Drop</div>
+            <div
+              className="blue-button"
+              onClick={() => {
+                AnnieAPI.updateAnimeStatus(
+                  animeItem.id,
+                  AnimeStatus.plan_to_watch,
+                  user.uid
+                );
+              }}
+            >
+              Plan to watch
+            </div>
+            <div
+              className="green-button"
+              onClick={() => {
+                AnnieAPI.updateAnimeStatus(
+                  animeItem.id,
+                  AnimeStatus.completed,
+                  user.uid,
+                  10,
+                  10
+                );
+              }}
+            >
+              Mark Complete
+            </div>
+            <div
+              className="yellow-button"
+              onClick={() => {
+                AnnieAPI.updateAnimeStatus(
+                  animeItem.id,
+                  AnimeStatus.on_hold,
+                  user.uid
+                );
+              }}
+            >
+              Put on hold
+            </div>
+            <div
+              className="red-button"
+              onClick={() => {
+                AnnieAPI.updateAnimeStatus(
+                  animeItem.id,
+                  AnimeStatus.dropped,
+                  user.uid
+                );
+              }}
+            >
+              Drop
+            </div>
           </div>
         </div>
       </div>
