@@ -13,6 +13,8 @@ import { Loader, MiniLoader } from "../../general/loader/loader";
 import "./recommendations.scss";
 
 export default function Recommendations() {
+  const user = useSelector((state: any) => state.isLoggedIn.user);
+
   const dispatch = useDispatch();
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 
@@ -26,7 +28,7 @@ export default function Recommendations() {
   const getRecommendations = useCallback(() => {
     if (recommendations.length <= 0) {
       dispatch(setLoading(true));
-      AnnieAPI.getRecommendations()
+      AnnieAPI.getRecommendations(user.uid)
         .then((recommendations) => {
           dispatch(setAnimes(recommendations));
           dispatch(setLoading(false));
@@ -40,7 +42,7 @@ export default function Recommendations() {
 
   const getMore = () => {
     setIsFetchingMore(true);
-    AnnieAPI.getRecommendations(recommendations.length)
+    AnnieAPI.getRecommendations(user.uid, recommendations.length)
       .then((moreRecomendations) => {
         dispatch(setAnimes([...recommendations, ...moreRecomendations]));
       })
