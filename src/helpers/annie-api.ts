@@ -68,6 +68,11 @@ export default class AnnieAPI {
     });
 
     let parsedResponse = await updateResponse.json();
+    if (parsedResponse.error !== undefined) {
+      AlertHelper.infoAlert(parsedResponse.error).then(() =>
+        window.open(parsedResponse.link)
+      );
+    }
     if (parsedResponse.status === status) {
       AlertHelper.successToast("Anime Status Updated!");
     }

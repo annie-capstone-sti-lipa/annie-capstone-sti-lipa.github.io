@@ -38,7 +38,7 @@ export default function Recommendations() {
           AlertHelper.errorToast(e);
         });
     }
-  }, [dispatch, recommendations.length]);
+  }, [dispatch, recommendations.length, user.uid]);
 
   const getMore = () => {
     setIsFetchingMore(true);
@@ -60,7 +60,7 @@ export default function Recommendations() {
 
   return (
     <div className="recommendations">
-      <div className="title">Recommendations based on your MAL profile.</div>
+      <div className="title">Recommendations</div>
       <div className="recommendation-container">
         {isLoading ? (
           <Loader />

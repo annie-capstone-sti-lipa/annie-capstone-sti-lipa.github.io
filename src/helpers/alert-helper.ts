@@ -134,7 +134,7 @@ export default class AlertHelper {
   };
 
   static infoAlert = (message: string) => {
-    Swal.fire({
+    return Swal.fire({
       icon: "info",
       title: message,
     });
