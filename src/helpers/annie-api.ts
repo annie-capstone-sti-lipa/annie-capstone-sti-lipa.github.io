@@ -183,6 +183,7 @@ export default class AnnieAPI {
     let response = await fetch(this._link("getWeekSchedule"), {
       mode: "cors",
     });
+    console.log("got here");
 
     let parsedResponse = await response.json();
 

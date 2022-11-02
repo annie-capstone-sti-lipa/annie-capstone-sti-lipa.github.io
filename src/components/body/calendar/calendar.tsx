@@ -5,9 +5,14 @@ import backIcon from "../../../assets/icons/back.svg";
 import AnimeCard from "../../general/anime-card/anime-card";
 import animeType from "../../../types/enums/anime-type";
 import { DaySchedules } from "../../../types/day-schedules";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Loader } from "../../general/loader/loader";
+import {
+  setLoading,
+  setSchedules,
+} from "../../../redux/reducers/anime-schedules";
 import sortCategory from "../../../types/enums/sort-by";
+import AnnieAPI from "../../../helpers/annie-api";
 
 enum view {
   monthView,
@@ -97,11 +102,12 @@ function WeekView({
   const [sortBy, setSortBy] = useState<sortCategory>(sortCategory.rating);
   const [scheds, setScheds] = useState(schedules);
 
+  const isLoading = useSelector((state: any) => state.animeSchedules.isLoading);
+  const dispatch = useDispatch();
+
   while (selectedWeek?.length !== 7) {
     selectedWeek?.push("_");
   }
-
-  const isLoading = useSelector((state: any) => state.animeSchedules.isLoading);
 
   useEffect(() => {
     let newScheds: Array<DaySchedules> = [];
@@ -120,8 +126,24 @@ function WeekView({
     setScheds(newScheds);
   }, [sortBy, schedules]);
 
+  useEffect(() => {
+    console.log(scheds.length);
+    dispatch(setLoading(false));
+    if (scheds.length === 0) {
+      dispatch(setLoading(true));
+      AnnieAPI.getWeekSchedule()
+        .then((schedules) => {
+          dispatch(setSchedules(schedules));
+        })
+        .finally(() => {
+          dispatch(setLoading(false));
+        });
+    }
+  }, [scheds.length, dispatch]);
+
   return (
     <>
+      {/* isLoading?<Loader show={isLoading}></Loader> */}
       <div className="sort-by">
         <span className="title">Sort by:</span>
         <select
@@ -136,56 +158,59 @@ function WeekView({
           <option value={sortCategory.popularity}>popularity</option>
         </select>
       </div>
-      <table className="week-view">
-        <thead className="week-header">
-          <tr>
-            {daysInWeek.map((day, index) => (
-              <th className="week-day" key={`${day} ${index}`}>
-                <div className="day-name">{day}</div>
-                <div className="day-date-container">
-                  <div
-                    className={`day-date ${
-                      selectedWeek![index] === new Date().getDate().toString()
-                        ? "today"
-                        : ""
-                    }`}
-                  >
-                    {selectedWeek![index].length === 0
-                      ? "_"
-                      : selectedWeek![index]}
+      {isLoading ? (
+        <Loader show={isLoading}></Loader>
+      ) : (
+        <table className="week-view">
+          <thead className="week-header">
+            <tr>
+              {daysInWeek.map((day, index) => (
+                <th className="week-day" key={`${day} ${index}`}>
+                  <div className="day-name">{day}</div>
+                  <div className="day-date-container">
+                    <div
+                      className={`day-date ${
+                        selectedWeek![index] === new Date().getDate().toString()
+                          ? "today"
+                          : ""
+                      }`}
+                    >
+                      {selectedWeek![index].length === 0
+                        ? "_"
+                        : selectedWeek![index]}
+                    </div>
                   </div>
-                </div>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="anime-scheds">
-            {selectedWeek!.map((day, index) => {
-              return (
-                <td key={`${day} ${index}`}>
-                  {scheds
-                    ?.find(
-                      (element) =>
-                        element.day.toLowerCase() ===
-                        daysInWeek[index].toLowerCase()
-                    )
-                    ?.animes.map((anime, index) => {
-                      return (
-                        <AnimeCard
-                          type={animeType.watching}
-                          animeItem={anime}
-                          key={index}
-                        />
-                      );
-                    })}
-                </td>
-              );
-            })}
-          </tr>
-        </tbody>
-      </table>
-      <Loader show={isLoading}></Loader>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="anime-scheds">
+              {selectedWeek!.map((day, index) => {
+                return (
+                  <td key={`${day} ${index}`}>
+                    {scheds
+                      ?.find(
+                        (element) =>
+                          element.day.toLowerCase() ===
+                          daysInWeek[index].toLowerCase()
+                      )
+                      ?.animes.map((anime, index) => {
+                        return (
+                          <AnimeCard
+                            type={animeType.watching}
+                            animeItem={anime}
+                            key={index}
+                          />
+                        );
+                      })}
+                  </td>
+                );
+              })}
+            </tr>
+          </tbody>
+        </table>
+      )}
     </>
   );
 }

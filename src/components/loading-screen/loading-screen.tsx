@@ -13,10 +13,13 @@ function LoadingScreen() {
   async function preloadData() {
     dispatch(setLoading(true));
     if (!isLoading) {
-      await AnnieAPI.getWeekSchedule().then((schedules) => {
-        dispatch(setSchedules(schedules));
-        dispatch(setLoading(false));
-      });
+      await AnnieAPI.getWeekSchedule()
+        .then((schedules) => {
+          dispatch(setSchedules(schedules));
+        })
+        .finally(() => {
+          dispatch(setLoading(false));
+        });
     }
   }
 
