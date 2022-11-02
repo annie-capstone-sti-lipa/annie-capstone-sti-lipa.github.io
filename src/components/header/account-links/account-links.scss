@@ -1,5 +1,46 @@
 @import "../../../styles/hover-effects";
 
+.discord-modal {
+  text-align: center;
+
+  .discord-message {
+    font-size: 20px;
+    padding: 40px;
+    font-weight: bold;
+
+    .register-command {
+      font-size: 16px;
+      font-weight: normal;
+      margin: 20px;
+
+      .copy-command {
+        background-color: $primary;
+        color: white;
+        padding: 8px;
+        margin: 0 20px;
+
+        @extend .clickable;
+        @extend .rounded-border;
+      }
+    }
+  }
+
+  .discord-link {
+    display: block;
+    margin: auto;
+    max-width: 180px;
+    font-size: 20px;
+    justify-content: center;
+    background-color: $primary;
+    color: white;
+    text-decoration: none;
+
+    @extend .clickable;
+    @extend .rounded-border;
+    @extend .default-padding;
+  }
+}
+
 .account-links {
   @include mobile {
     margin: auto;
