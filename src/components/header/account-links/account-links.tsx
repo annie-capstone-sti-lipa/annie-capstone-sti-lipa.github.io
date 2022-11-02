@@ -83,7 +83,12 @@ function DiscordModalBody({
           </small>
         </div>
         <div />
-        <a href={discordAuth?.link} className="discord-link" target="_blank">
+        <a
+          href={discordAuth?.link}
+          className="discord-link"
+          target="_blank"
+          rel="noreferrer"
+        >
           Message Annie
         </a>
       </div>
