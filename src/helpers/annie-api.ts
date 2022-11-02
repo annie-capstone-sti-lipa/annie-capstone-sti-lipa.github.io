@@ -11,6 +11,7 @@ import AlertHelper from "./alert-helper";
 import { fireBaseHelper } from "../App";
 import { UserInfo } from "firebase/auth";
 import AnimeStatus from "../types/anime-status";
+import DiscordAuth from "../types/discord-auth";
 
 export default class AnnieAPI {
   private static _link = (path: string) =>
@@ -23,6 +24,15 @@ export default class AnnieAPI {
     let parsedResponse = await response.json();
 
     return (parsedResponse as any)["authLink"];
+  };
+
+  static getDiscordAuth = async (userId: string): Promise<DiscordAuth> => {
+    let response = await fetch(this._link(`discord-auth?userId=${userId}`), {
+      method: "GET",
+    });
+    let parsedResponse = await response.json();
+
+    return parsedResponse as DiscordAuth;
   };
 
   static async saveQuizResult(data: {}): Promise<any> {

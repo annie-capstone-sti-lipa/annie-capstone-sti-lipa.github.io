@@ -15,7 +15,13 @@ export default function AccountLinks() {
         icon={discordIcon}
         name="Discord"
         color="#5865f2"
-        onClick={() => console.log("Discord discord")}
+        onClick={() => {
+          let discordLoading = AlertHelper.showLoading("Please Wait...");
+          AnnieAPI.getDiscordAuth(user.uid).then((discordAuth) => {
+            discordLoading.close();
+            console.log(discordAuth);
+          });
+        }}
       />
       <AccountButton
         icon={malIcon}
