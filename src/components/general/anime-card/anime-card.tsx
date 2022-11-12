@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal from "../modal/modal";
 import "./anime-card.scss";
 
+import malIcon from "../../../assets/icons/mal.svg";
 import playIcon from "../../../assets/icons/right.svg";
 import animeType from "../../../types/enums/anime-type";
 import AnimeItem from "../../../types/anime-item";
@@ -145,6 +146,17 @@ function ModalBody({
             </div>
           </div>
           <div className="synopsis">{animeItem.synopsis}</div>
+          <a
+            className="mal-button"
+            href={animeItem.malUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <div className="mal-link-container">
+              <img className="link-icon" src={malIcon} alt="icon" />
+              <span className="link-name">Open in MyAnimeList</span>
+            </div>
+          </a>
           <div className="actions">
             <div
               className="blue-button"

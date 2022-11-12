@@ -127,7 +127,6 @@ function WeekView({
   }, [sortBy, schedules]);
 
   useEffect(() => {
-    console.log(scheds.length);
     dispatch(setLoading(false));
     if (scheds.length === 0) {
       dispatch(setLoading(true));

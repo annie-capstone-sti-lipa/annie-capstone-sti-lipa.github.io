@@ -128,6 +128,35 @@
         }
       }
 
+      .mal-button {
+        display: block;
+        margin: 20px auto;
+        background-color: #2e51a2;
+        width: 90vw;
+        max-width: 250px;
+        display: flex;
+        justify-content: center;
+        padding: 4px;
+
+        @extend .clickable;
+        @extend .rounded-border;
+
+        .mal-link-container {
+          min-width: 70%;
+          color: white;
+          font-weight: bold;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          .link-icon {
+            width: 28px;
+            height: 28px;
+            margin-right: 12px;
+          }
+        }
+      }
+
       .synopsis {
         margin: 16px 0;
         text-align: center;

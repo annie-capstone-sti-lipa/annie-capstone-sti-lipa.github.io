@@ -183,29 +183,15 @@ export default class AnnieAPI {
     let response = await fetch(this._link("getWeekSchedule"), {
       mode: "cors",
     });
-    console.log("got here");
 
     let parsedResponse = await response.json();
 
-    parsedResponse = parsedResponse.map(
-      (element: any) =>
-        new DaySchedules(
-          element["day"],
-          (element.schedules ?? []).map(
-            (anime: any) =>
-              new AnimeItem(
-                anime.mal_id,
-                anime.title,
-                anime.images.jpg.large_image_url,
-                anime.score,
-                anime.synopsis,
-                anime.popularity,
-                anime.genres.map((genre: any) => genre.name),
-                anime.trailer.embed_url
-              )
-          )
-        )
-    );
+    parsedResponse = parsedResponse.map((element: any) => {
+      return new DaySchedules(
+        element["day"],
+        (element.schedules ?? []).map((anime: any) => anime)
+      );
+    });
 
     parsedResponse.forEach((day: DaySchedules, dayIndex: number) => {
       day.animes.forEach((anime: AnimeItem, animeIndex: number) => {
