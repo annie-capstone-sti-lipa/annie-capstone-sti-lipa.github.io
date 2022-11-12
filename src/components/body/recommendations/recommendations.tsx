@@ -28,7 +28,7 @@ export default function Recommendations() {
   const getRecommendations = useCallback(() => {
     if (recommendations.length <= 0) {
       dispatch(setLoading(true));
-      AnnieAPI.getRecommendations(user.uid)
+      AnnieAPI.getRecommendations(user.uid, 0, 7)
         .then((recommendations) => {
           dispatch(setAnimes(recommendations));
           dispatch(setLoading(false));
@@ -40,18 +40,26 @@ export default function Recommendations() {
     }
   }, [dispatch, recommendations.length, user.uid]);
 
-  const getMore = () => {
+  const getMore = async () => {
     setIsFetchingMore(true);
-    AnnieAPI.getRecommendations(user.uid, recommendations.length)
-      .then((moreRecomendations) => {
-        dispatch(setAnimes([...recommendations, ...moreRecomendations]));
-      })
-      .catch((e) => {
-        AlertHelper.errorToast(e);
-      })
-      .finally(() => {
-        setIsFetchingMore(false);
-      });
+    let animes: Array<AnimeItem> = [...recommendations];
+    async function sendRequest(index: number) {
+      console.log(index);
+      await AnnieAPI.getRecommendations(user.uid, animes.length + 1, 1)
+        .then((moreRecomendations) => {
+          animes = [...animes, ...moreRecomendations];
+          dispatch(setAnimes(animes));
+          if (index > 0) {
+            sendRequest((index -= 1));
+          } else {
+            setIsFetchingMore(false);
+          }
+        })
+        .catch((e) => {
+          AlertHelper.errorToast(e);
+        });
+    }
+    sendRequest(10);
   };
 
   useEffect(() => {

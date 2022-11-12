@@ -210,13 +210,12 @@ export default class AnnieAPI {
 
   static async getRecommendations(
     userId: string,
-    offset?: number
+    offset?: number,
+    limit?: number
   ): Promise<Array<AnimeItem>> {
     let response = await fetch(
       this._link(
-        `recommendations?offset=${offset}&userId=${userId}&limit=${
-          offset === undefined ? 30 : 10
-        }`
+        `recommendations?offset=${offset}&userId=${userId}&limit=${limit ?? 10}`
       ),
       {
         mode: "cors",
