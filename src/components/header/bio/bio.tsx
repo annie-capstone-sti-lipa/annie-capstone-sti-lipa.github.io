@@ -31,7 +31,9 @@ export default function Bio() {
             dispatch(updateUserInfo(userInfo));
           } else {
             let defaultName = user.email.substring(0, user.email.indexOf("@"));
-            dispatch(updateUserInfo(new UserInfo(defaultName, "Bio")));
+            dispatch(
+              updateUserInfo(new UserInfo(defaultName, "Bio", user.uid))
+            );
           }
         })
         .finally(() => setLoadingUserInfo(false));

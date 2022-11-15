@@ -12,6 +12,7 @@ import { fireBaseHelper } from "../App";
 import { UserInfo } from "firebase/auth";
 import AnimeStatus from "../types/anime-status";
 import DiscordAuth from "../types/discord-auth";
+import UserQuizScore from "../types/user-quiz-score";
 
 export default class AnnieAPI {
   private static _link = (path: string) =>
@@ -229,6 +230,14 @@ export default class AnnieAPI {
 
   static async getScores(userId?: string): Promise<QuizScores> {
     let response = await fetch(this._link(`quiz-scores?userId=${userId}`), {
+      mode: "cors",
+    });
+
+    return await response.json();
+  }
+
+  static async getAllScores(userId?: string): Promise<Array<UserQuizScore>> {
+    let response = await fetch(this._link("all-quiz-scores"), {
       mode: "cors",
     });
 

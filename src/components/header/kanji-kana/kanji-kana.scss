@@ -1,4 +1,48 @@
+@import "../../../styles/variables";
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
+@import "../../../styles/globals";
 @import "../../../styles/mixins";
+
+.quiz-modal {
+  background-color: $bgLight;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .loader-container {
+    flex: 1;
+  }
+
+  .quiz-card {
+    background-color: white;
+    margin: 16px 8px;
+    border-top: 8px solid $primary;
+    padding: 16px;
+    width: 220px;
+
+    @extend .box-shadow;
+    @extend .rounded-border;
+
+    .user-image {
+      height: 120px;
+      width: 120px;
+      object-fit: cover;
+
+      @extend .rounded-border;
+    }
+
+    .user-name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .user-bio {
+      font-size: 12px;
+      margin: 16px 0;
+    }
+  }
+}
 
 .kanji-kana {
   max-width: 200px;
@@ -8,27 +52,35 @@
     margin: auto;
   }
 
-  .title {
-    font-size: x-large;
-    font-weight: bold;
-    margin: 8px;
+  .quiz-scores-container {
+    position: relative;
 
-    display: flex;
-  }
+    @extend .rounded-border;
+    @extend .edit-icon-container;
+    @extend .clickable;
 
-  .score-list {
-    font-size: small;
-    text-align: start;
-    margin: 8px;
+    .title {
+      font-size: x-large;
+      font-weight: bold;
+      margin: 8px;
 
-    .score-item {
       display: flex;
-      justify-content: space-between;
-
-      .name {
-        font-weight: 600;
-        margin-right: 16px;
-      }
     }
+
+    .score-list {
+      font-size: small;
+      text-align: start;
+      margin: 8px;
+    }
+  }
+}
+
+.score-item {
+  display: flex;
+  justify-content: space-between;
+
+  .name {
+    font-weight: 600;
+    margin-right: 16px;
   }
 }

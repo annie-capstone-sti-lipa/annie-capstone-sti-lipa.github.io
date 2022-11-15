@@ -7,6 +7,7 @@ export default class FireBaseHelper {
   storage = getStorage();
 
   public getUserImage = async (userId: string): Promise<string | null> => {
+    console.log(userId);
     try {
       return await getDownloadURL(
         ref(this.storage, `user_images/${userId}.png`)
