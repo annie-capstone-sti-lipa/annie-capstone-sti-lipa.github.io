@@ -44,7 +44,6 @@ export default function Recommendations() {
     setIsFetchingMore(true);
     let animes: Array<AnimeItem> = [...recommendations];
     async function sendRequest(index: number) {
-      console.log(index);
       await AnnieAPI.getRecommendations(user.uid, animes.length + 1, 1)
         .then((moreRecomendations) => {
           animes = [...animes, ...moreRecomendations];

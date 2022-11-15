@@ -236,7 +236,7 @@ export default class AnnieAPI {
     return await response.json();
   }
 
-  static async getAllScores(userId?: string): Promise<Array<UserQuizScore>> {
+  static async getAllScores(): Promise<Array<UserQuizScore>> {
     let response = await fetch(this._link("all-quiz-scores"), {
       mode: "cors",
     });

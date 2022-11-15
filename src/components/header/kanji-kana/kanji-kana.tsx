@@ -12,6 +12,8 @@ import crownIcon from "../../../assets/icons/crown.svg";
 import tempPfp from "../../../assets/icons/temp_pfp.svg";
 
 import { fireBaseHelper } from "../../../App";
+import quizSortCategory from "../../../types/enums/quiz-sort-category";
+import QuizScores from "../../../types/quiz-scores";
 
 export default function KanjiKana() {
   const user = useSelector((state: any) => state.isLoggedIn.user);
@@ -75,13 +77,13 @@ function ScoreItem({ name, score }: { name: string; score: number }) {
 function ModalBody({ closeModal }: { closeModal: () => void }) {
   const [isLoading, setIsLoading] = useState(true);
   const [userScores, setUserScores] = useState<Array<UserQuizScore>>();
+  const [sortBy, setSortBy] = useState<quizSortCategory>(quizSortCategory.all);
 
   useEffect(() => {
     setIsLoading(true);
     AnnieAPI.getAllScores()
       .then((scores) => {
         setUserScores(scores);
-        console.log(scores);
       })
       .finally(() => {
         setIsLoading(false);
@@ -95,32 +97,76 @@ function ModalBody({ closeModal }: { closeModal: () => void }) {
           <Loader />
         </div>
       ) : (
-        userScores?.map((element, index) => {
-          return (
-            <div key={`${element.user.name}_${index}`}>
-              <UserQuizCard info={element} />
+        <div className="modal-body">
+          <div className="sort-by-container">
+            <div className="title">Quiz Rankings</div>
+            <div className="sort-title-container">
+              <div className="sort-title">Sort by:</div>
+              <select
+                name="sort-by"
+                onChange={(event) => {
+                  setSortBy(event.target.value as quizSortCategory);
+                }}
+              >
+                {(
+                  Object.keys(quizSortCategory) as Array<
+                    keyof typeof quizSortCategory
+                  >
+                ).map((key) => {
+                  return (
+                    <option value={quizSortCategory[key]} key={key}>
+                      {quizSortCategory[key]}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
-          );
-        })
+          </div>
+          <div className="score-card-container">
+            {userScores
+              ?.sort((a, b) => {
+                switch (sortBy) {
+                  case quizSortCategory.kanji:
+                    return b.quizScores.kanji - a.quizScores.kanji;
+                  case quizSortCategory.hiragana:
+                    return b.quizScores.hiragana - a.quizScores.hiragana;
+                  case quizSortCategory.katakana:
+                    return b.quizScores.katakana - a.quizScores.katakana;
+                  default:
+                    return (
+                      QuizScores.summation(b.quizScores) -
+                      QuizScores.summation(a.quizScores)
+                    );
+                }
+              })
+              .map((element, index) => {
+                return (
+                  <div key={`${element.user.name}_${index}`}>
+                    <UserQuizCard info={element} rank={index + 1} />
+                  </div>
+                );
+              })}
+          </div>
+        </div>
       )}
     </div>
   );
 }
 
-function UserQuizCard({ info }: { info: UserQuizScore }) {
+function UserQuizCard({ info, rank }: { info: UserQuizScore; rank: number }) {
   const [image, setImage] = useState<string>();
 
   useEffect(() => {
-    console.log(info.user.id);
     fireBaseHelper.getUserImage(info.userId).then((link) => {
       if (link) {
-        console.log(link);
         setImage(link);
       }
     });
-  }, []);
+  }, [info.userId]);
+
   return (
     <div className="quiz-card">
+      <div className="rank">{rank}</div>
       <img className="user-image" src={image ?? tempPfp} alt="profile-pic" />
       <div className="user-name">{info.user.name}</div>
       <div className="user-bio">{info.user.bio}</div>
