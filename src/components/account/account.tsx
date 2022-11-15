@@ -9,8 +9,13 @@ import ProfilePic from "../header/profile-pic/profile-pic";
 import logoutIcon from "../../assets/icons/logout.svg";
 import "./account.scss";
 import { useDispatch } from "react-redux";
-import { login } from "../../redux/reducers/login";
 import { setAnimes } from "../../redux/reducers/anime-recommendations";
+import {
+  updateUserInfo,
+  updateScores,
+  login,
+  updateImage,
+} from "../../redux/reducers/login";
 import { select } from "../../redux/reducers/tabnav-item-reducer";
 import tabnavItem from "../../types/enums/tabnavItem";
 
@@ -37,6 +42,9 @@ function Account() {
                     .then((res) => {
                       dispatch(login({ isLoggedIn: false, user: null }));
                       dispatch(setAnimes([]));
+                      dispatch(updateUserInfo(null));
+                      dispatch(updateScores(null));
+                      dispatch(updateImage(null));
                       dispatch(select(tabnavItem.recommendations));
                       AlertHelper.successToast("Logged out successfully");
                     })
