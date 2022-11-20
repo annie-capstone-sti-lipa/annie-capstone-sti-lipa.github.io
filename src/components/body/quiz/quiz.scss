@@ -49,15 +49,22 @@
     }
 
     .quiz-choice-card {
+      display: flex;
       font-weight: bolder;
       margin: 24px 0;
       padding: 24px 32px;
+      align-items: center;
+      justify-content: space-around;
       border-bottom: 4px solid $primary;
 
       @extend .box-shadow;
       @extend .rounded-border;
       @extend .clickable;
       @extend .hover-highlight;
+
+      .choice-name {
+        flex: 2;
+      }
     }
   }
 

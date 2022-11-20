@@ -14,6 +14,7 @@ import tempPfp from "../../../assets/icons/temp_pfp.svg";
 import { fireBaseHelper } from "../../../App";
 import quizSortCategory from "../../../types/enums/quiz-sort-category";
 import QuizScores from "../../../types/quiz-scores";
+import InfoButton from "../../general/info-button/info-button";
 
 export default function KanjiKana() {
   const user = useSelector((state: any) => state.isLoggedIn.user);
@@ -99,7 +100,10 @@ function ModalBody({ closeModal }: { closeModal: () => void }) {
       ) : (
         <div className="modal-body">
           <div className="sort-by-container">
-            <div className="title">Quiz Rankings</div>
+            <div className="title">
+              <span>Quiz Rankings</span>
+              <InfoButton tooltip="Only players with more than 10 quizzes will be included in the rankings. Users will be ranked based to their score percentages and the number of quizzes they have taken." />
+            </div>
             <div className="sort-title-container">
               <div className="sort-title">Sort by:</div>
               <select

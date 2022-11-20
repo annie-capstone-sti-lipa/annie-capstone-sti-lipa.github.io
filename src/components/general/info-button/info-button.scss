@@ -1,0 +1,17 @@
+@import "../../../styles/variables";
+@import "../../../styles/presets";
+@import "../../../styles/hover-effects";
+
+.info-button-container {
+  padding: 20px;
+
+  @extend .clickable;
+  @extend .rounded-border;
+
+  .info-icon {
+    @extend .primary-icon;
+
+    height: 20px;
+    width: 20px;
+  }
+}

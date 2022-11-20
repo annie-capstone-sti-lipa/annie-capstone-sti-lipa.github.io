@@ -20,8 +20,14 @@
       align-items: center;
       padding: 8px;
 
+      .title {
+        display: flex;
+        align-items: center;
+      }
+
       .sort-title-container {
         display: flex;
+
         .sort-title {
           margin-right: 20px;
         }

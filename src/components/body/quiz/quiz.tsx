@@ -101,9 +101,38 @@ function QuizChoiceCard({
   item: any;
   onClick: (quizType: any) => void;
 }) {
+  function getTooltip() {
+    switch (item.toLowerCase()) {
+      case "hiragana":
+        return "Hiragana is the basic Japanese phonetic alphabet. It represents every sound in the Japanese language.";
+      case "katakana":
+        return "Katakana are most often used for transcription of words from foreign origin.";
+      case "kanji":
+        return "Kanji are used for writing nouns, adjectives, adverbs and verbs, Kanji are ideograms, i.e. each character has its own meaning and corresponds to a word.";
+      case "gojuuon":
+        return "In the Japanese language, the gojūon is a traditional system ordering kana characters by their component phonemes, roughly analogous to alphabetical order.";
+      case "dakuon":
+        return "Dakuon ( '' ) or dakuten are two small strokes placed on top-left corner of certain hiragana/katakana that changed the sound of those basic kana";
+      case "youon":
+        return "Youon - when a や [ya] ゆ [yu] よ [yo] sound follows certain characters in Japanese, the sound is shortened and so instead of two separate characters, the sound is written as the combination of the first character and a small subscripted version of the ゃ[ya] ゅ [yu] ょ[yo] character's sound.";
+      case "onyomi":
+        return "On'yomi are Readings derived from the Chinese pronunciations.";
+      case "kunyomi":
+        return "Kun'yomi are  the original, indigenous Japanese readings.";
+      case "english":
+        return "English meanings of the kanji character.";
+      default:
+        return "no tooltip here";
+    }
+  }
+
   return (
-    <div className="quiz-choice-card" onClick={() => onClick(item)}>
-      {item}
+    <div
+      className="quiz-choice-card"
+      onClick={() => onClick(item)}
+      title={getTooltip()}
+    >
+      <span className="choice-name">{item}</span>
     </div>
   );
 }

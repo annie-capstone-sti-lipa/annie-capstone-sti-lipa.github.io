@@ -20,8 +20,6 @@ export const authenticationHelper = new AuthenticationHelper(
   })
 );
 
-//TODO: query user's anime list and display status accordingly
-
 export const fireBaseHelper = new FireBaseHelper();
 
 function App() {

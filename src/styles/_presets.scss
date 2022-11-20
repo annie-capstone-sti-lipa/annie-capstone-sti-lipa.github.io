@@ -49,6 +49,11 @@
     brightness(101%) contrast(102%);
 }
 
+.primary-icon {
+  filter: invert(33%) sepia(46%) saturate(4648%) hue-rotate(192deg)
+    brightness(96%) contrast(104%);
+}
+
 .gray-icon {
   filter: invert(96%) sepia(0%) saturate(234%) hue-rotate(197deg)
     brightness(91%) contrast(95%) !important;
