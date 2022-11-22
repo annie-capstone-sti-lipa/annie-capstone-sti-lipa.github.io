@@ -1,4 +1,3 @@
-import { query } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AlertHelper from "../../../helpers/alert-helper";
@@ -18,6 +17,8 @@ export default function Recommendations() {
 
   const dispatch = useDispatch();
   const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [hasRecommendations, setIsHasRecommendations] = useState(false);
 
   const recommendations = useSelector(
     (state: any) => state.animeRecommendations.animes
@@ -27,6 +28,7 @@ export default function Recommendations() {
   );
 
   const refreshRecommendations = () => {
+    setIsHasRecommendations(false);
     dispatch(setAnimes([]));
     getRecommendations();
   };
@@ -39,6 +41,9 @@ export default function Recommendations() {
         .then((recommendations) => {
           dispatch(setAnimes(recommendations));
           dispatch(setLoading(false));
+          if (recommendations.length > 0) {
+            setIsHasRecommendations(true);
+          }
         })
         .catch((e) => {
           AlertHelper.errorToast(e);
@@ -77,13 +82,15 @@ export default function Recommendations() {
     ).value;
     if (queryString !== undefined) {
       setIsFetchingMore(true);
+      setIsHasRecommendations(false);
+      setIsSearching(true);
+
       await AnnieAPI.getSearchResults(queryString)
         .then((animes) => {
           if (animes.length === 0) {
             AlertHelper.infoToast("There are no matches.");
           } else {
             dispatch(setAnimes(animes));
-            setIsFetchingMore(true);
           }
         })
         .catch((e) => {
@@ -91,6 +98,7 @@ export default function Recommendations() {
         })
         .finally(() => {
           setIsFetchingMore(false);
+          setIsSearching(false);
         });
     }
   };
@@ -113,14 +121,16 @@ export default function Recommendations() {
           >
             Get Auto Recommendations
           </span>
-          <div
-            className={`load-more ${isFetchingMore ? "disabled-button" : ""}`}
-            onClick={() => {
-              if (!isFetchingMore) getMore();
-            }}
-          >
-            {isFetchingMore ? <MiniLoader /> : "load more"}
-          </div>
+          {hasRecommendations && (
+            <div
+              className={`load-more ${isFetchingMore ? "disabled-button" : ""}`}
+              onClick={() => {
+                if (!isFetchingMore) getMore();
+              }}
+            >
+              {isFetchingMore ? <MiniLoader /> : "load more"}
+            </div>
+          )}
         </div>
         <div className="search-bar">
           <input
@@ -141,7 +151,7 @@ export default function Recommendations() {
               if (!isFetchingMore) getSearch();
             }}
           >
-            Search
+            {isSearching ? <MiniLoader /> : "Search"}
           </span>
         </div>
       </div>
