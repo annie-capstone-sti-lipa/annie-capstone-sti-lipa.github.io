@@ -102,7 +102,7 @@ function ModalBody({ closeModal }: { closeModal: () => void }) {
           <div className="sort-by-container">
             <div className="title">
               <span>Quiz Rankings</span>
-              <InfoButton tooltip="Only players with more than 10 quizzes will be included in the rankings. Users will be ranked based to their score percentages and the number of quizzes they have taken." />
+              <InfoButton tooltip="Only players with more than 10 quizzes will be included in the rankings. Users will be ranked based to their score percentages." />
             </div>
             <div className="sort-title-container">
               <div className="sort-title">Sort by:</div>
