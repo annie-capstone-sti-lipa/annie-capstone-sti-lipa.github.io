@@ -10,8 +10,66 @@
     background-color: $primary;
     color: white;
     padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
     @extend .rounded-border;
+    @include mobile {
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      * {
+        margin: 4px 0;
+      }
+    }
+
+    .auto-recommendation-buttons {
+      display: flex;
+      align-items: center;
+
+      .recommendation-title {
+        background-color: white;
+        color: $primary;
+        margin-left: 20px;
+        padding: 8px 24px;
+
+        @extend .clickable;
+        @extend .rounded-border;
+      }
+
+      .load-more {
+        background-color: white;
+        color: $primary;
+        margin-left: 20px;
+        padding: 8px 24px;
+
+        @extend .clickable;
+        @extend .rounded-border;
+      }
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+
+      #search-input {
+        padding: 8px;
+        border: 1px solid #888;
+
+        @extend .rounded-border;
+      }
+
+      .search-button {
+        background-color: white;
+        color: $primary;
+        margin-left: 20px;
+        padding: 8px 24px;
+
+        @extend .clickable;
+        @extend .rounded-border;
+      }
+    }
   }
 
   .recommendation-container {
@@ -27,18 +85,6 @@
 
     .anime-card {
       width: 120px;
-    }
-
-    .load-more {
-      width: 90%;
-      background-color: $primary;
-      padding: 16px;
-      color: white;
-      font-weight: bold;
-      margin: 24px auto;
-
-      @extend .rounded-border;
-      @extend .clickable;
     }
   }
 }

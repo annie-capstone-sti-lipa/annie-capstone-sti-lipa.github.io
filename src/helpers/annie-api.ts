@@ -228,6 +228,21 @@ export default class AnnieAPI {
     return parsedResponse;
   }
 
+  static async getSearchResults(
+    queryString: string
+  ): Promise<Array<AnimeItem>> {
+    let response = await fetch(
+      this._link(`search-anime?queryString=${queryString}`),
+      {
+        mode: "cors",
+      }
+    );
+
+    let parsedResponse = await response.json();
+
+    return parsedResponse["results"];
+  }
+
   static async getScores(userId?: string): Promise<QuizScores> {
     let response = await fetch(this._link(`quiz-scores?userId=${userId}`), {
       mode: "cors",

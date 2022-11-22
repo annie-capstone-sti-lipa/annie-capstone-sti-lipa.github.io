@@ -1,3 +1,4 @@
+import { query } from "firebase/firestore";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AlertHelper from "../../../helpers/alert-helper";
@@ -25,17 +26,26 @@ export default function Recommendations() {
     (state: any) => state.animeRecommendations.isLoading
   );
 
+  const refreshRecommendations = () => {
+    dispatch(setAnimes([]));
+    getRecommendations();
+  };
+
   const getRecommendations = useCallback(() => {
     if (recommendations.length <= 0) {
       dispatch(setLoading(true));
+      setIsFetchingMore(true);
       AnnieAPI.getRecommendations(user.uid, 0, 7)
         .then((recommendations) => {
           dispatch(setAnimes(recommendations));
           dispatch(setLoading(false));
         })
         .catch((e) => {
-          dispatch(setLoading(false));
           AlertHelper.errorToast(e);
+        })
+        .finally(() => {
+          dispatch(setLoading(false));
+          setIsFetchingMore(false);
         });
     }
   }, [dispatch, recommendations.length, user.uid]);
@@ -61,13 +71,80 @@ export default function Recommendations() {
     sendRequest(10);
   };
 
+  const getSearch = async () => {
+    let queryString = (
+      document.getElementById("search-input") as HTMLInputElement
+    ).value;
+    if (queryString !== undefined) {
+      setIsFetchingMore(true);
+      await AnnieAPI.getSearchResults(queryString)
+        .then((animes) => {
+          if (animes.length === 0) {
+            AlertHelper.infoToast("There are no matches.");
+          } else {
+            dispatch(setAnimes(animes));
+            setIsFetchingMore(true);
+          }
+        })
+        .catch((e) => {
+          AlertHelper.errorToast(e);
+        })
+        .finally(() => {
+          setIsFetchingMore(false);
+        });
+    }
+  };
+
   useEffect(() => {
     getRecommendations();
   }, [getRecommendations]);
 
   return (
     <div className="recommendations">
-      <div className="title">Recommendations</div>
+      <div className="title">
+        <div className="auto-recommendation-buttons">
+          <span
+            className={`recommendation-title ${
+              isFetchingMore ? "disabled-button" : ""
+            }`}
+            onClick={() => {
+              if (!isFetchingMore) refreshRecommendations();
+            }}
+          >
+            Get Auto Recommendations
+          </span>
+          <div
+            className={`load-more ${isFetchingMore ? "disabled-button" : ""}`}
+            onClick={() => {
+              if (!isFetchingMore) getMore();
+            }}
+          >
+            {isFetchingMore ? <MiniLoader /> : "load more"}
+          </div>
+        </div>
+        <div className="search-bar">
+          <input
+            type="text"
+            id="search-input"
+            onKeyUp={(event) => {
+              !event.shiftKey &&
+                event.key === "Enter" &&
+                !isFetchingMore &&
+                getSearch();
+            }}
+          />
+          <span
+            className={`search-button ${
+              isFetchingMore ? "disabled-button" : ""
+            }`}
+            onClick={() => {
+              if (!isFetchingMore) getSearch();
+            }}
+          >
+            Search
+          </span>
+        </div>
+      </div>
       <div className="recommendation-container">
         {isLoading ? (
           <Loader />
@@ -82,14 +159,6 @@ export default function Recommendations() {
                 />
               );
             })}
-            <div
-              className={`load-more ${isFetchingMore ? "disabled-button" : ""}`}
-              onClick={() => {
-                if (!isFetchingMore) getMore();
-              }}
-            >
-              {isFetchingMore ? <MiniLoader /> : "load more"}
-            </div>
           </>
         )}
       </div>
