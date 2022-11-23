@@ -18,7 +18,7 @@ export default function Recommendations() {
   const dispatch = useDispatch();
   const [isFetchingMore, setIsFetchingMore] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [hasRecommendations, setIsHasRecommendations] = useState(false);
+  const [hasRecommendations, setHasRecommendations] = useState(false);
 
   const recommendations = useSelector(
     (state: any) => state.animeRecommendations.animes
@@ -28,7 +28,7 @@ export default function Recommendations() {
   );
 
   const refreshRecommendations = () => {
-    setIsHasRecommendations(false);
+    setHasRecommendations(false);
     dispatch(setAnimes([]));
     getRecommendations();
   };
@@ -38,11 +38,11 @@ export default function Recommendations() {
       dispatch(setLoading(true));
       setIsFetchingMore(true);
       AnnieAPI.getRecommendations(user.uid, 0, 7)
-        .then((recommendations) => {
-          dispatch(setAnimes(recommendations));
+        .then((recoms) => {
+          dispatch(setAnimes(recoms));
           dispatch(setLoading(false));
-          if (recommendations.length > 0) {
-            setIsHasRecommendations(true);
+          if (recoms.length > 0) {
+            setHasRecommendations(true);
           }
         })
         .catch((e) => {
@@ -82,7 +82,7 @@ export default function Recommendations() {
     ).value;
     if (queryString !== undefined) {
       setIsFetchingMore(true);
-      setIsHasRecommendations(false);
+      setHasRecommendations(false);
       setIsSearching(true);
 
       await AnnieAPI.getSearchResults(queryString)
@@ -105,7 +105,14 @@ export default function Recommendations() {
 
   useEffect(() => {
     getRecommendations();
+    return function cleanup() {};
   }, [getRecommendations]);
+
+  useEffect(() => {
+    if (recommendations.length > 0) {
+      setHasRecommendations(true);
+    }
+  }, [recommendations.length]);
 
   return (
     <div className="recommendations">

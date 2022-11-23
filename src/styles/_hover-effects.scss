@@ -10,6 +10,7 @@
 }
 
 .disabled-button {
+  color: white !important;
   background-color: $bgDark !important;
 
   @extend .hover-disabled;
