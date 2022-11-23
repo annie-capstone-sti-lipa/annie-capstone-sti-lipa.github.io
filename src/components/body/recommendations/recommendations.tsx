@@ -105,7 +105,6 @@ export default function Recommendations() {
 
   useEffect(() => {
     getRecommendations();
-    return function cleanup() {};
   }, [getRecommendations]);
 
   useEffect(() => {
