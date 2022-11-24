@@ -24,6 +24,10 @@ export default class Helpers {
     return t;
   };
 
+  static remove_duplicates = (arr: Array<any>) => {
+    return arr.filter((v, i, a) => a.findIndex((v2) => v2.id === v.id) === i);
+  };
+
   static resizeImage = (settings: IResizeImageOptions): Promise<Blob> => {
     const file = settings.file;
     const maxSize = settings.maxSize;

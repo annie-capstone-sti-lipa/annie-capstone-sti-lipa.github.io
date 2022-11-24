@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AlertHelper from "../../../helpers/alert-helper";
 import AnnieAPI from "../../../helpers/annie-api";
+import Helpers from "../../../helpers/helpers";
 import {
   setAnimes,
   setLoading,
@@ -14,6 +15,8 @@ import "./recommendations.scss";
 
 export default function Recommendations() {
   const user = useSelector((state: any) => state.isLoggedIn.user);
+
+  const [hasLoaded, setHasLoaded] = useState(false);
 
   const dispatch = useDispatch();
   const [isFetchingMore, setIsFetchingMore] = useState(false);
@@ -62,7 +65,7 @@ export default function Recommendations() {
       await AnnieAPI.getRecommendations(user.uid, animes.length + 1, 1)
         .then((moreRecomendations) => {
           animes = [...animes, ...moreRecomendations];
-          dispatch(setAnimes(animes));
+          dispatch(setAnimes(Helpers.remove_duplicates(animes)));
           if (index > 0) {
             sendRequest((index -= 1));
           } else {
@@ -82,7 +85,6 @@ export default function Recommendations() {
     ).value;
     if (queryString !== undefined) {
       setIsFetchingMore(true);
-      setHasRecommendations(false);
       setIsSearching(true);
 
       await AnnieAPI.getSearchResults(queryString)
@@ -97,6 +99,7 @@ export default function Recommendations() {
           AlertHelper.errorToast(e);
         })
         .finally(() => {
+          setHasRecommendations(false);
           setIsFetchingMore(false);
           setIsSearching(false);
         });
@@ -108,25 +111,28 @@ export default function Recommendations() {
   }, [getRecommendations]);
 
   useEffect(() => {
-    if (recommendations.length > 0) {
+    if (!hasLoaded && recommendations.length > 0) {
+      setHasLoaded(true);
       setHasRecommendations(true);
     }
-  }, [recommendations.length]);
+  }, [hasLoaded, recommendations.length]);
 
   return (
     <div className="recommendations">
       <div className="title">
         <div className="auto-recommendation-buttons">
-          <span
-            className={`recommendation-title ${
-              isFetchingMore ? "disabled-button" : ""
-            }`}
-            onClick={() => {
-              if (!isFetchingMore) refreshRecommendations();
-            }}
-          >
-            Get Auto Recommendations
-          </span>
+          {!hasRecommendations && (
+            <span
+              className={`recommendation-title ${
+                isFetchingMore ? "disabled-button" : ""
+              }`}
+              onClick={() => {
+                if (!isFetchingMore) refreshRecommendations();
+              }}
+            >
+              Get Auto Recommendations
+            </span>
+          )}
           {hasRecommendations && (
             <div
               className={`load-more ${isFetchingMore ? "disabled-button" : ""}`}
@@ -134,7 +140,7 @@ export default function Recommendations() {
                 if (!isFetchingMore) getMore();
               }}
             >
-              {isFetchingMore ? <MiniLoader /> : "load more"}
+              {isFetchingMore && !isSearching ? <MiniLoader /> : "load more"}
             </div>
           )}
         </div>
