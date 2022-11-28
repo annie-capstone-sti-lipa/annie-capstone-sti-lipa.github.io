@@ -66,7 +66,7 @@ function LoginFrame() {
                   if (loginError === "") {
                     let loading = AlertHelper.showLoading("Logging in");
                     authenticationHelper
-                      .login(loginEmail, loginPassword)
+                      .login(loginEmail.trim(), loginPassword.trim())
                       .then((auth) => {
                         dispatch(login({ isLoggedIn: true, user: auth.user }));
                         loading.close();
@@ -89,7 +89,7 @@ function LoginFrame() {
                     try {
                       let loading = AlertHelper.showLoading("Processing");
                       await authenticationHelper
-                        .resetPassword(email)
+                        .resetPassword(email.trim())
                         .then(() => loading.close());
                       AlertHelper.successAlert(
                         "We've sent the reset password link to your email."
@@ -162,7 +162,7 @@ function LoginFrame() {
                 if (signupError === "") {
                   let loading = AlertHelper.showLoading("Signing Up.");
                   authenticationHelper
-                    .signup(signupEmail, signupPassword)
+                    .signup(signupEmail.trim(), signupPassword.trim())
                     .then((auth) => {
                       dispatch(login({ isLoggedIn: true, user: auth.user }));
                       loading.close();
