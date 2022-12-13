@@ -73,7 +73,7 @@ export default class AnnieAPI {
         animeId: animeId,
         status: status,
         userId: userId,
-        score: score,
+        score: score ?? 0,
         num_watched_episodes: num_watched_episodes,
       }),
     });

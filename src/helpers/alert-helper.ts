@@ -25,9 +25,18 @@ function fireToast({ icon, message, duration, showTimer }: fireToastProps) {
   });
 }
 
+interface numberInputAlertProps {
+  question: string;
+  onConfirm: (value: any) => void;
+  confirmButtonText?: string;
+  cancelButtonText?: string;
+}
+
 interface confirmDialogProps {
   question: string;
   confirmButtonColor?: string;
+  cancelButtonText?: string;
+  confirmButtonText?: string;
 }
 
 export default class AlertHelper {
@@ -76,11 +85,13 @@ export default class AlertHelper {
     });
   };
 
-  static numberInputAlert = (
-    question: string,
-    onConfirm: (value: any) => void
-  ) => {
-    return Swal.fire({
+  static numberInputAlert = async ({
+    question,
+    onConfirm,
+    confirmButtonText,
+    cancelButtonText,
+  }: numberInputAlertProps) => {
+    const value_1 = await Swal.fire({
       icon: "question",
       html: `
       <span id="number-input-alert">
@@ -95,15 +106,17 @@ export default class AlertHelper {
       </span>`,
       title: question,
       showCancelButton: true,
-    }).then((value: any) => {
-      if (value.isConfirmed) {
-        onConfirm(
-          (document.getElementById("range-value") as HTMLInputElement).value
-        );
-      } else {
-        onConfirm(undefined);
-      }
+      confirmButtonText: confirmButtonText,
+      cancelButtonText: cancelButtonText,
+      allowOutsideClick: false,
     });
+    if (value_1.isConfirmed) {
+      onConfirm(
+        (document.getElementById("range-value") as HTMLInputElement).value
+      );
+    } else {
+      onConfirm(undefined);
+    }
   };
 
   static fileInputAlert = (
@@ -153,12 +166,17 @@ export default class AlertHelper {
   static confirmDialog = async ({
     question,
     confirmButtonColor,
+    cancelButtonText,
+    confirmButtonText,
   }: confirmDialogProps) => {
     return Swal.fire({
       icon: "question",
       title: question,
       showCancelButton: true,
       confirmButtonColor: confirmButtonColor ?? "red",
+      cancelButtonText: cancelButtonText ?? "cancel",
+      confirmButtonText: confirmButtonText ?? "ok",
+      allowOutsideClick: false,
     }).then((value: any) => {
       return value.isConfirmed;
     });

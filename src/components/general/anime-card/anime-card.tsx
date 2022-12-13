@@ -177,25 +177,36 @@ function ModalBody({
             <div
               className="green-button"
               onClick={async () => {
-                let leaveRating = await AlertHelper.confirmDialog({
+                await AlertHelper.confirmDialog({
                   question: "Would you like to add a rating?",
-                });
-                let rating = undefined;
-                if (leaveRating) {
-                  await AlertHelper.numberInputAlert("Rate", (response) => {
-                    rating = response;
-                  });
-                }
+                  cancelButtonText: "Proceed without rating",
+                  confirmButtonText: "Leave rating",
+                  confirmButtonColor: "#52ce9c",
+                }).then(async (confirmed) => {
+                  let rating = undefined;
+                  console.log(confirmed);
+                  if (confirmed) {
+                    await AlertHelper.numberInputAlert({
+                      question: "Rate",
+                      onConfirm: (response) => {
+                        rating = response;
+                      },
+                      confirmButtonText: "Confirm",
+                      cancelButtonText: "Proceed without rating",
+                    });
+                  }
 
-                closeModal();
-                let updateStatus = AlertHelper.showLoading("Updating");
-                AnnieAPI.updateAnimeStatus(
-                  animeItem.id,
-                  AnimeStatus.completed,
-                  user.uid,
-                  rating
-                ).finally(() => {
-                  updateStatus.close();
+                  let updateStatus = AlertHelper.showLoading("Updating");
+                  AnnieAPI.updateAnimeStatus(
+                    animeItem.id,
+                    AnimeStatus.completed,
+                    user.uid,
+                    rating
+                  ).finally(() => {
+                    updateStatus.close();
+                  });
+
+                  closeModal();
                 });
               }}
             >
