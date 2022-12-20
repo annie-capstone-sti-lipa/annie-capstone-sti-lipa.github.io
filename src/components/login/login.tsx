@@ -4,6 +4,7 @@ import { authenticationHelper } from "../../App";
 import AlertHelper from "../../helpers/alert-helper";
 import Helpers from "../../helpers/helpers";
 import { login } from "../../redux/reducers/login";
+import InputField from "../general/input-field/input-field";
 import "./login.scss";
 
 function LoginFrame() {
@@ -48,12 +49,12 @@ function LoginFrame() {
               className="input-field"
               onChange={(event) => setLoginUsername(event.target.value)}
             />
-            <small>password</small>
-            <input
+            <InputField
               type="password"
-              defaultValue={loginPassword}
-              className="input-field"
-              onChange={(event) => setLoginPassword(event.target.value)}
+              label="password"
+              onChange={(event: any) => {
+                setLoginPassword(event.target.value);
+              }}
             />
             <small className="error-text"></small>
             <div
@@ -138,13 +139,19 @@ function LoginFrame() {
             className="input-field"
             onChange={(event) => setSignupPassword(event.target.value)}
           />
-          <small>confirm password</small>
+          <InputField
+            defaultValue={signupPassword1}
+            label="confirm password"
+            type="password"
+            onChange={(event: any) => setSignupPassword1(event.target.value)}
+          />
+          {/* <small>confirm password</small>
           <input
             type="password"
             defaultValue={signupPassword1}
             className="input-field"
             onChange={(event) => setSignupPassword1(event.target.value)}
-          />
+          /> */}
           <small className="error-text"></small>
           <div
             className="submit-button"
@@ -155,9 +162,9 @@ function LoginFrame() {
                 signupPassword1.length === 0 ||
                 signupEmail.length === 0
               ) {
-                setSignupError("Passwords do not match.");
-              } else if (signupPassword !== signupPassword1) {
                 setSignupError("Please fill all the fields.");
+              } else if (signupPassword !== signupPassword1) {
+                setSignupError("Passwords do not match.");
               } else {
                 if (signupError === "") {
                   let loading = AlertHelper.showLoading("Signing Up.");

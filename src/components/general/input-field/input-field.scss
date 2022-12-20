@@ -1,0 +1,31 @@
+@import "../../../styles/presets";
+
+.input-field {
+  align-items: center;
+  justify-content: center;
+
+  .label {
+    font-size: 14px;
+    display: block;
+  }
+
+  .input {
+    display: block;
+    margin: auto;
+    padding: 8px;
+    margin: 8px auto;
+
+    @extend .rounded-border;
+  }
+
+  .input:focus {
+    outline: none;
+    border: 2px solid $primary;
+  }
+
+  .checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
