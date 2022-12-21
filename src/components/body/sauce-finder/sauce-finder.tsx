@@ -24,7 +24,7 @@ export default function SauceFinder() {
   return (
     <div className="sauce-finder-container">
       <div className="sauce-finder">
-        <div className="hint-text">Select Image:</div>
+        <div className="hint-text">Insert Image:</div>
         <div className="image-input">
           <div
             className="preview-image-container"
