@@ -104,7 +104,7 @@ export default function SauceFinder() {
           <>
             <div className="less-relevant">
               <div className="title">Results </div>
-              <small>Less relevant results have been hidden.</small>
+              <small>Less relevant results have are hidden by default.</small>
               <div
                 className="unhide-button"
                 onClick={() => {
