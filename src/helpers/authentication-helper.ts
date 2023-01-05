@@ -9,6 +9,7 @@ import {
   updateCurrentUser,
   signOut,
 } from "firebase/auth";
+import AlertHelper from "./alert-helper";
 
 export default class AuthenticationHelper {
   auth: Auth;
@@ -35,6 +36,12 @@ export default class AuthenticationHelper {
 
   public signOut() {
     return signOut(this.auth);
+  }
+
+  public promptEmailVerification(email: string) {
+    return AlertHelper.infoAlert(
+      "We've sent you an email to verify your account in: " + email
+    );
   }
 
   constructor(firebaseInstance: FirebaseApp) {

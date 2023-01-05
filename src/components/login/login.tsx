@@ -1,3 +1,4 @@
+import { sendEmailVerification } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { authenticationHelper } from "../../App";
@@ -69,7 +70,15 @@ function LoginFrame() {
                     authenticationHelper
                       .login(loginEmail.trim(), loginPassword.trim())
                       .then((auth) => {
-                        dispatch(login({ isLoggedIn: true, user: auth.user }));
+                        if (!auth.user.emailVerified) {
+                          authenticationHelper.promptEmailVerification(
+                            loginEmail
+                          );
+                        } else {
+                          dispatch(
+                            login({ isLoggedIn: true, user: auth.user })
+                          );
+                        }
                         loading.close();
                       })
                       .catch((e) => {
@@ -170,8 +179,16 @@ function LoginFrame() {
                   let loading = AlertHelper.showLoading("Signing Up.");
                   authenticationHelper
                     .signup(signupEmail.trim(), signupPassword.trim())
-                    .then((auth) => {
-                      dispatch(login({ isLoggedIn: true, user: auth.user }));
+                    .then((auth) =>
+                      sendEmailVerification(auth.user, {
+                        url: "https://client-annie.me/",
+                      }).then(() =>
+                        authenticationHelper
+                          .promptEmailVerification(signupEmail)
+                          .then(() => setIsLogin(true))
+                      )
+                    )
+                    .finally(() => {
                       loading.close();
                     })
                     .catch((e) => {
